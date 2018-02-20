@@ -5,28 +5,39 @@
   Ionic pages and navigation.
 -->
 
-<ion-content padding>
+<ion-content padding class="cream-background">
+	<ion-img width="100%" src="http://via.placeholder.com/450x250"></ion-img>
 	<form autocomplete="off">
-    <ion-row>
-      <ion-col>
-        <ion-list>
-          <ion-item>
-			<ion-label floating>Email</ion-label>
-            <ion-input placeholder="Email" name="username" id="loginField" type="text" required ></ion-input>
-          </ion-item>
-          <ion-item>
-			  <ion-label floating>Password</ion-label>
-            <ion-input placeholder="Password" name="password" id="passwordField" type="password" required ></ion-input>
-          </ion-item>
-        </ion-list>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col>
-        <div *ngIf="error" class="alert alert-danger">{{error}}</div>
-        <button ion-button class="submit-btn" full type="submit" (click)="goToHome();">Login
-        </button>
-      </ion-col>
-    </ion-row>
-  </form>
+		<ion-row>
+			<ion-col>
+				<ion-list>
+					<ion-item class="cream-background">
+						<ion-label floating>Email</ion-label>
+						<ion-input placeholder="Email" name="username" id="loginField" type="text" required ></ion-input>
+					</ion-item>
+					<ion-item class="cream-background">
+						<ion-label floating>Password</ion-label>
+						<ion-input placeholder="Password" name="password" id="passwordField" type="password" required ></ion-input>
+					</ion-item>
+				</ion-list>
+			</ion-col>
+		</ion-row>
+		<ion-row>
+			<ion-col>
+				<div *ngIf="error" class="alert alert-danger">{{error}}</div>
+				<button ion-button color="primary" round full type="submit" (click)="goToHome();">Masuk
+				</button>
+			</ion-col>
+		</ion-row>
+		<ion-row>
+			<ion-col text-center>
+				<button ion-button color="cream" style="margin-top:20px;" no-border>Buat Akun</button>
+			</ion-col>
+		</ion-row>
+		<ion-row>
+			<ion-col text-center>
+				<button ion-button color="cream" small  no-border>Lupa Password</button>
+			</ion-col>
+		</ion-row>
+	</form>
 </ion-content>

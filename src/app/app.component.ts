@@ -16,11 +16,12 @@ export class MyApp {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
-      splashScreen.show();
-      
-      setTimeout(function() {
-        splashScreen.hide();
-      }, 3000);
+      //splashScreen.show();
+      splashScreen.hide();
+//      setTimeout(function() {
+//        splashScreen.hide();
+//		console.log("splash screen hide");
+//      }, 3000);
     });
   }
 }
