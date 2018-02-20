@@ -17,11 +17,8 @@ import { ApiProvider } from '../../providers/api/api';
 })
 export class LoginPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private api: ApiProvider) {
-    api.post('auth/login', {'email': 'hendri.gnw@gmail.com'}, {'Content-Type': 'application/json'})
-	.then(data => {
-       console.log(data.data);
-    });
+  constructor(public navCtrl: NavController, public navParams: NavParams, public api: ApiProvider) {
+    
   }
 
   ionViewDidLoad() {
@@ -29,7 +26,18 @@ export class LoginPage {
   }
   
   goToHome() {
-	  this.navCtrl.setRoot(HomePage);
+  console.log("testse");
+	  this.api.post('auth/login', {"email": "hendri.gnw@gmail.com", "password": "admin123", "firebase_token":"xxx", "device_number":"xxx"}, {'Content-Type':'application/json'})
+	  .then((data) => {
+         console.log(data.data);
+		 console.log("success");
+		 alert('coba');
+      })
+      .catch((error) => {
+	     console.log("error");
+         console.log(error);
+      });
+	  //this.navCtrl.setRoot(HomePage);
   }
 
 }
