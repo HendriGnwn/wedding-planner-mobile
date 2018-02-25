@@ -10,7 +10,7 @@ import { HTTP } from '@ionic-native/http';
 @Injectable()
 export class ApiProvider {
   
-  API_URL : string = 'http://10.0.0.192/wedding-planner-web/public/api/v1/';
+  API_URL : string = 'http://192.168.43.233:8080/wedding-planner-web/public/api/v1/';
 
   constructor(private http: HTTP) {
     console.log('Hello ApiProvider Provider');

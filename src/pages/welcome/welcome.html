@@ -20,6 +20,12 @@
 	<p style="margin-top:30px;font-size:4rem">Selamat Datang</p>
 	<p style="margin-top:30px;font-size:2rem">Rencanakan Hari Bahagia Anda Bersama Kami</p>
 	
-	<button ion-button color="primary" round (click)="nextClick()">Selanjutnya</button>
+	<button ion-button color="primary" round (click)="getConcept()">Selanjutnya</button>
+    
+    <ion-list>
+        <ion-item *ngFor="let item of result">
+            {{ item.name }}
+        </ion-item>
+    </ion-list>
 	
 </ion-content>
