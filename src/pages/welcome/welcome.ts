@@ -1,9 +1,12 @@
 import { Component } from '@angular/core';
+import { Platform } from 'ionic-angular';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {NativeStorage} from '@ionic-native/native-storage';
 
 import { ApiProvider } from '../../providers/api/api';
 
 import { LoginPage } from '../login/login';
+import { HomePage } from '../home/home';
 
 /**
  * Generated class for the WelcomePage page.
@@ -19,33 +22,37 @@ import { LoginPage } from '../login/login';
 })
 export class WelcomePage {
     
-  public result: any = [];
+  public result: any = [{name:''}];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public api: ApiProvider) {
+  constructor(private nativeStorage: NativeStorage, public navCtrl: NavController, public navParams: NavParams, public api: ApiProvider, platform: Platform) {
+	  
+    this.nativeStorage.getItem("isLoggedIn").then(data => {
+      
+      if (data) {
+        this.navCtrl.setRoot(HomePage);
+      }
+      
+    });
   }
   
   getConcept() {
-      this.result = this.api.get('concepts', {}, {})
+      this.api.get('concepts', {}, {})
       .then((result) => {
-		  return result.data;
-		  //console.log(JSON.parse(result.data));
+		  this.result = JSON.parse(result.data).data;
+		  console.log(this.result);
       })
       .catch((error) => {
-          console.log("error");
+          console.log("error Ini");
           console.log(error);
-		  return {};
       });
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad WelcomePage');
-	result = this.getConcept();
-	  
-	  console.log(result);
   }
   
   nextClick() {
-    this.navCtrl.setRoot(LoginPage);
+    this.navCtrl.push(LoginPage);
   }
 
 }

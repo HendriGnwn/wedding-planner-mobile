@@ -1,7 +1,10 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { HomePage } from '../home/home';
-import { ApiProvider } from '../../providers/api/api';
+import {Component} from '@angular/core';
+import {IonicPage, NavController, NavParams, ViewController, LoadingController, ToastController} from 'ionic-angular';
+import {Device} from '@ionic-native/device';
+import {NativeStorage} from '@ionic-native/native-storage';
+import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
+import {HomePage} from '../home/home';
+import {ApiProvider} from '../../providers/api/api';
 
 /**
  * Generated class for the LoginPage page.
@@ -12,32 +15,83 @@ import { ApiProvider } from '../../providers/api/api';
 
 @IonicPage()
 @Component({
-  selector: 'page-login',
-  templateUrl: 'login.html',
+	selector: 'page-login',
+	templateUrl: 'login.html',
 })
 export class LoginPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public api: ApiProvider) {
-    
-  }
+	loading: any;
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginPage');
-  }
+  loginForm: FormGroup;
+  email: AbstractControl;
+  password: AbstractControl;
   
-  goToHome() {
-  console.log("testse");
-	  this.api.post('auth/login', {"email": "hendri.gnw@gmail.com", "password": "admin123", "firebase_token":"xxx", "device_number":"xxx"}, {'Content-Type':'application/json'})
-	  .then((data) => {
-         console.log(data.data);
-		 console.log("success");
-		 alert('coba');
-      })
-      .catch((error) => {
-	     console.log("error");
-         console.log(error);
+  loginErrors: any;
+  loginError: any;
+
+	constructor(
+		public navCtrl: NavController,
+		public api: ApiProvider,
+		public loadingCtrl: LoadingController,
+		public navParams: NavParams,
+		private viewCtrl: ViewController,
+		private toastCtrl: ToastController,
+		private device: Device,
+		private nativeStorage: NativeStorage,
+    private formBuilder: FormBuilder) {
+    
+    this.loginForm = this.formBuilder.group({
+      email: ['', Validators.compose([Validators.required, Validators.email])],
+      password: ['', Validators.compose([Validators.required])]
+    });
+    
+    this.nativeStorage.getItem("isLoggedIn").then(data => {
+      
+      if (data) {
+        this.navCtrl.setRoot(HomePage);
+      }
+      
+    });
+    
+	}
+  
+  onSubmit(value:any) : void {
+    if (this.loginForm.valid) {
+      this.loading = this.loadingCtrl.create({
+        content: "Authenticating ..."
       });
-	  //this.navCtrl.setRoot(HomePage);
+      this.loading.present();
+      
+      this.api.post('auth/login', {"email": value.email, "password": value.password, "firebase_token":"xxx", "device_number": this.device.uuid}, {'Content-Type':'application/json'})
+        .then((data) => {
+          
+          let result = JSON.parse(data.data);
+          
+          this.nativeStorage.setItem("isLoggedIn", true);
+          this.nativeStorage.setItem("user", result.data);
+          this.nativeStorage.setItem("token", result.data.token);
+          
+          this.loading.dismiss();
+          this.toastCtrl.create({
+            message: "Login Success",
+            duration: 3000,
+            position: 'buttom',
+            dismissOnPageChange: false,
+          }).present();
+          
+          this.navCtrl.setRoot(HomePage);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
   }
 
+	ionViewWillEnter() {
+		this.viewCtrl.showBackButton(false);
+	}
+
+	ionViewDidLoad() {
+		console.log('ionViewDidLoad LoginPage');
+	}
 }

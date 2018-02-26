@@ -4,6 +4,8 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { HTTP } from '@ionic-native/http';
+import { Device } from '@ionic-native/device';
+import { NativeStorage } from '@ionic-native/native-storage';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -15,7 +17,7 @@ import { ApiProvider } from '../providers/api/api';
   declarations: [
     MyApp,
     HomePage,
-	LoginPage,
+	  LoginPage,
     WelcomePage
   ],
   imports: [
@@ -26,7 +28,7 @@ import { ApiProvider } from '../providers/api/api';
   entryComponents: [
     MyApp,
     HomePage,
-	LoginPage,
+	  LoginPage,
     WelcomePage
   ],
   providers: [
@@ -34,7 +36,9 @@ import { ApiProvider } from '../providers/api/api';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     ApiProvider,
-	HTTP
+	  HTTP,
+    Device,
+    NativeStorage
   ]
 })
 export class AppModule {}
