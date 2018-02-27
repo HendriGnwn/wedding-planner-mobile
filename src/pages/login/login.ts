@@ -1,9 +1,10 @@
 import {Component} from '@angular/core';
 import {IonicPage, NavController, NavParams, ViewController, LoadingController, ToastController} from 'ionic-angular';
 import {Device} from '@ionic-native/device';
-import {NativeStorage} from '@ionic-native/native-storage';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
-import {HomePage} from '../home/home';
+import {TabsPage} from '../tabs/tabs';
+import {RegisterPage} from '../register/register';
+import {ForgotPasswordPage} from '../forgot-password/forgot-password';
 import {ApiProvider} from '../../providers/api/api';
 
 /**
@@ -37,7 +38,6 @@ export class LoginPage {
 		private viewCtrl: ViewController,
 		private toastCtrl: ToastController,
 		private device: Device,
-		private nativeStorage: NativeStorage,
     private formBuilder: FormBuilder) {
     
     this.loginForm = this.formBuilder.group({
@@ -45,13 +45,9 @@ export class LoginPage {
       password: ['', Validators.compose([Validators.required])]
     });
     
-    this.nativeStorage.getItem("isLoggedIn").then(data => {
-      
-      if (data) {
-        this.navCtrl.setRoot(HomePage);
-      }
-      
-    });
+    if (localStorage.getItem("isLoggedIn") == "1") {
+      this.navCtrl.setRoot(TabsPage);
+    }
     
 	}
   
@@ -67,22 +63,32 @@ export class LoginPage {
           
           let result = JSON.parse(data.data);
           
-          this.nativeStorage.setItem("isLoggedIn", true);
-          this.nativeStorage.setItem("user", result.data);
-          this.nativeStorage.setItem("token", result.data.token);
+          localStorage.setItem("isLoggedIn", "1");
+          localStorage.setItem("user", JSON.stringify(result.data));
+          localStorage.setItem("token", result.data.token);
           
           this.loading.dismiss();
           this.toastCtrl.create({
-            message: "Login Success",
+            message: result.message,
             duration: 3000,
             position: 'buttom',
             dismissOnPageChange: false,
           }).present();
           
-          this.navCtrl.setRoot(HomePage);
+          this.navCtrl.setRoot(TabsPage);
         })
         .catch((error) => {
+          this.loading.dismiss();
           console.log(error);
+          
+          let result = JSON.parse(error.error);
+          
+          this.toastCtrl.create({
+            message: result.message,
+            duration: 3000,
+            position: 'buttom',
+            dismissOnPageChange: false,
+          }).present();
         });
     }
   }
@@ -94,4 +100,12 @@ export class LoginPage {
 	ionViewDidLoad() {
 		console.log('ionViewDidLoad LoginPage');
 	}
+  
+  goToRegisterPage() {
+    this.navCtrl.push(RegisterPage);
+  }
+  
+  goToForgotPasswordPage() {
+    this.navCtrl.push(ForgotPasswordPage);
+  }
 }

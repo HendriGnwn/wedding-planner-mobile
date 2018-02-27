@@ -16,17 +16,17 @@
 						<ion-input formControlName="email" type="text" required ></ion-input>
 					</ion-item>
           <ion-item color="danger" class="form-error" *ngIf="loginForm.controls.email.hasError('required') && loginForm.controls.email.touched">
-            <p>Sorry, field email is required!</p>
+            <p>Email harus diisi</p>
           </ion-item>
           <ion-item color="danger" class="form-error" *ngIf="loginForm.controls.email.hasError('email') && loginForm.controls.email.touched">
-            <p>Sorry, field email not valid!</p>
+            <p>Format email tidak valid</p>
           </ion-item>
 					<ion-item class="cream-background">
 						<ion-label floating>Password</ion-label>
 						<ion-input formControlName="password" type="password" required ></ion-input>
 					</ion-item>
           <ion-item color="danger" class="form-error" *ngIf="loginForm.controls.password.hasError('required') && loginForm.controls.password.touched">
-            <p>Sorry, field password is required!</p>
+            <p>Password harus diisi</p>
           </ion-item>
 				</ion-list>
 			</ion-col>
@@ -35,7 +35,7 @@
 			<ion-col>
         <ion-list>
           <ion-item color="danger" class="form-error" *ngFor="let item of loginErrors">
-            <p>Sorry, field password is required!</p>
+            <p>{{item}}</p>
           </ion-item>
         </ion-list>
 				<button ion-button color="primary" round full type="submit" [disabled]="!loginForm.valid" >Masuk</button>
@@ -43,12 +43,12 @@
 		</ion-row>
 		<ion-row>
 			<ion-col text-center>
-				<button ion-button color="cream" style="margin-top:20px;" no-border>Buat Akun</button>
+				<button ion-button color="secondary" style="margin-top:20px;" no-border (click)="goToRegisterPage()">Buat Akun</button>
 			</ion-col>
 		</ion-row>
 		<ion-row>
 			<ion-col text-center>
-				<button ion-button color="cream" small  no-border>Lupa Password</button>
+				<button ion-button color="secondary" small  no-border (click)="goToForgotPasswordPage()">Lupa Password</button>
 			</ion-col>
 		</ion-row>
 	</form>

@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
 import { Platform } from 'ionic-angular';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import {NativeStorage} from '@ionic-native/native-storage';
 
 import { ApiProvider } from '../../providers/api/api';
 
 import { LoginPage } from '../login/login';
-import { HomePage } from '../home/home';
+import { TabsPage } from '../tabs/tabs';
 
 /**
  * Generated class for the WelcomePage page.
@@ -22,17 +21,19 @@ import { HomePage } from '../home/home';
 })
 export class WelcomePage {
     
+  isLoggedIn: any;
   public result: any = [{name:''}];
 
-  constructor(private nativeStorage: NativeStorage, public navCtrl: NavController, public navParams: NavParams, public api: ApiProvider, platform: Platform) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public api: ApiProvider, platform: Platform) {
+    
+    this.isLoggedIn = localStorage.getItem("isLoggedIn");
 	  
-    this.nativeStorage.getItem("isLoggedIn").then(data => {
-      
-      if (data) {
-        this.navCtrl.setRoot(HomePage);
+    platform.ready().then(() => {
+      if (this.isLoggedIn == true) {
+        this.navCtrl.setRoot(TabsPage);
       }
-      
     });
+    
   }
   
   getConcept() {
