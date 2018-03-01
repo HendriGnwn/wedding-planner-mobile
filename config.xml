@@ -3,7 +3,7 @@
     <name>Agenda Nikah</name>
     <description>Rencanakan Hari Bahagia Anda bersama kami.</description>
     <author email="hendri.gnw@gmail.com" href="http://hendrign.id/">Hendri Gunawan</author>
-    <content original-src="index.html" src="http://10.0.0.192:8101" />
+    <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -15,6 +15,7 @@
     <preference name="android-minSdkVersion" value="16" />
     <preference name="android-targetSdkVersion" value="25" />
     <preference name="BackupWebStorage" value="none" />
+    <preference name="StatusBarBackgroundColor" value="#F6F4E8" />
     <preference name="SplashMaintainAspectRatio" value="true" />
     <preference name="FadeSplashScreenDuration" value="300" />
     <preference name="SplashShowOnlyFirstTime" value="false" />
@@ -88,6 +89,5 @@
     <plugin name="cordova-plugin-statusbar" spec="^2.4.1" />
     <plugin name="cordova-plugin-advanced-http" spec="^1.10.1" />
     <plugin name="cordova-plugin-device" spec="^2.0.1" />
-    <allow-navigation href="http://10.0.0.192:8101" />
     <engine name="android" spec="7.0.0" />
 </widget>
