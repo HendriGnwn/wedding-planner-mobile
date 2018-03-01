@@ -13,7 +13,7 @@
 				<ion-list>
 					<ion-item class="cream-background" [ngClass]="{'error-border':!loginForm.controls.email.valid && loginForm.controls.email.touched}">
 						<ion-label floating>Email</ion-label>
-						<ion-input formControlName="email" type="text" required ></ion-input>
+						<ion-input formControlName="email" type="email" required ></ion-input>
 					</ion-item>
           <ion-item color="danger" class="form-error" *ngIf="loginForm.controls.email.hasError('required') && loginForm.controls.email.touched">
             <p>Email harus diisi</p>

@@ -23,8 +23,6 @@ export class TabsPage {
   
   @ViewChild('tabs') tabs;
   
-  private firstLoaded: boolean = false;
-
   procedureRoot = ProcedurePage;
   costRoot = CostPage;
   conceptRoot = ConceptPage;
@@ -35,10 +33,6 @@ export class TabsPage {
   constructor(public navCtrl: NavController) {}
   
   ionViewDidEnter() {
-//    if (!this.firstLoaded && this.tabs.getSelected().length() >= 2) {
-//      this.tabs.getSelected().remove(0, this.tabs.getSelected().length() - 1);
-//    }
-//    this.firstLoaded = true;
   }
 
 }

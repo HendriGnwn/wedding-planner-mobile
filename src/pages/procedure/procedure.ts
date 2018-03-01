@@ -16,7 +16,7 @@ import {ApiProvider} from '../../providers/api/api';
 })
 export class ProcedurePage {
   
-  procedureImgUrl : string = "http://10.0.0.192/wedding-planner-web/public/files/procedures/default.png";
+  procedureImgUrl : string = "http://agendanikah.com/dev/public/files/procedures/default.png";
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public apiProvider: ApiProvider) {
     this.getProcedure();

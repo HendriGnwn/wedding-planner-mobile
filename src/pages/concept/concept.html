@@ -20,29 +20,13 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
   <ion-grid>
     <ion-row>
-      <ion-col col-6>
-        1
-      </ion-col>
-      <ion-col col-6>
-        1
-      </ion-col>
-      <ion-col col-6>
-        1
-      </ion-col>
-      <ion-col col-6>
-        1
-      </ion-col>
-      <ion-col col-6>
-        1
-      </ion-col>
-      <ion-col col-6>
-        1
-      </ion-col>
-      <ion-col col-6>
-        1
+      <ion-col col-6 *ngFor="let concept of concepts">
+        <button ion-button clear class="grid-col" text-center (onclick)="goToDetail(concept.id)">
+          {{ concept.name }}
+        </button>
       </ion-col>
     </ion-row>
   </ion-grid>
