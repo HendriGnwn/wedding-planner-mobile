@@ -1,3 +1,32 @@
 page-cost {
-
+  .scroll-content, .fixed-content {
+    padding: 0.8rem;
+    font-size: 1.2em;
+    color: color($colors, primary);
+  }
+  .grid-col {
+    .grid-row-content {
+      border: 1px solid color($colors, secondary);
+      background: color($colors, secondary);
+      border-radius: 0.2rem;
+      padding: 5px 10px;
+      vertical-align: middle;
+      margin-top: auto;
+      margin-bottom: auto;
+    }
+  }
+  ion-footer {
+    padding: 0.8rem;
+    padding: 0.8rem;
+    font-size: 1.2em;
+    color: color($colors, primary);
+    .grid-col {
+      .grid-row-grand-cost {
+        border: 1px solid color($colors, secondary);
+        background: color($colors, secondary);
+        border-radius: 0.2rem;
+        padding: 5px 10px;
+      }
+    }
+  }
 }

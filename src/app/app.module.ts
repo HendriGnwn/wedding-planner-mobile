@@ -5,6 +5,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { HTTP } from '@ionic-native/http';
 import { Device } from '@ionic-native/device';
+import { File } from '@ionic-native/file';
+import { Camera } from '@ionic-native/camera';
+
 
 import { ApiProvider } from '../providers/api/api';
 
@@ -20,6 +23,7 @@ import { ProcedurePage } from '../pages/procedure/procedure';
 import { ProcedurePageModule } from '../pages/procedure/procedure.module';
 import { ProfilePage } from '../pages/profile/profile';
 import { TabsPage } from '../pages/tabs/tabs';
+import { HelpersProvider } from '../providers/helpers/helpers';
 
 @NgModule({
   declarations: [
@@ -60,7 +64,10 @@ import { TabsPage } from '../pages/tabs/tabs';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     ApiProvider,
 	  HTTP,
-    Device
+    Device,
+    HelpersProvider,
+    File,
+    Camera
   ]
 })
 export class AppModule {}

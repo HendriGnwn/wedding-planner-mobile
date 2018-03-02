@@ -18,6 +18,32 @@
 </ion-header>
 
 
-<ion-content padding>
-
+<ion-content class="padding">
+    <ion-row>
+      <ion-col col-12 class="grid-col" *ngFor="let item of costs;">
+        <ion-row  class="grid-row-content">
+          <ion-col col-8>
+            {{ item.content.name }}
+          </ion-col>
+          <ion-col col-4 text-right>
+            IDR {{ item.value | number : fractionSize }}
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
 </ion-content>
+
+<ion-footer no-border transparent>
+    <ion-row>
+      <ion-col col-12 class="grid-col">
+        <ion-row>
+          <ion-col col-6 text-center>
+            Total Biaya
+          </ion-col>
+          <ion-col col-6 text-right class="grid-row-grand-cost">
+            IDR {{ grandCost | number : fractionSize }}
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+</ion-footer>
