@@ -20,6 +20,9 @@ import {LoginPage} from '../login/login';
 export class ProfilePage {
   
   token: any;
+  relation_name: any;
+  venue: any;
+  wedding_day: any;
   user: any = {};
   dirs: any;
   options: CameraOptions = {
@@ -58,14 +61,15 @@ export class ProfilePage {
   }
 
   getUser() {
-    this.apiProvider.get('user/show/' + localStorage.getItem('id'), {}, {'Content-Type': 'application/json', "Authorization": "Bearer " + localStorage.getItem('token')})
+    this.apiProvider.get('user/show/' + localStorage.getItem('user_id'), {}, {'Content-Type': 'application/json', "Authorization": "Bearer " + localStorage.getItem('token')})
       .then((data) => {
         
         let result = JSON.parse(data.data);
         
+        this.relation_name = result.data.relation.relation_name;
+        this.wedding_day = result.data.relation.wedding_day;
+        this.venue = result.data.relation.venue;
         this.user = result.data;
-        
-        console.log(result);
 
       })
       .catch((error) => {

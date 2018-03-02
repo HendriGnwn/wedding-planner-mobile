@@ -5,14 +5,14 @@ page-profile {
     }
   }
   .content {
-    padding: 0.8rem;
+    padding: 1.3rem;
     font-size: 1em;
     color: color($colors, primary);
   }
-  .counting-down-container, .detail-container {
+  .counting-down-container {
     background: color($colors, secondary);
     padding: 0.8rem;
-    margin-top: 20px;
+    margin-top: -20px;
     border-radius: 0.7rem;
     
   }
@@ -20,7 +20,7 @@ page-profile {
   .detail-container {
     background: color($colors, secondary);
     padding: 0.8rem;
-    margin-top: 15px;
+    margin-top: 10px;
     border-radius: 0.7rem;
     .detail-title {
       font-size: 3rem;
