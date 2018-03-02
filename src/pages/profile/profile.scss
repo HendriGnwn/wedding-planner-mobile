@@ -4,4 +4,30 @@ page-profile {
       padding: 0px !important;
     }
   }
+  .content {
+    padding: 0.8rem;
+    font-size: 1em;
+    color: color($colors, primary);
+  }
+  .counting-down-container, .detail-container {
+    background: color($colors, secondary);
+    padding: 0.8rem;
+    margin-top: 20px;
+    border-radius: 0.7rem;
+    
+  }
+  
+  .detail-container {
+    background: color($colors, secondary);
+    padding: 0.8rem;
+    margin-top: 15px;
+    border-radius: 0.7rem;
+    .detail-title {
+      font-size: 3rem;
+    }
+    .detail-subtitle {
+      font-size: 1.5rem;
+    }
+  }
+  
 }

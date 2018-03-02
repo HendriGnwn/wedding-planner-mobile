@@ -83,6 +83,7 @@ export class RegisterPage {
           localStorage.setItem("isLoggedIn", "1");
           localStorage.setItem("user", JSON.stringify(result.data));
           localStorage.setItem("token", result.data.token);
+          localStorage.setItem("user_id", result.data.id);
           
           this.loading.dismiss();
           this.toastCtrl.create({

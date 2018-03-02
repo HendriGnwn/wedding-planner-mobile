@@ -67,6 +67,7 @@ export class MyApp {
       localStorage.setItem('isLoggedIn', null);
       localStorage.setItem('token', null);
       localStorage.setItem('user', null);
+      localStorage.setItem("user_id", null);
       
       let result = JSON.parse(data.data);
       this.loading.dismiss();
@@ -86,6 +87,7 @@ export class MyApp {
       localStorage.setItem('isLoggedIn', null);
       localStorage.setItem('token', null);
       localStorage.setItem('user', null);
+      localStorage.setItem("user_id", null);
       
       this.loading.dismiss();
       

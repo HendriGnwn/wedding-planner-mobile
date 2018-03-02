@@ -8,11 +8,12 @@ page-cost {
     .grid-row-content {
       border: 1px solid color($colors, secondary);
       background: color($colors, secondary);
-      border-radius: 0.2rem;
+      border-radius: 0.8rem;
       padding: 5px 10px;
       vertical-align: middle;
       margin-top: auto;
       margin-bottom: auto;
+      display: table-flex;
     }
   }
   ion-footer {

@@ -22,21 +22,41 @@
   <ion-row class="profile-banner">
     <ion-col col-12 text-center>
       <ion-img (click)="openFile()" width="100%" height="200" src="https://static.pexels.com/photos/256737/pexels-photo-256737.jpeg"></ion-img>
-      <ion-icon name="camera" color="white" large style="font-size: 2.2em; top: -50px;position:relative;"></ion-icon>
+      <ion-icon name="camera" color="white" large style="font-size: 2.2em; top: -20px; position:relative;"></ion-icon>
     </ion-col>
   </ion-row>
   
-  <button ion-button (click)="doLogout()">Logout</button>
+  <div class="content">
+    
+    <ion-row class="counting-down-container">
+      <ion-col col-3 text-center>
+        Hari
+      </ion-col>
+      <ion-col col-3 text-center>
+        Jam
+      </ion-col>
+      <ion-col col-3 text-center>
+        Menit
+      </ion-col>
+      <ion-col col-3 text-center>
+        Detik
+      </ion-col>
+    </ion-row>
+    
+    <ion-row class="detail-container">
+      <ion-col col-12 class="detail-title" text-center>
+        {{ user.relation.relation_name }}
+      </ion-col>
+      <ion-col col-12 class="detail-subtitle" text-center>
+        {{ user.relation.wedding_name }}
+      </ion-col>
+      <ion-col col-12 class="detail-subtitle" text-center>
+        {{ user.relation.venue }}
+      </ion-col>
+    </ion-row>
+  </div>
   
-  <ion-content padding>
-
-    <ion-list>
-        <ion-item *ngFor="let x of dirs" (click)="open(x)">
-            <ion-icon name='folder' class="file-color" item-start *ngIf="x.isDirectory"></ion-icon>
-            {{x.name}}
-        </ion-item>
-    </ion-list>
-
-</ion-content>
-
+  
+  <button ion-button (click)="doLogout()">Logout</button>
+ 
 </ion-content>
