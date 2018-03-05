@@ -24,7 +24,7 @@
   <ion-grid>
     <ion-row>
       <ion-col col-6 *ngFor="let concept of concepts">
-        <button ion-button clear class="grid-col" text-center (onclick)="goToDetail(concept.id)">
+        <button ion-button clear class="grid-col" text-center (click)="goToDetail(concept.id, concept.name)">
           {{ concept.name }}
         </button>
       </ion-col>

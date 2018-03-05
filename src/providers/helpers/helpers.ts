@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { LoadingController, ToastController } from 'ionic-angular';
 import { Device } from '@ionic-native/device';
 import { File } from '@ionic-native/file';
+import { DatePicker } from '@ionic-native/date-picker';
 
 /*
   Generated class for the HelpersProvider provider.
@@ -16,15 +17,18 @@ export class HelpersProvider {
     public loadingCtrl: LoadingController,
     public toastCtrl: ToastController,
     public file: File,
-    public device: Device
+    public device: Device,
+    public datePicker: DatePicker
     ) {
     
   }
   
   loadingPresent(content: string) {
-    this.loadingCtrl.create({
+    let loading = this.loadingCtrl.create({
       content: content
-    }).present();
+    });
+    loading.present();
+    return loading;
   }
   
   loadingDismiss() {
@@ -38,6 +42,17 @@ export class HelpersProvider {
         position: position,
         dismissOnPageChange: false,
       }).present();
+  }
+  
+  datepickerShow() {
+    this.datePicker.show({
+      date: new Date(),
+      mode: 'date',
+      androidTheme: this.datePicker.ANDROID_THEMES.THEME_HOLO_DARK
+    }).then(
+      date => console.log('Got date: ', date),
+      err => console.log('Error occurred while getting date: ', err)
+    );
   }
   
   

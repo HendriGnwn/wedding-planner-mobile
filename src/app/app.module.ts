@@ -20,10 +20,14 @@ import { ConceptPage } from '../pages/concept/concept';
 import { CostPage } from '../pages/cost/cost';
 import { NotificationPage } from '../pages/notification/notification';
 import { ProcedurePage } from '../pages/procedure/procedure';
+import { ContentPage } from '../pages/content/content';
+import { ContentDetailPage } from '../pages/content-detail/content-detail';
+import { ContentDetailListPage } from '../pages/content-detail-list/content-detail-list';
 import { ProcedurePageModule } from '../pages/procedure/procedure.module';
 import { ProfilePage } from '../pages/profile/profile';
 import { TabsPage } from '../pages/tabs/tabs';
 import { HelpersProvider } from '../providers/helpers/helpers';
+import { DatePicker } from '@ionic-native/date-picker';
 
 @NgModule({
   declarations: [
@@ -37,11 +41,16 @@ import { HelpersProvider } from '../providers/helpers/helpers';
     NotificationPage,
     //ProcedurePage,
     ProfilePage,
-    TabsPage
+    TabsPage,
+    ContentPage,
+    ContentDetailPage,
+    ContentDetailListPage
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp),
+    IonicModule.forRoot(MyApp, {
+      tabsHideOnSubPages:true
+    }),
     ProcedurePageModule
   ],
   bootstrap: [IonicApp],
@@ -56,7 +65,10 @@ import { HelpersProvider } from '../providers/helpers/helpers';
     NotificationPage,
     ProcedurePage,
     ProfilePage,
-    TabsPage
+    TabsPage,
+    ContentPage,
+    ContentDetailPage,
+    ContentDetailListPage
   ],
   providers: [
     StatusBar,
@@ -67,7 +79,8 @@ import { HelpersProvider } from '../providers/helpers/helpers';
     Device,
     HelpersProvider,
     File,
-    Camera
+    Camera,
+    DatePicker
   ]
 })
 export class AppModule {}

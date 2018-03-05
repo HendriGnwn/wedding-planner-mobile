@@ -48,7 +48,7 @@
         {{ relation_name }}
       </ion-col>
       <ion-col col-12 class="detail-subtitle" text-center>
-        {{ wedding_day }}
+        {{ wedding_day | date: "dd MMMM yyyy" }}
       </ion-col>
       <ion-col col-12 class="detail-subtitle" text-center>
         {{ venue }}

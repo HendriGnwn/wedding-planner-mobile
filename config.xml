@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.hendri.agendanikah" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget android-packageName="com.hendri.agendanikah" id="com.hendri.agendanikah" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Agenda Nikah</name>
     <description>Rencanakan Hari Bahagia Anda bersama kami.</description>
     <author email="hendri.gnw@gmail.com" href="http://hendrign.id/">Hendri Gunawan</author>
-    <content original-src="index.html" src="http://10.0.0.168:8100" />
+    <content original-src="index.html" src="http://10.0.0.173:8100" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -98,6 +98,7 @@
     <allow-navigation href="http://10.0.0.168:8100" />
     <plugin name="cordova-plugin-file" spec="^6.0.1" />
     <plugin name="cordova-plugin-camera" spec="^4.0.2" />
+    <allow-navigation href="http://10.0.0.173:8100" />
     <engine name="ios" spec="4.5.4" />
     <engine name="android" spec="7.0.0" />
 </widget>

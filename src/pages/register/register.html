@@ -77,6 +77,20 @@
           <ion-item color="danger" class="form-error" *ngIf="registerForm.controls.relation_email.hasError('required') && registerForm.controls.relation_email.touched">
             <p>Email harus diisi</p>
           </ion-item>
+          <ion-item class="cream-background" [ngClass]="{'error-border':!registerForm.controls.wedding_day.valid && registerForm.controls.wedding_day.touched}">
+						<ion-label floating>Tanggal Pernikahan</ion-label>
+						<ion-datetime displayFormat="YYYY-MM-DD" pickerFormat="DD MMMM YYYY" formControlName="wedding_day" required></ion-datetime>
+					</ion-item>
+          <ion-item color="danger" class="form-error" *ngIf="registerForm.controls.wedding_day.hasError('required') && registerForm.controls.wedding_day.touched">
+            <p>Tanggal Pernikahan harus diisi</p>
+          </ion-item>
+          <ion-item class="cream-background" [ngClass]="{'error-border':!registerForm.controls.venue.valid && registerForm.controls.venue.touched}">
+						<ion-label floating>Tempat Resepsi</ion-label>
+						<ion-input formControlName="venue" type="text" required ></ion-input>
+					</ion-item>
+          <ion-item color="danger" class="form-error" *ngIf="registerForm.controls.venue.hasError('required') && registerForm.controls.venue.touched">
+            <p>Tanggal Pernikahan harus diisi</p>
+          </ion-item>
 				</ion-list>
 			</ion-col>
 		</ion-row>

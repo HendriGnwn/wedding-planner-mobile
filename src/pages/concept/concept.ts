@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {ApiProvider} from '../../providers/api/api';
+import { ContentPage } from '../content/content';
 
 /**
  * Generated class for the ConceptPage page.
@@ -42,8 +43,11 @@ export class ConceptPage {
       });
   }
   
-  goToDetail(id: any) {
-    
+  goToDetail(id: any, name: string) {
+    this.navCtrl.push(ContentPage, {
+      "id": id,
+      "name": name
+    });
   }
 
 }

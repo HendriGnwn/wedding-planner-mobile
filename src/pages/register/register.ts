@@ -4,6 +4,7 @@ import {Device} from '@ionic-native/device';
 import {TabsPage} from '../tabs/tabs';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import {ApiProvider} from '../../providers/api/api';
+import {HelpersProvider} from '../../providers/helpers/helpers';
 
 /**
  * Generated class for the RegisterPage page.
@@ -29,6 +30,8 @@ export class RegisterPage {
   password: AbstractControl;
   confirm_password: AbstractControl;
   relation_email: AbstractControl;
+  wedding_day: AbstractControl;
+  venue: AbstractControl;
 
   constructor(
 		public navCtrl: NavController,
@@ -37,7 +40,8 @@ export class RegisterPage {
 		public navParams: NavParams,
 		private toastCtrl: ToastController,
 		private device: Device,
-    private formBuilder: FormBuilder) {
+    private formBuilder: FormBuilder,
+    private helpers: HelpersProvider) {
     
     this.registerForm = this.formBuilder.group({
       name: ['', Validators.compose([Validators.required])],
@@ -46,7 +50,9 @@ export class RegisterPage {
       email: ['', Validators.compose([Validators.required, Validators.email])],
       password: ['', Validators.compose([Validators.required])],
       confirm_password: ['', Validators.compose([Validators.required])],
-      relation_email: ['', Validators.compose([Validators.required, Validators.email])]
+      relation_email: ['', Validators.compose([Validators.required, Validators.email])],
+      wedding_day: ['', Validators.compose([Validators.required])],
+      venue: ['', Validators.compose([Validators.required])]
     }, {validator: this.matchingPasswords('password', 'confirm_password')});
     
     if (localStorage.getItem("isLoggedIn") == "1") {
@@ -70,6 +76,8 @@ export class RegisterPage {
         "password": value.password,
         "confirm_password": value.confirm_password,
         "relation_email": value.relation_email,
+        "wedding_day": value.wedding_day,
+        "venue": value.venue,
         "registered_device_number": this.device.uuid,
         "firebase_token": "xxx",
         "device_number": this.device.uuid
@@ -109,6 +117,10 @@ export class RegisterPage {
           }).present();
         });
     }
+  }
+  
+  datePickerShow() {
+    this.helpers.datepickerShow();
   }
   
   matchingPasswords(passwordKey: string, confirmPasswordKey: string) {
