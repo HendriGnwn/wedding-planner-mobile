@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { HelpersProvider } from '../../providers/helpers/helpers';
 import { ApiProvider } from '../../providers/api/api';
 import { LoginPage } from '../login/login';
@@ -24,7 +24,12 @@ export class ContentPage {
   contents: any = [];
   loading: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public helpersProvider: HelpersProvider, public api: ApiProvider) {
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams, 
+    public helpersProvider: HelpersProvider, 
+    public api: ApiProvider,
+    public modalCtrl: ModalController) {
     if (localStorage.getItem("isLoggedIn") == null) {
         
       this.helpersProvider.toastPresent("Session expired, Please Login again.", );
@@ -64,6 +69,11 @@ export class ContentPage {
       "id": id,
       "name": name
     });
+  }
+  
+  addContent() {
+    let profileModal = this.modalCtrl.create(ContentDetailPage, { userId: 8675309 });
+    profileModal.present();
   }
 
   ionViewDidLoad() {

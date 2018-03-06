@@ -20,7 +20,7 @@ import { ContentDetailListPage } from '../content-detail-list/content-detail-lis
 export class ContentDetailPage {
   
   loading: any;
-  contentDetails: any = [];
+  contents: any = [];
   pageTitle: string = "Content Detail";
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public helpersProvider: HelpersProvider, public api: ApiProvider) {
@@ -40,22 +40,28 @@ export class ContentDetailPage {
     this.api.get('content-details/' + this.navParams.get('id'), {}, {'Content-Type': 'application/json', "Authorization": "Bearer " + localStorage.getItem('token')})
       .then((data) => {
         this.loading.dismiss();
-        this.contentDetails = JSON.parse(data.data).data;
-        console.log(this.contentDetails);
+        this.contents = JSON.parse(data.data).data;
         console.log(data.data);
 
       })
       .catch((error) => {
         this.loading.dismiss();
-        this.contentDetails = [];
+        this.contents = [];
         let result = JSON.parse(error.error);
         if (result.status == '401') {
           this.helpersProvider.toastPresent(result.message);
           this.navCtrl.setRoot(LoginPage);
         }
-        console.log(this.contentDetails);
         console.log(error);
       });
+  }
+  
+  inputKeypress(event, id) {
+    if (event.keyCode == 13) {
+      console.log(id);
+      console.log(event.keyCode);
+      console.log(event.target.value);
+    }
   }
 
   ionViewDidLoad() {

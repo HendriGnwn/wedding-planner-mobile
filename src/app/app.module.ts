@@ -7,6 +7,7 @@ import { HTTP } from '@ionic-native/http';
 import { Device } from '@ionic-native/device';
 import { File } from '@ionic-native/file';
 import { Camera } from '@ionic-native/camera';
+import { Deeplinks } from '@ionic-native/deeplinks';
 
 
 import { ApiProvider } from '../providers/api/api';
@@ -15,6 +16,7 @@ import { MyApp } from './app.component';
 import { LoginPage } from '../pages/login/login';
 import { ForgotPasswordPage } from '../pages/forgot-password/forgot-password';
 import { RegisterPage } from '../pages/register/register';
+import { RegisterRelationPage } from '../pages/register-relation/register-relation';
 import { WelcomePage } from '../pages/welcome/welcome';
 import { ConceptPage } from '../pages/concept/concept';
 import { CostPage } from '../pages/cost/cost';
@@ -44,7 +46,8 @@ import { DatePicker } from '@ionic-native/date-picker';
     TabsPage,
     ContentPage,
     ContentDetailPage,
-    ContentDetailListPage
+    ContentDetailListPage,
+    RegisterRelationPage
   ],
   imports: [
     BrowserModule,
@@ -68,7 +71,8 @@ import { DatePicker } from '@ionic-native/date-picker';
     TabsPage,
     ContentPage,
     ContentDetailPage,
-    ContentDetailListPage
+    ContentDetailListPage,
+    RegisterRelationPage
   ],
   providers: [
     StatusBar,
@@ -80,7 +84,8 @@ import { DatePicker } from '@ionic-native/date-picker';
     HelpersProvider,
     File,
     Camera,
-    DatePicker
+    DatePicker,
+    Deeplinks
   ]
 })
 export class AppModule {}

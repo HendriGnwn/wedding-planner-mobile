@@ -3,9 +3,11 @@ import { Platform, Events, ToastController, Nav, LoadingController } from 'ionic
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import {ApiProvider} from '../providers/api/api';
+import { Deeplinks } from '@ionic-native/deeplinks';
 
 import { WelcomePage } from '../pages/welcome/welcome';
 import { LoginPage } from '../pages/login/login';
+import { RegisterRelationPage } from '../pages/register-relation/register-relation';
 import { TabsPage } from '../pages/tabs/tabs';
 
 @Component({
@@ -19,13 +21,14 @@ export class MyApp {
   loading: any;
   
   constructor(
-    platform: Platform, 
+    private platform: Platform, 
     statusBar: StatusBar, 
     splashScreen: SplashScreen, 
     private events: Events, 
     private apiProvider: ApiProvider, 
     private toastCtrl: ToastController,
-    public loadingCtrl: LoadingController) {
+    public loadingCtrl: LoadingController,
+    public deeplinks: Deeplinks) {
     
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
@@ -51,6 +54,22 @@ export class MyApp {
         this.rootPage = WelcomePage;
         this.nav.setRoot(WelcomePage);
       }
+    });
+  }
+  
+  ngAfterViewInit() {
+    this.platform.ready().then(() => {
+      this.deeplinks.routeWithNavController(this.nav, {
+        '/register-relation': RegisterRelationPage
+      }).subscribe((match) => {
+          // match.$route - the route we matched, which is the matched entry from the arguments to route()
+          // match.$args - the args passed in the link
+          // match.$link - the full link data
+          console.log('Successfully matched route', match);
+        }, (nomatch) => {
+          // nomatch.$link - the full link data
+          console.error('Got a deeplink that didn\'t match', nomatch);
+        });
     });
   }
   

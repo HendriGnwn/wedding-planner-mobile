@@ -1,7 +1,13 @@
 page-content {
-  .content {
-    padding: 1.3rem;
-    font-size: 1em;
+  .scroll-content, .fixed-content {
+    padding: 1.5rem 1.3rem;
+    color: color($colors, secondary);
+  }
+  
+  .button-item {
+    margin-bottom: 1.5rem;
+    font-size: 1.7rem;
+    border-radius: 0.8rem;
     color: color($colors, primary);
   }
 }
