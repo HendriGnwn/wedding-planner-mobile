@@ -5,8 +5,8 @@
   Ionic pages and navigation.
 -->
 
-<ion-content padding class="cream-background">
-	<ion-img width="100%" src="http://via.placeholder.com/450x250"></ion-img>
+<ion-content padding class="cream-background" text-center>
+  <img style="margin-top:30px;" width="60%" src="assets/imgs/logo.png" />
 	<form autocomplete="off" [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm.value)">
 		<ion-row>
 			<ion-col>
@@ -43,7 +43,7 @@
 		</ion-row>
 		<ion-row>
 			<ion-col text-center>
-				<button ion-button color="secondary" style="margin-top:20px;" no-border (click)="goToRegisterPage()">Buat Akun</button>
+				<button ion-button color="secondary" style="margin-top:20px;" no-line (click)="goToRegisterPage()">Buat Akun</button>
 			</ion-col>
 		</ion-row>
 		<ion-row>

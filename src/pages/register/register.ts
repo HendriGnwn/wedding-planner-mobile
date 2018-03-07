@@ -83,6 +83,8 @@ export class RegisterPage {
         "device_number": this.device.uuid
       };
       
+      console.log(params);
+      
       this.api.post('auth/register', params, {'Content-Type':'application/json'})
         .then((data) => {
           
