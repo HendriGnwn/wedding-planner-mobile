@@ -28,26 +28,36 @@ import { ContentDetailListPage } from '../pages/content-detail-list/content-deta
 import { ProcedurePageModule } from '../pages/procedure/procedure.module';
 import { ProfilePage } from '../pages/profile/profile';
 import { TabsPage } from '../pages/tabs/tabs';
+import { SettingPage } from '../pages/setting/setting';
+import { EditProfilePage } from '../pages/edit-profile/edit-profile';
+import { RelationProfileDetailPage } from '../pages/relation-profile-detail/relation-profile-detail';
+import { StaticPage } from '../pages/static/static';
+import { ReportProblemPage } from '../pages/report-problem/report-problem';
 import { HelpersProvider } from '../providers/helpers/helpers';
 import { DatePicker } from '@ionic-native/date-picker';
 
 @NgModule({
   declarations: [
     MyApp,
-//	  LoginPage,
-//	  RegisterPage,
-//	  ForgotPasswordPage,
-//    WelcomePage,
-//    ConceptPage,
-//    CostPage,
-//    NotificationPage,
-//    //ProcedurePage,
-//    ProfilePage,
-//    TabsPage,
-//    ContentPage,
-//    ContentDetailPage,
-//    ContentDetailListPage,
-//    RegisterRelationPage
+	  LoginPage,
+	  RegisterPage,
+	  ForgotPasswordPage,
+    WelcomePage,
+    ConceptPage,
+    CostPage,
+    NotificationPage,
+    //ProcedurePage,
+    ProfilePage,
+    TabsPage,
+    ContentPage,
+    ContentDetailPage,
+    ContentDetailListPage,
+    RegisterRelationPage,
+    SettingPage,
+    EditProfilePage,
+    RelationProfileDetailPage,
+    StaticPage,
+    ReportProblemPage
   ],
   imports: [
     BrowserModule,
@@ -71,8 +81,12 @@ import { DatePicker } from '@ionic-native/date-picker';
     TabsPage,
     ContentPage,
     ContentDetailPage,
-    ContentDetailListPage,
-    RegisterRelationPage
+    RegisterRelationPage,
+    SettingPage,
+    EditProfilePage,
+    RelationProfileDetailPage,
+    StaticPage,
+    ReportProblemPage
   ],
   providers: [
     StatusBar,

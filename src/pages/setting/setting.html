@@ -1,0 +1,61 @@
+<!--
+  Generated template for the SettingPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title text-center>Pengaturan</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-list>
+    <ion-list-header>
+      Akun
+    </ion-list-header>
+
+    <button ion-item (click)="goToEditProfile()">
+      <ion-icon ios="ios-contact-outline" md="ios-contact-outline" item-start></ion-icon>
+      Edit Profile
+      <ion-icon ios="ios-arrow-forward-outline" md="ios-arrow-forward-outline" item-end></ion-icon>
+    </button>
+    <button ion-item (click)="goToRelationProfile()">
+      <ion-icon ios="ios-person-outline" md="ios-person-outline" item-start></ion-icon>
+      Detail Pasangan Anda
+      <ion-icon ios="ios-arrow-forward-outline" md="ios-arrow-forward-outline" item-end></ion-icon>
+    </button>
+    <ion-list-header>
+      Tentang
+    </ion-list-header>
+    <button ion-item (click)="goToStatic(2, 'Tentang Kami')">
+      <ion-icon ios="ios-paper-outline" md="ios-paper-outline" item-start></ion-icon>
+      Tentang Kami
+      <ion-icon ios="ios-arrow-forward-outline" md="ios-arrow-forward-outline" item-end></ion-icon>
+    </button>  
+    <button ion-item (click)="goToStatic(1, 'Kebijakan Privasi')">
+      <ion-icon ios="ios-bookmark-outline" md="ios-bookmark-outline" item-start></ion-icon>
+      Kebijakan Privasi
+      <ion-icon ios="ios-arrow-forward-outline" md="ios-arrow-forward-outline" item-end></ion-icon>
+    </button>
+    <button ion-item (click)="goToStatic(3, 'Ketentuan Penggunaan')">
+      <ion-icon ios="ios-book-outline" md="ios-book-outline" item-start></ion-icon>
+      Ketentuan Penggunaan
+      <ion-icon ios="ios-arrow-forward-outline" md="ios-arrow-forward-outline" item-end></ion-icon>
+    </button>
+    <button ion-item (click)="goToReportProblem()">
+      <ion-icon ios="ios-alert-outline" md="ios-alert-outline" item-start></ion-icon>
+      Laporkan Masalah
+      <ion-icon ios="ios-arrow-forward-outline" md="ios-arrow-forward-outline" item-end></ion-icon>
+    </button>  
+    <button ion-item (click)="doLogout()">
+      <ion-icon ios="ios-log-out-outline" md="ios-log-out-outline" item-start></ion-icon>
+      Keluar
+    </button>  
+  </ion-list>
+
+</ion-content>

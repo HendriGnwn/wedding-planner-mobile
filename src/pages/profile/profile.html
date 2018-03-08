@@ -8,7 +8,7 @@
 
   <ion-navbar color="primary">
     <ion-buttons end>
-      <button ion-button icon-only color="white">
+      <button ion-button icon-only color="white" (click)="goToSetting()">
         <ion-icon name="settings"></ion-icon>
       </button>
     </ion-buttons>
@@ -22,7 +22,7 @@
   <ion-row class="profile-banner">
     <ion-col col-12 text-center>
       <ion-img (click)="openFile()" width="100%" height="180" src="https://static.pexels.com/photos/256737/pexels-photo-256737.jpeg"></ion-img>
-      <ion-icon name="camera" color="white" large style="font-size: 2.2em; top: -40px; position:relative;"></ion-icon>
+      <ion-icon name="camera" color="white" large class="icon-upload"></ion-icon>
     </ion-col>
   </ion-row>
   
@@ -30,16 +30,52 @@
     
     <ion-row class="counting-down-container">
       <ion-col col-3 text-center>
-        Hari
+        <ion-row>
+          <ion-col col-12 class="counting-number">
+            {{ days }}
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-12 class="counting-label">
+            Hari
+          </ion-col>
+        </ion-row>
       </ion-col>
       <ion-col col-3 text-center>
-        Jam
+        <ion-row>
+          <ion-col col-12 class="counting-number">
+            {{ hours }}
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-12 class="counting-label">
+            Jam
+          </ion-col>
+        </ion-row>
       </ion-col>
       <ion-col col-3 text-center>
-        Menit
+        <ion-row>
+          <ion-col col-12 class="counting-number">
+            {{ minutes }}
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-12 class="counting-label">
+            Menit
+          </ion-col>
+        </ion-row>
       </ion-col>
       <ion-col col-3 text-center>
-        Detik
+        <ion-row>
+          <ion-col col-12 class="counting-number">
+            {{ seconds }}
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-12 class="counting-label">
+            Detik
+          </ion-col>
+        </ion-row>
       </ion-col>
     </ion-row>
     
@@ -54,7 +90,6 @@
         {{ venue }}
       </ion-col>
     </ion-row>
-    <button ion-button (click)="doLogout()">Logout</button>
   </div>
    
 </ion-content>

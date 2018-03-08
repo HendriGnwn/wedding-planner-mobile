@@ -1,9 +1,7 @@
 page-cost {
-  .scroll-content, .fixed-content {
-    padding: 0.8rem;
-    font-size: 1.2em;
-    color: color($colors, primary);
-  }
+  .item-md, .item-ios, .item-wp {
+	  padding-left: 0px;
+	}
   .grid-col {
     .grid-row-content {
       border: 1px solid color($colors, secondary);

@@ -9,6 +9,7 @@ import { WelcomePage } from '../pages/welcome/welcome';
 import { LoginPage } from '../pages/login/login';
 import { RegisterRelationPage } from '../pages/register-relation/register-relation';
 import { TabsPage } from '../pages/tabs/tabs';
+import { HelpersProvider } from '../providers/helpers/helpers';
 
 @Component({
   templateUrl: 'app.html'
@@ -28,7 +29,9 @@ export class MyApp {
     private apiProvider: ApiProvider, 
     private toastCtrl: ToastController,
     public loadingCtrl: LoadingController,
-    public deeplinks: Deeplinks) {
+    public deeplinks: Deeplinks,
+    public helpers: HelpersProvider,
+    ) {
     
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
@@ -83,10 +86,7 @@ export class MyApp {
     this.apiProvider.post('auth/logout', {}, {"Content-Type": "application/json", "Authorization": "Bearer " + token})
     .then ((data) => {
       
-      localStorage.setItem('isLoggedIn', null);
-      localStorage.setItem('token', null);
-      localStorage.setItem('user', null);
-      localStorage.setItem("user_id", null);
+      this.helpers.clearLoggedIn();
       
       let result = JSON.parse(data.data);
       this.loading.dismiss();
@@ -103,10 +103,7 @@ export class MyApp {
     })
     .catch((error) => {
       
-      localStorage.setItem('isLoggedIn', null);
-      localStorage.setItem('token', null);
-      localStorage.setItem('user', null);
-      localStorage.setItem("user_id", null);
+      this.helpers.clearLoggedIn();
       
       this.loading.dismiss();
       

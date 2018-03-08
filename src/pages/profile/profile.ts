@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
-import { NavController, ViewController, ToastController, Events } from 'ionic-angular';
+import { NavController, ViewController, ToastController, Events, App } from 'ionic-angular';
 import { File } from '@ionic-native/file';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { ApiProvider } from '../../providers/api/api';
+import { HelpersProvider } from '../../providers/helpers/helpers';
 
 import {LoginPage} from '../login/login';
+import {SettingPage} from '../setting/setting';
 
 /**
  * Generated class for the ProfilePage page.
@@ -31,6 +33,11 @@ export class ProfilePage {
     encodingType: this.camera.EncodingType.JPEG,
     mediaType: this.camera.MediaType.PICTURE
   }
+  
+  days: any;
+  hours: any;
+  minutes: any;
+  seconds: any;
 
   constructor(
     public navCtrl: NavController, 
@@ -39,7 +46,10 @@ export class ProfilePage {
     private toastCtrl: ToastController, 
     public file: File,
     private camera: Camera,
-    public apiProvider: ApiProvider) {
+    public apiProvider: ApiProvider,
+    public helpersProvider: HelpersProvider,
+    public app: App
+    ) {
     
     if (localStorage.getItem("isLoggedIn") == null) {
         
@@ -49,8 +59,8 @@ export class ProfilePage {
           position: 'buttom',
           dismissOnPageChange: false,
         }).present();
-
-      this.navCtrl.setRoot(LoginPage);
+      this.helpersProvider.clearLoggedIn();
+      this.app.getRootNav().setRoot(LoginPage);
       
     }
 
@@ -58,6 +68,11 @@ export class ProfilePage {
     
     this.getUser();
     
+    this.getCountdown();
+
+    setInterval(() => { 
+      this.getCountdown(); 
+    }, 1000);
   }
 
   getUser() {
@@ -74,6 +89,12 @@ export class ProfilePage {
       })
       .catch((error) => {
         this.user = {};
+        let result = JSON.parse(error.error);
+        if (result.status == '401') {
+          this.helpersProvider.toastPresent(result.message);
+          this.helpersProvider.clearLoggedIn();
+          this.app.getRootNav().setRoot(LoginPage);
+        }
         console.log(error);
       });
   }
@@ -104,9 +125,38 @@ export class ProfilePage {
    });
   }
   
-  doLogout() {
-    //this.myApp.logout();
-    this.events.publish("auth:logout", this.token);
+  getCountdown() {
+    if (!this.wedding_day) {
+      return;
+    }
+    
+    let target_date = Date.parse(this.wedding_day + ' 00:00:00'); // set the countdown date
+
+    // find the amount of "seconds" between now and target
+    let current_date = new Date().getTime();
+    
+    let seconds_left = (target_date - current_date) / 1000;
+    
+    if (current_date > target_date) {
+      seconds_left = 0;
+    }
+    
+    this.days = this.pad(Math.floor(seconds_left / 86400) );
+    seconds_left = seconds_left % 86400;
+
+    this.hours = this.pad(Math.floor(seconds_left / 3600) );
+    seconds_left = seconds_left % 3600;
+
+    this.minutes = this.pad(Math.floor(seconds_left / 60) );
+    this.seconds = this.pad(Math.floor( seconds_left % 60 ) );
+  }
+
+  pad(n) {
+    return (n < 10 ? '0' : '') + n;
+  }
+  
+  goToSetting() {
+    this.navCtrl.push(SettingPage);
   }
   
   ionViewWillEnter() {

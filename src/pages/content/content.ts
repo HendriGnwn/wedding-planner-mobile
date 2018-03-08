@@ -33,7 +33,7 @@ export class ContentPage {
     if (localStorage.getItem("isLoggedIn") == null) {
         
       this.helpersProvider.toastPresent("Session expired, Please Login again.", );
-
+      this.helpersProvider.clearLoggedIn();
       this.navCtrl.setRoot(LoginPage);
     }
     this.pageTitle = this.navParams.get('name');
@@ -57,7 +57,9 @@ export class ContentPage {
         let result = JSON.parse(error.error);
         if (result.status == '401') {
           this.helpersProvider.toastPresent(result.message);
+          this.helpersProvider.clearLoggedIn();
           this.navCtrl.setRoot(LoginPage);
+          
         }
         console.log(this.contents);
         console.log(error);

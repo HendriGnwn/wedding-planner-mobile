@@ -22,10 +22,10 @@
   <ion-list no-lines>
     <ion-item class="list-item" color="secondary" *ngFor="let item of contents.content_details">
       <ion-label class="list-item-label" fixed *ngIf="!item.is_link && !item.is_cost">{{ item.name }}:</ion-label>
-      <ion-input class="list-item-input" placeholder="Isi {{ item.name }}" type="text" value="{{ item.value }}" (keypress)="inputKeypress($event, item.id)" *ngIf="!item.is_link && !item.is_cost"></ion-input>
+      <ion-input class="list-item-input" placeholder="Isi {{ item.name }}" type="text" value="{{ item.value }}" (change)="eventChangeSaveContentDetail($event, item.id)" (keypress)="eventKeypressSaveContentDetail($event, item.id)" *ngIf="!item.is_link && !item.is_cost"></ion-input>
       
       <ion-label class="list-item-label" fixed *ngIf="!item.is_link && item.is_cost">{{ item.name }}:</ion-label>
-      <ion-input class="list-item-input" placeholder="Isi {{ item.name }}" type="number" value="{{ item.value }}" (keypress)="inputKeypress($event, item.id)" *ngIf="!item.is_link && item.is_cost"></ion-input>
+      <ion-input class="list-item-input" placeholder="Isi {{ item.name }}" type="number" value="{{ item.value }}" (change)="eventChangeSaveContentDetail($event, item.id)" (keypress)="eventKeypressSaveContentDetail($event, item.id)" *ngIf="!item.is_link && item.is_cost"></ion-input>
       
       <button text-left ion-item full class="list-item-button" color="secondary" *ngIf="item.is_link">
         {{ item.name }}

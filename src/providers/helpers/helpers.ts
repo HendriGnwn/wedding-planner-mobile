@@ -55,6 +55,13 @@ export class HelpersProvider {
     );
   }
   
+  clearLoggedIn() {
+    localStorage.setItem('isLoggedIn', null);
+    localStorage.setItem('token', null);
+    localStorage.setItem('user', null);
+    localStorage.setItem("user_id", null);
+  }
+  
   
 
 }

@@ -2,6 +2,11 @@ page-profile {
   .profile-banner {
     .col {
       padding: 0px !important;
+      .icon-upload {
+        font-size: 2.2em; 
+        top: -40px; 
+        position:relative;
+      }
     }
   }
   .content {
@@ -14,7 +19,12 @@ page-profile {
     padding: 0.8rem;
     margin-top: -20px;
     border-radius: 0.7rem;
-    
+    .counting-number {
+      font-size: 2.7rem;
+    }
+    .counting-label {
+      font-size: 1.5rem;
+    }
   }
   
   .detail-container {
