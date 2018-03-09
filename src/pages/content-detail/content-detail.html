@@ -27,12 +27,12 @@
       <ion-label class="list-item-label" fixed *ngIf="!item.is_link && item.is_cost">{{ item.name }}:</ion-label>
       <ion-input class="list-item-input" placeholder="Isi {{ item.name }}" type="number" value="{{ item.value }}" (change)="eventChangeSaveContentDetail($event, item.id)" (keypress)="eventKeypressSaveContentDetail($event, item.id)" *ngIf="!item.is_link && item.is_cost"></ion-input>
       
-      <button text-left ion-item full class="list-item-button" color="secondary" *ngIf="item.is_link">
+      <button text-left ion-item full class="list-item-button" color="secondary" *ngIf="item.is_link" detail-none>
         {{ item.name }}
       </button>
       <ion-icon ios="ios-arrow-forward-outline" md="ios-arrow-forward-outline" item-end *ngIf="item.is_link" color="primary"></ion-icon>
     </ion-item>
-    <button ion-item class="list-item list-item-icon-add" color="secondary" (click)="addContent()">
+    <button ion-item class="list-item list-item-icon-add" color="secondary" (click)="addContent()" detail-none>
       <ion-icon ios="ios-add-circle" md="ios-add-circle" item-start color="primary"></ion-icon>
     </button>
   </ion-list>

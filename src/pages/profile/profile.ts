@@ -38,6 +38,7 @@ export class ProfilePage {
   hours: any;
   minutes: any;
   seconds: any;
+  bannerHeight: any;
 
   constructor(
     public navCtrl: NavController, 
@@ -74,6 +75,12 @@ export class ProfilePage {
     setInterval(() => { 
       this.getCountdown(); 
     }, 1000);
+    
+    if (this.platform.is('ios')) {
+      this.bannerHeight = 200;
+    } else {
+      this.bannerHeight = 200;
+    }
   }
 
   getUser() {
@@ -136,7 +143,7 @@ export class ProfilePage {
     if(this.platform.is('ios')) {
       let t = this.wedding_day.split(/[- :]/);
       // Apply each element to the Date function
-      target_date = new Date(t[0], t[1]-1, t[2], "00", "00", "00").getTime();
+      target_date = new Date(t[0], t[1]-1, t[2], 0, 0, 0).getTime();
     } else {
       target_date = Date.parse(this.wedding_day + ' 00:00:00'); // set the countdown date
     }
@@ -158,12 +165,6 @@ export class ProfilePage {
 
     this.minutes = this.pad(Math.floor(seconds_left / 60) );
     this.seconds = this.pad(Math.floor( seconds_left % 60 ) );
-let t = this.wedding_day.split(/[- :]/);
-
-// Apply each element to the Date function
-let d = new Date(t[0], t[1]-1, t[2], "00", "00", "00").getTime();
-let target_date = new Date(d);
-    console.log(( d ));
   }
 
   pad(n) {

@@ -3,7 +3,7 @@ import { IonicPage, NavController, Nav } from 'ionic-angular';
 
 import { ConceptPage } from '../concept/concept';
 import { CostPage } from '../cost/cost';
-import { NotificationPage } from '../notification/notification';
+import { VendorPage } from '../vendor/vendor';
 import { ProcedurePage } from '../procedure/procedure';
 import { ProfilePage } from '../profile/profile';
 
@@ -26,7 +26,7 @@ export class TabsPage {
   procedureRoot = ProcedurePage;
   costRoot = CostPage;
   conceptRoot = ConceptPage;
-  notificationRoot = NotificationPage;
+  vendorRoot = VendorPage;
   profileRoot = ProfilePage;
 
 

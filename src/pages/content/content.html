@@ -21,11 +21,11 @@
 <ion-content>
 
   <ion-list no-lines>
-    <button class="button-item" ion-item color="secondary" *ngFor="let item of contents" (click)="goToDetail(item.id, item.name)">
+    <button class="button-item" ion-item color="secondary" *ngFor="let item of contents" (click)="goToDetail(item.id, item.name)" detail-none>
       {{ item.name }}
       <ion-icon ios="ios-arrow-forward-outline" md="ios-arrow-forward-outline" item-end></ion-icon>
     </button>
-    <button ion-item class="button-item" color="secondary" (click)="addContent()">
+    <button ion-item class="button-item" color="secondary" (click)="addContent()" detail-none>
       <ion-icon ios="ios-add-circle" md="ios-add-circle" item-start></ion-icon>
     </button>
   </ion-list>

@@ -32,6 +32,8 @@ import { SettingPage } from '../pages/setting/setting';
 import { EditProfilePage } from '../pages/edit-profile/edit-profile';
 import { RelationProfileDetailPage } from '../pages/relation-profile-detail/relation-profile-detail';
 import { StaticPage } from '../pages/static/static';
+import { VendorPage } from '../pages/vendor/vendor';
+import { VendorDetailPage } from '../pages/vendor-detail/vendor-detail';
 import { ReportProblemPage } from '../pages/report-problem/report-problem';
 import { HelpersProvider } from '../providers/helpers/helpers';
 import { DatePicker } from '@ionic-native/date-picker';
@@ -57,7 +59,9 @@ import { DatePicker } from '@ionic-native/date-picker';
     EditProfilePage,
     RelationProfileDetailPage,
     StaticPage,
-    ReportProblemPage
+    ReportProblemPage,
+    VendorPage,
+    VendorDetailPage
   ],
   imports: [
     BrowserModule,
@@ -86,7 +90,9 @@ import { DatePicker } from '@ionic-native/date-picker';
     EditProfilePage,
     RelationProfileDetailPage,
     StaticPage,
-    ReportProblemPage
+    ReportProblemPage,
+    VendorPage,
+    VendorDetailPage
   ],
   providers: [
     StatusBar,

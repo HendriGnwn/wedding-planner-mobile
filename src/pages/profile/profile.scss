@@ -1,7 +1,12 @@
 page-profile {
   .profile-banner {
+    margin-bottom: 2rem;
     .col {
       padding: 0px !important;
+      .banner-profile {
+        background-position: 50% 50%;
+        height: 20rem;
+      }
       .icon-upload {
         font-size: 2.2em; 
         top: -40px; 
@@ -33,7 +38,7 @@ page-profile {
     margin-top: 10px;
     border-radius: 0.7rem;
     .detail-title {
-      font-size: 5rem;
+      font-size: 3.5rem;
       font-family: 'Dancing Script', cursive !important;
     }
     .detail-subtitle {

@@ -1,15 +1,17 @@
 page-static {
-  .item-md, .item-ios, .item-wp {
-	  padding-left: 0px;
-	}
+  .scroll-content, .fixed-content {
+    padding: 1.5rem 1.3rem;
+    color: color($colors, dark);
+  }
   .page-title {
     font-size: 2.2rem;
-    margin-top: 2rem;
+    margin-top: 0.5rem;
   }
   .page-content {
     p {
       line-height: 3.2rem;
-      font-size: 1.8rem;
+      font-size: 1.6rem;
+      text-align: justify;
     }
   }
   

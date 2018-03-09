@@ -21,8 +21,12 @@
   
   <ion-row class="profile-banner">
     <ion-col col-12 text-center>
-      <ion-img (click)="openFile()" width="100%" height="180" src="https://static.pexels.com/photos/256737/pexels-photo-256737.jpeg"></ion-img>
-      <ion-icon name="camera" color="white" large class="icon-upload"></ion-icon>
+      <div class="banner-profile">
+        <img (click)="openFile()" width="100%" height="{{ bannerHeight }}" src="https://static.pexels.com/photos/256737/pexels-photo-256737.jpeg" />
+        <ion-icon name="camera" color="white" large class="icon-upload"></ion-icon>
+      </div>
+      
+      
     </ion-col>
   </ion-row>
   
