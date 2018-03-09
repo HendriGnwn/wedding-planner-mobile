@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { NavController, ViewController, ToastController, Events, App } from 'ionic-angular';
+import { Component,  } from '@angular/core';
+import { Platform, NavController, ViewController, ToastController, Events, App } from 'ionic-angular';
 import { File } from '@ionic-native/file';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { ApiProvider } from '../../providers/api/api';
@@ -42,13 +42,14 @@ export class ProfilePage {
   constructor(
     public navCtrl: NavController, 
     private viewCtrl: ViewController, 
-    private events: Events, 
+    private events: Events,
     private toastCtrl: ToastController, 
     public file: File,
     private camera: Camera,
     public apiProvider: ApiProvider,
     public helpersProvider: HelpersProvider,
-    public app: App
+    public app: App,
+    public platform: Platform
     ) {
     
     if (localStorage.getItem("isLoggedIn") == null) {
@@ -130,8 +131,16 @@ export class ProfilePage {
       return;
     }
     
-    let target_date = Date.parse(this.wedding_day + ' 00:00:00'); // set the countdown date
-
+    let target_date = null;
+    
+    if(this.platform.is('ios')) {
+      let t = this.wedding_day.split(/[- :]/);
+      // Apply each element to the Date function
+      target_date = new Date(t[0], t[1]-1, t[2], "00", "00", "00").getTime();
+    } else {
+      target_date = Date.parse(this.wedding_day + ' 00:00:00'); // set the countdown date
+    }
+    
     // find the amount of "seconds" between now and target
     let current_date = new Date().getTime();
     
@@ -149,6 +158,12 @@ export class ProfilePage {
 
     this.minutes = this.pad(Math.floor(seconds_left / 60) );
     this.seconds = this.pad(Math.floor( seconds_left % 60 ) );
+let t = this.wedding_day.split(/[- :]/);
+
+// Apply each element to the Date function
+let d = new Date(t[0], t[1]-1, t[2], "00", "00", "00").getTime();
+let target_date = new Date(d);
+    console.log(( d ));
   }
 
   pad(n) {
