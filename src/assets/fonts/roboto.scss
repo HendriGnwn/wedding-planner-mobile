@@ -33,18 +33,18 @@ $roboto-font-path: $font-path !default;
   src: local("Roboto Bold"), local("Roboto-Bold"), url("#{$roboto-font-path}/roboto-bold.woff2") format("woff2"), url("#{$roboto-font-path}/roboto-bold.woff") format("woff"), url("#{$roboto-font-path}/roboto-bold.ttf") format("truetype");
 }
 
-$dancing-script-font-path: $font-path !default;
+$alexbrush-font-path: $font-path !default;
 
 @font-face {
-  font-family: "Dancing Script";
+  font-family: "Alex Brush";
   font-style: normal;
   font-weight: 300;
-  src: local("Dancing Script"), local("dancingscript-regular"), url("#{$dancing-script-font-path}/noto-sans-regular.ttf") format("opentype");
+  src: local("Alex Brush"), local("alexbrush-regular"), url("#{$alexbrush-font-path}/alexbrush-regular.ttf") format("opentype");
 }
 
 @font-face {
-  font-family: "Dancing Script";
+  font-family: "Alex Brush";
   font-style: normal;
   font-weight: 500;
-  src: local("Dancing Script"), local("dancingscript-regular"), url("#{$dancing-script-font-path}/dancingscript-bold.ttf") format("opentype");
+  src: local("Alex Brush"), local("alexbrush-regular"), url("#{$alexbrush-font-path}/alexbrush-bold.ttf") format("opentype");
 }

@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, App } from 'ionic-angular';
 import {ApiProvider} from '../../providers/api/api';
 import { ContentPage } from '../content/content';
 import { LoginPage } from '../login/login';
+import {NotificationPage} from '../notification/notification';
 import { HelpersProvider } from '../../providers/helpers/helpers';
 
 /**
@@ -60,6 +61,10 @@ export class ConceptPage {
       "id": id,
       "name": name
     });
+  }
+  
+  goToNotification() {
+    this.navCtrl.push(NotificationPage);
   }
 
 }

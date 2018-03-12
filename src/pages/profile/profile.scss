@@ -1,4 +1,15 @@
 page-profile {
+  .content-md {
+    .profile-banner {
+      margin-bottom: 7.5rem;
+    }
+    .counting-down-container {
+      .counting-number {
+        height: 8rem;
+        padding-top: 1.3rem;
+      } 
+    }
+  }
   .profile-banner {
     margin-bottom: 2rem;
     .col {
@@ -26,9 +37,16 @@ page-profile {
     border-radius: 0.7rem;
     .counting-number {
       font-size: 2.7rem;
+      background: url("../assets/imgs/calendar_icon.png") no-repeat;
+      background-size: 100% 100%;
+      height: 6rem;
+      display:flex;
+      justify-content:center;
+      padding-top: 1rem;
+      align-items:center;
     }
     .counting-label {
-      font-size: 1.5rem;
+      font-size: 1.2rem;
     }
   }
   
@@ -39,7 +57,7 @@ page-profile {
     border-radius: 0.7rem;
     .detail-title {
       font-size: 3.5rem;
-      font-family: 'Dancing Script', cursive !important;
+      font-family: 'Alex Brush', cursive !important;
     }
     .detail-subtitle {
       font-size: 1.5rem;

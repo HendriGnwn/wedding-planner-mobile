@@ -28,6 +28,7 @@
     <preference name="AndroidPersistentFileLocation" value="Compatibility" />
     <preference name="iosPersistentFileLocation" value="Library" />
     <preference name="iosPersistentFileLocation" value="Compatibility" />
+    <preference name="orientation" value="portrait" />
     <platform name="android">
         <allow-intent href="market:*" />
         <icon density="ldpi" src="resources/android/icon/drawable-ldpi-icon.png" />
@@ -120,4 +121,5 @@
     <allow-navigation href="http://10.0.0.170:8100" />
     <engine name="ios" spec="4.5.4" />
     <engine name="android" spec="7.0.0" />
+    <allow-navigation href="http://10.0.0.159:8100" />
 </widget>

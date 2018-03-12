@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {NotificationPage} from '../notification/notification';
 
 /**
  * Generated class for the VendorPage page.
@@ -20,6 +21,10 @@ export class VendorPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad VendorPage');
+  }
+  
+  goToNotification() {
+    this.navCtrl.push(NotificationPage);
   }
 
 }

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, App } from 'ionic-angular';
 import { ApiProvider } from '../../providers/api/api';
 import { LoginPage } from '../login/login';
+import {NotificationPage} from '../notification/notification';
 import { HelpersProvider } from '../../providers/helpers/helpers';
 
 /**
@@ -61,6 +62,10 @@ export class CostPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad CostPage');
+  }
+  
+  goToNotification() {
+    this.navCtrl.push(NotificationPage);
   }
 
 }
