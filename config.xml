@@ -3,7 +3,7 @@
     <name>Agenda Nikah</name>
     <description>Rencanakan Hari Bahagia Anda bersama kami.</description>
     <author email="hendri.gnw@gmail.com" href="http://hendrign.id/">Hendri Gunawan</author>
-    <content src="index.html" />
+    <content original-src="index.html" src="http://10.0.0.171:8100" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -119,7 +119,8 @@
         <variable name="DEEPLINK_5_HOST" value=" " />
     </plugin>
     <allow-navigation href="http://10.0.0.170:8100" />
+    <allow-navigation href="http://10.0.0.159:8100" />
+    <allow-navigation href="http://10.0.0.171:8100" />
     <engine name="ios" spec="4.5.4" />
     <engine name="android" spec="7.0.0" />
-    <allow-navigation href="http://10.0.0.159:8100" />
 </widget>
