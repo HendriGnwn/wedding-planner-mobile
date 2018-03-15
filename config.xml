@@ -23,7 +23,6 @@
     <preference name="SplashScreenDelay" value="3000" />
     <preference name="AutoHideSplashScreen" value="true" />
     <preference name="ShowSplashScreenSpinner" value="false" />
-    <preference name="loadUrlTimeoutValue" value="700000" />
     <preference name="AndroidPersistentFileLocation" value="Internal" />
     <preference name="AndroidPersistentFileLocation" value="Compatibility" />
     <preference name="iosPersistentFileLocation" value="Library" />
@@ -119,5 +118,5 @@
         <variable name="DEEPLINK_5_HOST" value=" " />
     </plugin>
     <engine name="ios" spec="4.5.4" />
-    <engine name="android" spec="~7.0.0" />
+    <engine name="android" spec="7.0.0" />
 </widget>
