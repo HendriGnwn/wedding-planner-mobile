@@ -1,5 +1,7 @@
 import { Component,  } from '@angular/core';
-import { Platform, NavController, ToastController, App } from 'ionic-angular';
+import { Platform, NavController, ToastController, App, IonicPage, ViewController } from 'ionic-angular';
+import { File } from '@ionic-native/file';
+import { Camera, CameraOptions } from '@ionic-native/camera';
 import { ApiProvider } from '../../providers/api/api';
 import { HelpersProvider } from '../../providers/helpers/helpers';
 
@@ -10,6 +12,7 @@ import { HelpersProvider } from '../../providers/helpers/helpers';
  * Ionic pages and navigation.
  */
 
+@IonicPage()
 @Component({
   selector: 'page-profile',
   templateUrl: 'profile.html',
@@ -22,6 +25,12 @@ export class ProfilePage {
   wedding_day: any;
   user: any = {};
   dirs: any;
+  options: CameraOptions = {
+    quality: 100,
+    destinationType: this.camera.DestinationType.DATA_URL,
+    encodingType: this.camera.EncodingType.JPEG,
+    mediaType: this.camera.MediaType.PICTURE
+  }
   
   days: any;
   hours: any;
@@ -31,6 +40,9 @@ export class ProfilePage {
 
   constructor(
     public navCtrl: NavController, 
+    private viewCtrl: ViewController, 
+    public file: File,
+    private camera: Camera,
     private toastCtrl: ToastController, 
     public apiProvider: ApiProvider,
     public helpersProvider: HelpersProvider,
@@ -90,6 +102,32 @@ export class ProfilePage {
         }
         console.log(error);
       });
+  }
+  
+  openFile() {
+//    this.file.resolveLocalFilesystemUrl(this.file.dataDirectory);
+//    console.log(this.file.dataDirectory);
+//    this.file.listDir(this.file.applicationDirectory, '').then(
+//  (files) => {
+//    // do something
+//    this.dirs = files;
+//    console.log('test');
+//  }
+//).catch(ç
+//  (err) => {
+    // do something
+//    console.log('test1');
+//  }
+//);
+    this.camera.getPicture(this.options).then((imageData) => {
+    // imageData is either a base64 encoded string or a file URI
+    // If it's base64:
+    let base64Image = 'data:image/jpeg;base64,' + imageData;
+    console.log(base64Image);
+   }, (err) => {
+    // Handle error
+      console.log(err);
+   });
   }
   
   getCountdown() {
