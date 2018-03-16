@@ -32,7 +32,7 @@ export class EditProfilePage {
   userName: string = '';
   userPhone: string = '';
   userGender: any = '';
-  userWeddingDay: any = '2018-09-01';
+  userWeddingDay: any = '';
   userVenue: any = '';
 
   constructor(
@@ -49,6 +49,8 @@ export class EditProfilePage {
       this.helpersProvider.clearLoggedIn();
       this.navCtrl.setRoot("LoginPage");
     }
+    
+    this.loading = this.helpersProvider.loadingPresent("Please Wait ...");
     
     this.getUser();
     this.editProfileForm = this.formBuilder.group({
@@ -73,6 +75,8 @@ export class EditProfilePage {
         this.userVenue = this.user.relation.venue;
         
         console.log(this.user);
+        
+        this.loading.dismiss();
         
         this.editProfileForm = this.formBuilder.group({
           email: [this.userEmail, Validators.compose([Validators.required, Validators.email])],

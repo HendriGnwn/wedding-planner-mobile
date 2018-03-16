@@ -5,10 +5,6 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import {ApiProvider} from '../providers/api/api';
 import { Deeplinks } from '@ionic-native/deeplinks';
 
-import { WelcomePage } from '../pages/welcome/welcome';
-import { LoginPage } from '../pages/login/login';
-import { RegisterRelationPage } from '../pages/register-relation/register-relation';
-import { TabsPage } from '../pages/tabs/tabs';
 import { HelpersProvider } from '../providers/helpers/helpers';
 
 @Component({
@@ -63,7 +59,7 @@ export class MyApp {
   ngAfterViewInit() {
     this.platform.ready().then(() => {
       this.deeplinks.routeWithNavController(this.nav, {
-        '/register-relation': RegisterRelationPage
+        '/register-relation': "RegisterRelationPage"
       }).subscribe((match) => {
           // match.$route - the route we matched, which is the matched entry from the arguments to route()
           // match.$args - the args passed in the link
