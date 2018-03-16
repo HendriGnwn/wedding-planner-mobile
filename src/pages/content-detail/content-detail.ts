@@ -82,9 +82,6 @@ export class ContentDetailPage {
   }
   
   eventKeypressSaveContentDetail(event, id) {
-    if (event.keyCode == 13) {
-      this.saveContentDetail(id, event.target.value);
-    }
   }
   
   eventChangeSaveContentDetail(event, id) {
