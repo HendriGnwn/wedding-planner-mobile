@@ -6,8 +6,14 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>contentModalPage</ion-title>
+  <ion-navbar color="primary">
+    <ion-title text-center>Tambah baru</ion-title>
+    <ion-buttons start>
+      <button ion-button (click)="dismiss()">
+        <span ion-text color="primary" showWhen="ios">Batal</span>
+        <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
