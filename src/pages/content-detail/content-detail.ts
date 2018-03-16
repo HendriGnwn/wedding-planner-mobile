@@ -2,8 +2,6 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { HelpersProvider } from '../../providers/helpers/helpers';
 import { ApiProvider } from '../../providers/api/api';
-import { LoginPage } from '../login/login';
-import { ContentDetailListPage } from '../content-detail-list/content-detail-list';
 
 /**
  * Generated class for the ContentDetailPage page.
@@ -28,7 +26,7 @@ export class ContentDetailPage {
         
       this.helpersProvider.toastPresent("Session expired, Please Login again.", );
       this.helpersProvider.clearLoggedIn();
-      this.navCtrl.setRoot(LoginPage);
+      this.navCtrl.setRoot("LoginPage");
     }
     this.pageTitle = this.navParams.get('name');
     
@@ -51,7 +49,7 @@ export class ContentDetailPage {
         if (result.status == '401') {
           this.helpersProvider.toastPresent(result.message);
           this.helpersProvider.clearLoggedIn();
-          this.navCtrl.setRoot(LoginPage);
+          this.navCtrl.setRoot("LoginPage");
         }
         console.log(error);
       });
@@ -77,7 +75,7 @@ export class ContentDetailPage {
       if (result.status == '401') {
         this.helpersProvider.toastPresent(result.message);
         this.helpersProvider.clearLoggedIn();
-        this.navCtrl.setRoot(LoginPage);
+        this.navCtrl.setRoot("LoginPage");
       }
       console.log(error);
     });

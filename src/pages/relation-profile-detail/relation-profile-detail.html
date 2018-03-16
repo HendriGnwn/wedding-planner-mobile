@@ -13,6 +13,65 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content padding class="cream-background" text-center>
+  <form autocomplete="off" [formGroup]="relationProfileForm" (ngSubmit)="onSubmit(relationProfileForm.value)" *ngIf="isFormRelation">
+    <ion-row>
+      <ion-col>
+        <p>
+          Pasangan Anda belum mendaftar, silahkan Kirim ulang email agar mengingatkan untuk segera daftar.
+        </p>
+        <ion-list>
+          <ion-item class="cream-background" [ngClass]="{'error-border':!relationProfileForm.controls.email.valid && relationProfileForm.controls.email.touched}">
+            <ion-label floating>Email</ion-label>
+            <ion-input formControlName="email" type="email" required ></ion-input>
+            <p color="danger" class="form-error" *ngIf="relationProfileForm.controls.email.hasError('required') && relationProfileForm.controls.email.touched">
+              Email harus diisi
+            </p>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <button ion-button color="primary" round full type="submit" [disabled]="!relationProfileForm.valid" >Kirim Ulang</button>
+      </ion-col>
+    </ion-row>
+  </form>
+  <ion-list *ngIf="isRelationDetail">
+    <ion-list-header color="secondary">
+      Detail Pasangan Anda
+    </ion-list-header>
+    <ion-item color="secondary">
+      <ion-row class="label-detail">
+        <ion-col col-4>
+          Nama Lengkap
+        </ion-col>
+        <ion-col col-8>
+          {{ relation.name }}
+        </ion-col>
+      </ion-row>
+    </ion-item>
+    <ion-item color="secondary">
+      <ion-row class="label-detail">
+        <ion-col col-4>
+          Email
+        </ion-col>
+        <ion-col col-8>
+          {{ relation.email }}
+        </ion-col>
+      </ion-row>
+    </ion-item>
+    <ion-item color="secondary">
+      <ion-row class="label-detail">
+        <ion-col col-4>
+          Handphone
+        </ion-col>
+        <ion-col col-8>
+          {{ relation.phone }}
+        </ion-col>
+      </ion-row>
+    </ion-item>
+  </ion-list>
 
+  
 </ion-content>

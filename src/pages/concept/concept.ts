@@ -1,9 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, App } from 'ionic-angular';
 import {ApiProvider} from '../../providers/api/api';
-import { ContentPage } from '../content/content';
-import { LoginPage } from '../login/login';
-import {NotificationPage} from '../notification/notification';
 import { HelpersProvider } from '../../providers/helpers/helpers';
 
 /**
@@ -26,7 +23,7 @@ export class ConceptPage {
     if (localStorage.getItem("isLoggedIn") == null) {
       this.helpersProvider.toastPresent("Session expired, Please Login again.", );
       this.helpersProvider.clearLoggedIn();
-      this.app.getRootNav().setRoot(LoginPage);
+      this.app.getRootNav().setRoot("LoginPage");
     }
     this.getConcepts();
   }
@@ -50,21 +47,21 @@ export class ConceptPage {
         if (result.status == '401') {
           this.helpersProvider.toastPresent(result.message);
           this.helpersProvider.clearLoggedIn();
-          this.app.getRootNav().setRoot(LoginPage);
+          this.app.getRootNav().setRoot("LoginPage");
         }
         
       });
   }
   
   goToDetail(id: any, name: string) {
-    this.navCtrl.push(ContentPage, {
+    this.navCtrl.push("ContentPage", {
       "id": id,
       "name": name
     });
   }
   
   goToNotification() {
-    this.navCtrl.push(NotificationPage);
+    this.navCtrl.push("NotificationPage");
   }
 
 }

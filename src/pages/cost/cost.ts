@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, App } from 'ionic-angular';
 import { ApiProvider } from '../../providers/api/api';
-import { LoginPage } from '../login/login';
-import {NotificationPage} from '../notification/notification';
 import { HelpersProvider } from '../../providers/helpers/helpers';
 
 /**
@@ -28,7 +26,7 @@ export class CostPage {
         
       this.helpers.loadingPresent('Session expired, Please Login again.');
 
-      this.app.getRootNav().setRoot(LoginPage);
+      this.app.getRootNav().setRoot("LoginPage");
       
     }
     
@@ -54,7 +52,7 @@ export class CostPage {
         if (result.status == '401') {
           this.helpers.toastPresent(result.message);
           this.helpers.clearLoggedIn();
-          this.app.getRootNav().setRoot(LoginPage);
+          this.app.getRootNav().setRoot("LoginPage");
         }
         console.log(error);
       });
@@ -65,7 +63,7 @@ export class CostPage {
   }
   
   goToNotification() {
-    this.navCtrl.push(NotificationPage);
+    this.navCtrl.push("NotificationPage");
   }
 
 }

@@ -2,9 +2,6 @@ import {Component} from '@angular/core';
 import {IonicPage, NavController, NavParams, ViewController, LoadingController, ToastController} from 'ionic-angular';
 import {Device} from '@ionic-native/device';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
-import {TabsPage} from '../tabs/tabs';
-import {RegisterPage} from '../register/register';
-import {ForgotPasswordPage} from '../forgot-password/forgot-password';
 import {ApiProvider} from '../../providers/api/api';
 
 /**
@@ -46,7 +43,7 @@ export class LoginPage {
     });
     
     if (localStorage.getItem("isLoggedIn") == "1") {
-      this.navCtrl.setRoot(TabsPage);
+      this.navCtrl.setRoot("TabsPage");
     }
     
 	}
@@ -76,7 +73,7 @@ export class LoginPage {
             dismissOnPageChange: false,
           }).present();
           
-          this.navCtrl.setRoot(TabsPage);
+          this.navCtrl.setRoot("TabsPage");
         })
         .catch((error) => {
           this.loading.dismiss();
@@ -103,10 +100,10 @@ export class LoginPage {
 	}
   
   goToRegisterPage() {
-    this.navCtrl.push(RegisterPage);
+    this.navCtrl.push("RegisterPage");
   }
   
   goToForgotPasswordPage() {
-    this.navCtrl.push(ForgotPasswordPage);
+    this.navCtrl.push("ForgotPasswordPage");
   }
 }

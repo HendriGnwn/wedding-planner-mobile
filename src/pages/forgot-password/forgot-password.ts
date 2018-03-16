@@ -2,8 +2,6 @@ import { Component } from '@angular/core';
 import {IonicPage, NavController, NavParams, LoadingController, ToastController} from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import {ApiProvider} from '../../providers/api/api';
-import {TabsPage} from '../tabs/tabs';
-import {LoginPage} from '../login/login';
 
 /**
  * Generated class for the ForgotPasswordPage page.
@@ -39,7 +37,7 @@ export class ForgotPasswordPage {
     });
     
     if (localStorage.getItem("isLoggedIn") == "1") {
-      this.navCtrl.setRoot(TabsPage);
+      this.navCtrl.setRoot("TabsPage");
     }
     
   }
@@ -67,7 +65,7 @@ export class ForgotPasswordPage {
             dismissOnPageChange: false,
           }).present();
           
-          this.navCtrl.setRoot(LoginPage);
+          this.navCtrl.setRoot("LoginPage");
         })
         .catch((error) => {
           this.loading.dismiss();

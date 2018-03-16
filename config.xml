@@ -3,7 +3,7 @@
     <name>Agenda Nikah</name>
     <description>Rencanakan Hari Bahagia Anda bersama kami.</description>
     <author email="hendri.gnw@gmail.com" href="http://hendrign.id/">Hendri Gunawan</author>
-    <content src="index.html" />
+    <content original-src="index.html" src="http://10.0.0.171:8100" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -23,6 +23,7 @@
     <preference name="SplashScreenDelay" value="3000" />
     <preference name="AutoHideSplashScreen" value="true" />
     <preference name="ShowSplashScreenSpinner" value="false" />
+    <preference name="loadUrlTimeoutValue" value="700000" />
     <preference name="AndroidPersistentFileLocation" value="Internal" />
     <preference name="AndroidPersistentFileLocation" value="Compatibility" />
     <preference name="iosPersistentFileLocation" value="Library" />
@@ -92,10 +93,7 @@
     <plugin name="cordova-plugin-statusbar" spec="^2.4.1" />
     <plugin name="cordova-plugin-advanced-http" spec="^1.10.1" />
     <plugin name="cordova-plugin-device" spec="^2.0.1" />
-    <allow-navigation href="http://10.0.0.152:8100" />
-    <allow-navigation href="http://10.0.0.152:8101" />
-    <allow-navigation href="http://10.0.0.152:8102" />
-    <allow-navigation href="http://10.0.0.168:8100" />
+    <allow-navigation href="*" />
     <plugin name="cordova-plugin-file" spec="^6.0.1" />
     <plugin name="cordova-plugin-camera" spec="^4.0.2" />
     <allow-navigation href="http://10.0.0.173:8100" />
@@ -117,6 +115,7 @@
         <variable name="DEEPLINK_5_SCHEME" value=" " />
         <variable name="DEEPLINK_5_HOST" value=" " />
     </plugin>
+    <allow-navigation href="http://10.0.0.171:8100" />
     <engine name="ios" spec="4.5.4" />
     <engine name="android" spec="7.0.0" />
 </widget>

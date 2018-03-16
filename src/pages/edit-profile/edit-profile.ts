@@ -3,8 +3,6 @@ import {IonicPage, NavController, NavParams} from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { ApiProvider } from '../../providers/api/api';
 import { HelpersProvider } from '../../providers/helpers/helpers';
-import { LoginPage } from '../login/login';
-import { ProfilePage } from '../profile/profile';
 
 /**
  * Generated class for the EditProfilePage page.
@@ -28,6 +26,14 @@ export class EditProfilePage {
   phone: AbstractControl;
   wedding_day: AbstractControl;
   venue: AbstractControl;
+  
+  user: any;
+  userEmail: string = '';
+  userName: string = '';
+  userPhone: string = '';
+  userGender: any = '';
+  userWeddingDay: any = '2018-09-01';
+  userVenue: any = '';
 
   constructor(
     public navCtrl: NavController, 
@@ -41,18 +47,54 @@ export class EditProfilePage {
         
       this.helpersProvider.toastPresent("Session expired, Please Login again.", );
       this.helpersProvider.clearLoggedIn();
-      this.navCtrl.setRoot(LoginPage);
+      this.navCtrl.setRoot("LoginPage");
     }
     
+    this.getUser();
     this.editProfileForm = this.formBuilder.group({
-      email: ['', Validators.compose([Validators.required, Validators.email])],
-      name: ['', Validators.compose([Validators.required])],
-      phone: ['', Validators.compose([Validators.required])],
-      gender: ['', Validators.compose([Validators.required])],
-      wedding_day: ['', Validators.compose([Validators.required])],
-      venue: ['', Validators.compose([Validators.required])],
+      email: [this.userEmail, Validators.compose([Validators.required, Validators.email])],
+      name: [this.userName, Validators.compose([Validators.required])],
+      phone: [this.userPhone, Validators.compose([Validators.required])],
+      gender: [this.userGender, Validators.compose([Validators.required])],
+      wedding_day: [this.userWeddingDay, Validators.compose([Validators.required])],
+      venue: [this.userVenue, Validators.compose([Validators.required])],
     });
+  }
   
+  getUser() {
+    this.apiProvider.get('user/show/' + localStorage.getItem('user_id'), {}, {'Content-Type': 'application/json', "Authorization": "Bearer " + localStorage.getItem('token')})
+      .then((data) => {
+        this.user = JSON.parse(data.data).data;
+        this.userEmail = this.user.email;
+        this.userName = this.user.name;
+        this.userGender = this.user.gender;
+        this.userPhone = this.user.phone;
+        this.userWeddingDay = this.user.relation.wedding_day;
+        this.userVenue = this.user.relation.venue;
+        
+        console.log(this.user);
+        
+        this.editProfileForm = this.formBuilder.group({
+          email: [this.userEmail, Validators.compose([Validators.required, Validators.email])],
+          name: [this.userName, Validators.compose([Validators.required])],
+          phone: [this.userPhone, Validators.compose([Validators.required])],
+          gender: [this.userGender, Validators.compose([Validators.required])],
+          wedding_day: [this.userWeddingDay, Validators.compose([Validators.required])],
+          venue: [this.userVenue, Validators.compose([Validators.required])],
+        });
+      })
+      .catch((error) => {
+        this.loading.dismiss();
+        this.user = [];
+        let result = JSON.parse(error.error);
+        if (result.status == '401') {
+          this.helpersProvider.toastPresent(result.message);
+          this.helpersProvider.clearLoggedIn();
+          this.navCtrl.setRoot("LoginPage");
+          
+        }
+        console.log(error);
+      });
   }
   
   onSubmit(value:any) : void {
@@ -76,7 +118,7 @@ export class EditProfilePage {
           this.loading.dismiss();
           this.helpersProvider.toastPresent(result.message);
           
-          this.navCtrl.setRoot(ProfilePage);
+          this.navCtrl.setRoot("ProfilePage");
         })
         .catch((error) => {
           this.loading.dismiss();

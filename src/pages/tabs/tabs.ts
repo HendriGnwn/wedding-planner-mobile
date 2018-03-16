@@ -1,11 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, Nav } from 'ionic-angular';
-
-import { ConceptPage } from '../concept/concept';
-import { CostPage } from '../cost/cost';
-import { VendorPage } from '../vendor/vendor';
-import { ProcedurePage } from '../procedure/procedure';
-import { ProfilePage } from '../profile/profile';
+import { IonicPage, NavController } from 'ionic-angular';
 
 /**
  * Generated class for the TabsPage tabs.
@@ -23,11 +17,11 @@ export class TabsPage {
   
   @ViewChild('tabs') tabs;
   
-  procedureRoot = ProcedurePage;
-  costRoot = CostPage;
-  conceptRoot = ConceptPage;
-  vendorRoot = VendorPage;
-  profileRoot = ProfilePage;
+  procedureRoot = "ProcedurePage";
+  costRoot = "CostPage";
+  conceptRoot = "ConceptPage";
+  vendorRoot = "VendorPage";
+  profileRoot = "ProfilePage";
 
 
   constructor(public navCtrl: NavController) {}

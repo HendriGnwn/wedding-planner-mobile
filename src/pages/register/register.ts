@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import {IonicPage, NavController, NavParams, LoadingController, ToastController} from 'ionic-angular';
 import {Device} from '@ionic-native/device';
-import {TabsPage} from '../tabs/tabs';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import {ApiProvider} from '../../providers/api/api';
 import {HelpersProvider} from '../../providers/helpers/helpers';
@@ -56,7 +55,7 @@ export class RegisterPage {
     }, {validator: this.matchingPasswords('password', 'confirm_password')});
     
     if (localStorage.getItem("isLoggedIn") == "1") {
-      this.navCtrl.setRoot(TabsPage);
+      this.navCtrl.setRoot("TabsPage");
     }
     
 	}
@@ -103,7 +102,7 @@ export class RegisterPage {
             dismissOnPageChange: false,
           }).present();
           
-          this.navCtrl.setRoot(TabsPage);
+          this.navCtrl.setRoot("TabsPage");
         })
         .catch((error) => {
           this.loading.dismiss();

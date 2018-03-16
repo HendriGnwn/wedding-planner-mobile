@@ -2,8 +2,6 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { HelpersProvider } from '../../providers/helpers/helpers';
 import { ApiProvider } from '../../providers/api/api';
-import { LoginPage } from '../login/login';
-import { ContentDetailPage } from '../content-detail/content-detail';
 
 
 /**
@@ -34,7 +32,7 @@ export class ContentPage {
         
       this.helpersProvider.toastPresent("Session expired, Please Login again.", );
       this.helpersProvider.clearLoggedIn();
-      this.navCtrl.setRoot(LoginPage);
+      this.navCtrl.setRoot("LoginPage");
     }
     this.pageTitle = this.navParams.get('name');
     
@@ -58,7 +56,7 @@ export class ContentPage {
         if (result.status == '401') {
           this.helpersProvider.toastPresent(result.message);
           this.helpersProvider.clearLoggedIn();
-          this.navCtrl.setRoot(LoginPage);
+          this.navCtrl.setRoot("LoginPage");
           
         }
         console.log(this.contents);
@@ -67,14 +65,14 @@ export class ContentPage {
   }
   
   goToDetail(id:any, name: string) {
-    this.navCtrl.push(ContentDetailPage, {
+    this.navCtrl.push("ContentDetailPage", {
       "id": id,
       "name": name
     });
   }
   
   addContent() {
-    let profileModal = this.modalCtrl.create(ContentDetailPage, { userId: 8675309 });
+    let profileModal = this.modalCtrl.create("ContentModalPage", { userId: 8675309 });
     profileModal.present();
   }
 

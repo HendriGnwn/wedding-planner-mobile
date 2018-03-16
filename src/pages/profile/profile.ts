@@ -1,12 +1,9 @@
 import { Component,  } from '@angular/core';
-import { Platform, NavController, ViewController, ToastController, Events, App } from 'ionic-angular';
+import { Platform, NavController, ViewController, ToastController, App } from 'ionic-angular';
 import { File } from '@ionic-native/file';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { ApiProvider } from '../../providers/api/api';
 import { HelpersProvider } from '../../providers/helpers/helpers';
-
-import {LoginPage} from '../login/login';
-import {SettingPage} from '../setting/setting';
 
 /**
  * Generated class for the ProfilePage page.
@@ -43,7 +40,6 @@ export class ProfilePage {
   constructor(
     public navCtrl: NavController, 
     private viewCtrl: ViewController, 
-    private events: Events,
     private toastCtrl: ToastController, 
     public file: File,
     private camera: Camera,
@@ -62,7 +58,7 @@ export class ProfilePage {
           dismissOnPageChange: false,
         }).present();
       this.helpersProvider.clearLoggedIn();
-      this.app.getRootNav().setRoot(LoginPage);
+      this.app.getRootNav().setRoot("LoginPage");
       
     }
 
@@ -101,7 +97,7 @@ export class ProfilePage {
         if (result.status == '401') {
           this.helpersProvider.toastPresent(result.message);
           this.helpersProvider.clearLoggedIn();
-          this.app.getRootNav().setRoot(LoginPage);
+          this.app.getRootNav().setRoot("LoginPage");
         }
         console.log(error);
       });
@@ -172,7 +168,7 @@ export class ProfilePage {
   }
   
   goToSetting() {
-    this.navCtrl.push(SettingPage);
+    this.navCtrl.push("SettingPage");
   }
   
   ionViewWillEnter() {

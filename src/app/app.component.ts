@@ -51,11 +51,11 @@ export class MyApp {
       this.isLoggedIn = localStorage.getItem("isLoggedIn");
       
       if (this.isLoggedIn == true) {
-        this.rootPage = TabsPage;
-        this.nav.setRoot(TabsPage);
+        this.rootPage = "TabsPage";
+        this.nav.setRoot("TabsPage");
       } else {
-        this.rootPage = WelcomePage;
-        this.nav.setRoot(WelcomePage);
+        this.rootPage = "WelcomePage";
+        this.nav.setRoot("WelcomePage");
       }
     });
   }
@@ -97,7 +97,7 @@ export class MyApp {
         dismissOnPageChange: false,
       }).present();
        
-      this.nav.setRoot(LoginPage, {}, {
+      this.nav.setRoot("LoginPage", {}, {
         animate: true
       });
     })
@@ -114,7 +114,7 @@ export class MyApp {
          dismissOnPageChange: false,
        }).present();
        
-       this.nav.setRoot(LoginPage, {}, {
+       this.nav.setRoot("LoginPage", {}, {
          animate: true
        });
     });

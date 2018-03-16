@@ -38,28 +38,28 @@
               <ion-option value="0">Perempuan</ion-option>
             </ion-select>
             <p color="danger" class="form-error" *ngIf="editProfileForm.controls.gender.hasError('required') && editProfileForm.controls.gender.touched">
-              Jenis kelamin harus diisi
+              Email harus diisi
             </p>
 					</ion-item>
-					<ion-item class="cream-background" [ngClass]="{'error-border':!editProfileForm.controls.phone.valid && editProfileForm.controls.phone.touched}">
+          <ion-item class="cream-background" [ngClass]="{'error-border':!editProfileForm.controls.phone.valid && editProfileForm.controls.phone.touched}">
 						<ion-label floating>No Handphone</ion-label>
             <ion-input formControlName="phone" type="number" required ></ion-input>
             <p color="danger" class="form-error" *ngIf="editProfileForm.controls.phone.hasError('required') && editProfileForm.controls.phone.touched">
-              No Handphone harus diisi
+              No Hanphone harus diisi
             </p>
 					</ion-item>
-          <ion-item class="cream-background" [ngClass]="{'error-border':!registerForm.controls.wedding_day.valid && editProfileForm.controls.wedding_day.touched}">
-						<ion-label floating>Tanggal Pernikahan</ion-label>
-						<ion-datetime displayFormat="YYYY-MM-DD" pickerFormat="DD MMMM YYYY" formControlName="wedding_day" required></ion-datetime>
+          <ion-item class="cream-background" [ngClass]="{'error-border':!editProfileForm.controls.wedding_day.valid && editProfileForm.controls.wedding_day.touched}">
+						<ion-label floating>Hari Pernikahan</ion-label>
+            <ion-datetime displayFormat="YYYY-MM-DD" pickerFormat="DD MMMM YYYY" formControlName="wedding_day" required></ion-datetime>
             <p color="danger" class="form-error" *ngIf="editProfileForm.controls.wedding_day.hasError('required') && editProfileForm.controls.wedding_day.touched">
-              Tanggal Pernikahan harus diisi
+              Hari pernikahan harus diisi
             </p>
 					</ion-item>
           <ion-item class="cream-background" [ngClass]="{'error-border':!editProfileForm.controls.venue.valid && editProfileForm.controls.venue.touched}">
 						<ion-label floating>Tempat Resepsi</ion-label>
 						<ion-input formControlName="venue" type="text" required ></ion-input>
             <p color="danger" class="form-error" *ngIf="editProfileForm.controls.venue.hasError('required') && editProfileForm.controls.venue.touched">
-              Tanggal Pernikahan harus diisi
+              No Hanphone harus diisi
             </p>
 					</ion-item>
         </ion-list>

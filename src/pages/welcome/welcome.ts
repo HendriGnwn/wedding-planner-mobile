@@ -4,9 +4,6 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { ApiProvider } from '../../providers/api/api';
 
-import { LoginPage } from '../login/login';
-import { TabsPage } from '../tabs/tabs';
-
 /**
  * Generated class for the WelcomePage page.
  *
@@ -30,7 +27,7 @@ export class WelcomePage {
 	  
     platform.ready().then(() => {
       if (this.isLoggedIn == true) {
-        this.navCtrl.setRoot(TabsPage);
+        this.navCtrl.setRoot("TabsPage");
       }
     });
     
@@ -53,7 +50,7 @@ export class WelcomePage {
   }
   
   nextClick() {
-    this.navCtrl.push(LoginPage);
+    this.navCtrl.push("LoginPage");
   }
 
 }
