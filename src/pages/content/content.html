@@ -21,7 +21,7 @@
 <ion-content>
 
   <ion-list no-lines>
-    <button class="button-item" ion-item color="secondary" *ngFor="let item of contents" (click)="goToDetail(item.id, item.name)" detail-none>
+    <button (press)="contentPressed($event, item.id, item.name)" class="button-item" ion-item color="secondary" *ngFor="let item of contents" (click)="goToDetail(item.id, item.name)" detail-none>
       {{ item.name }}
       <ion-icon ios="ios-arrow-forward-outline" md="ios-arrow-forward-outline" item-end></ion-icon>
     </button>

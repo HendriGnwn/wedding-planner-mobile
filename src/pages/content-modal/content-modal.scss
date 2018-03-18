@@ -1,3 +1,18 @@
 page-content-modal {
-
+  .item-md, .item-ios, .item-wp {
+	  padding-left: 0px;
+	}
+  
+  .error-border {
+    .label {
+      color: color($colors, danger);
+    }
+  }
+  
+  .form-error {
+    background: transparent;
+    p {
+      color: color($colors, danger)
+    }
+  }
 }

@@ -30,5 +30,10 @@ export class ApiProvider {
     this.http.setDataSerializer('json');
     return this.http.patch(this.API_URL + url, params, headers);
   }
+  
+  delete(url: string, params?: any, headers?: any) {
+    this.http.setDataSerializer('json');
+    return this.http.delete(this.API_URL + url, params, headers);
+  }
 
 }

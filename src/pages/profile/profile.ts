@@ -1,5 +1,5 @@
 import { Component,  } from '@angular/core';
-import { Platform, NavController, ToastController, App, IonicPage, ViewController } from 'ionic-angular';
+import { Platform, NavController, ToastController, App, IonicPage } from 'ionic-angular';
 import { File } from '@ionic-native/file';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { ApiProvider } from '../../providers/api/api';
@@ -40,7 +40,6 @@ export class ProfilePage {
 
   constructor(
     public navCtrl: NavController, 
-    private viewCtrl: ViewController, 
     public file: File,
     private camera: Camera,
     private toastCtrl: ToastController, 

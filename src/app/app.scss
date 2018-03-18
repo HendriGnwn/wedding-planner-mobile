@@ -22,3 +22,23 @@
 .cream-background {
 	background: color($colors, secondary);
 }
+
+.error-border {
+  .label {
+    color: color($colors, danger);
+  }
+}
+
+.form-error {
+  background: transparent;
+  min-height: 0rem;
+  padding: 0px;
+  max-height: 3rem;
+  font-size: 1rem;
+  .item-inner {
+    border-bottom: 0px !important;
+  }
+  p {
+    color: color($colors, danger)
+  }
+}

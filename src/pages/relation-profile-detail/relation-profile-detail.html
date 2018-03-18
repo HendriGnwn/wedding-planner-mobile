@@ -13,7 +13,7 @@
 </ion-header>
 
 
-<ion-content padding class="cream-background" text-center>
+<ion-content padding text-center>
   <form autocomplete="off" [formGroup]="relationProfileForm" (ngSubmit)="onSubmit(relationProfileForm.value)" *ngIf="isFormRelation">
     <ion-row>
       <ion-col>
@@ -21,7 +21,7 @@
           Pasangan Anda belum mendaftar, silahkan Kirim ulang email agar mengingatkan untuk segera daftar.
         </p>
         <ion-list>
-          <ion-item class="cream-background" [ngClass]="{'error-border':!relationProfileForm.controls.email.valid && relationProfileForm.controls.email.touched}">
+          <ion-item [ngClass]="{'error-border':!relationProfileForm.controls.email.valid && relationProfileForm.controls.email.touched}">
             <ion-label floating>Email</ion-label>
             <ion-input formControlName="email" type="email" required ></ion-input>
             <p color="danger" class="form-error" *ngIf="relationProfileForm.controls.email.hasError('required') && relationProfileForm.controls.email.touched">
@@ -38,10 +38,10 @@
     </ion-row>
   </form>
   <ion-list *ngIf="isRelationDetail">
-    <ion-list-header color="secondary">
+    <ion-list-header >
       Detail Pasangan Anda
     </ion-list-header>
-    <ion-item color="secondary">
+    <ion-item >
       <ion-row class="label-detail">
         <ion-col col-4>
           Nama Lengkap
@@ -51,7 +51,7 @@
         </ion-col>
       </ion-row>
     </ion-item>
-    <ion-item color="secondary">
+    <ion-item >
       <ion-row class="label-detail">
         <ion-col col-4>
           Email
@@ -61,7 +61,7 @@
         </ion-col>
       </ion-row>
     </ion-item>
-    <ion-item color="secondary">
+    <ion-item >
       <ion-row class="label-detail">
         <ion-col col-4>
           Handphone

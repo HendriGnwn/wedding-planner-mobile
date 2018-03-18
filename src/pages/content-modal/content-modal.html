@@ -7,11 +7,11 @@
 <ion-header>
 
   <ion-navbar color="primary">
-    <ion-title text-center>Tambah baru</ion-title>
+    <ion-title text-center>{{ headerTitle }}</ion-title>
     <ion-buttons start>
       <button ion-button (click)="dismiss()">
-        <span ion-text color="primary" showWhen="ios">Batal</span>
-        <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
+        <span ion-text color="white" showWhen="ios">Batal</span>
+        <ion-icon name="md-close" color="white" showWhen="android,windows"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
@@ -20,5 +20,25 @@
 
 
 <ion-content padding>
+  
+  <form autocomplete="off" [formGroup]="contentForm" (ngSubmit)="onSubmit(contentForm.value)">
+		<ion-row>
+			<ion-col>
+				<ion-list>
+					<ion-item [ngClass]="{'error-border':!contentForm.controls.name.valid && contentForm.controls.name.touched}">
+						<ion-label floating>Label</ion-label>
+						<ion-input formControlName="name" type="text" required ></ion-input>
+					</ion-item>
+          <ion-item class="form-error">
+            <p *ngIf="contentForm.controls.name.hasError('required') && contentForm.controls.name.touched">
+                Label harus diisi
+            </p>
+          </ion-item>
+				</ion-list>
+        <button ion-button color="primary" round full type="submit" [disabled]="!contentForm.valid" >SIMPAN</button>
+			</ion-col>
+		</ion-row>
+	</form>
 
 </ion-content>
+

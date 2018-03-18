@@ -1,3 +1,11 @@
 page-report-problem {
-
+  .item-md, .item-ios, .item-wp {
+	  padding-left: 0px;
+	}
+  .subtitle-description {
+    line-height: 2.5rem;
+  }
+  textarea {
+    min-height: 10rem;
+  }
 }

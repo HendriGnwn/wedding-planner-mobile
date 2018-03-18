@@ -12,26 +12,26 @@
 
 </ion-header>
 
-<ion-content padding class="cream-background" text-center>
+<ion-content padding text-center>
   <form autocomplete="off" [formGroup]="editProfileForm" (ngSubmit)="onSubmit(editProfileForm.value)">
     <ion-row>
       <ion-col>
         <ion-list>
-          <ion-item class="cream-background" [ngClass]="{'error-border':!editProfileForm.controls.name.valid && editProfileForm.controls.name.touched}">
+          <ion-item [ngClass]="{'error-border':!editProfileForm.controls.name.valid && editProfileForm.controls.name.touched}">
             <ion-label floating>Nama Lengkap</ion-label>
             <ion-input formControlName="name" type="name" required ></ion-input>
             <p color="danger" class="form-error" *ngIf="editProfileForm.controls.name.hasError('required') && editProfileForm.controls.name.touched">
               Nama harus diisi
             </p>
           </ion-item>
-          <ion-item class="cream-background" [ngClass]="{'error-border':!editProfileForm.controls.email.valid && editProfileForm.controls.email.touched}">
+          <ion-item [ngClass]="{'error-border':!editProfileForm.controls.email.valid && editProfileForm.controls.email.touched}">
             <ion-label floating>Email</ion-label>
             <ion-input formControlName="email" type="email" readonly="true" ></ion-input>
             <p color="danger" class="form-error" *ngIf="editProfileForm.controls.email.hasError('required') && editProfileForm.controls.email.touched">
               Email harus diisi
             </p>
           </ion-item>
-          <ion-item class="cream-background" [ngClass]="{'error-border':!editProfileForm.controls.gender.valid && editProfileForm.controls.gender.touched}">
+          <ion-item [ngClass]="{'error-border':!editProfileForm.controls.gender.valid && editProfileForm.controls.gender.touched}">
 						<ion-label floating>Jenis kelamin</ion-label>
             <ion-select formControlName="gender" required>
               <ion-option value="1">Laki-laki</ion-option>
@@ -41,21 +41,21 @@
               Email harus diisi
             </p>
 					</ion-item>
-          <ion-item class="cream-background" [ngClass]="{'error-border':!editProfileForm.controls.phone.valid && editProfileForm.controls.phone.touched}">
+          <ion-item [ngClass]="{'error-border':!editProfileForm.controls.phone.valid && editProfileForm.controls.phone.touched}">
 						<ion-label floating>No Handphone</ion-label>
             <ion-input formControlName="phone" type="number" required ></ion-input>
             <p color="danger" class="form-error" *ngIf="editProfileForm.controls.phone.hasError('required') && editProfileForm.controls.phone.touched">
               No Hanphone harus diisi
             </p>
 					</ion-item>
-          <ion-item class="cream-background" [ngClass]="{'error-border':!editProfileForm.controls.wedding_day.valid && editProfileForm.controls.wedding_day.touched}">
+          <ion-item [ngClass]="{'error-border':!editProfileForm.controls.wedding_day.valid && editProfileForm.controls.wedding_day.touched}">
 						<ion-label floating>Hari Pernikahan</ion-label>
             <ion-datetime displayFormat="YYYY-MM-DD" pickerFormat="DD MMMM YYYY" formControlName="wedding_day" required></ion-datetime>
             <p color="danger" class="form-error" *ngIf="editProfileForm.controls.wedding_day.hasError('required') && editProfileForm.controls.wedding_day.touched">
               Hari pernikahan harus diisi
             </p>
 					</ion-item>
-          <ion-item class="cream-background" [ngClass]="{'error-border':!editProfileForm.controls.venue.valid && editProfileForm.controls.venue.touched}">
+          <ion-item [ngClass]="{'error-border':!editProfileForm.controls.venue.valid && editProfileForm.controls.venue.touched}">
 						<ion-label floating>Tempat Resepsi</ion-label>
 						<ion-input formControlName="venue" type="text" required ></ion-input>
             <p color="danger" class="form-error" *ngIf="editProfileForm.controls.venue.hasError('required') && editProfileForm.controls.venue.touched">
