@@ -3,6 +3,7 @@ import { LoadingController, ToastController } from 'ionic-angular';
 import { Device } from '@ionic-native/device';
 import { File } from '@ionic-native/file';
 import { DatePicker } from '@ionic-native/date-picker';
+import { CallNumber } from '@ionic-native/call-number';
 
 /*
   Generated class for the HelpersProvider provider.
@@ -12,15 +13,22 @@ import { DatePicker } from '@ionic-native/date-picker';
 */
 @Injectable()
 export class HelpersProvider {
+  
+  BASE_URL: string = 'http://agendanikah.com/dev/public/';
 
   constructor(
     public loadingCtrl: LoadingController,
     public toastCtrl: ToastController,
     public file: File,
     public device: Device,
-    public datePicker: DatePicker
+    public datePicker: DatePicker,
+    public callNumber: CallNumber
     ) {
     
+  }
+  
+  getBaseUrl() {
+    return this.BASE_URL;
   }
   
   loadingPresent(content: string) {

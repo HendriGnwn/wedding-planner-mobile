@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+  import { IonicPage, NavController, NavParams, App } from 'ionic-angular';
 import {NotificationPage} from '../notification/notification';
+import { ApiProvider } from '../../providers/api/api';
+import { HelpersProvider } from '../../providers/helpers/helpers';
 
 /**
  * Generated class for the VendorPage page.
@@ -15,8 +17,65 @@ import {NotificationPage} from '../notification/notification';
   templateUrl: 'vendor.html',
 })
 export class VendorPage {
+  
+  vendors: any = [];
+  fileThumbUrl: string;
+  exceptionFileThumbUrl: string;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams,
+    public app: App,
+    public apiProvider: ApiProvider,
+    public helpersProvider: HelpersProvider) {
+    
+    if (localStorage.getItem("isLoggedIn") == null) {
+        
+      this.helpersProvider.toastPresent("Session expired, Please Login again.");
+      this.helpersProvider.clearLoggedIn();
+      this.app.getRootNav().setRoot("LoginPage");
+      
+    }
+    
+    this.fileThumbUrl = this.helpersProvider.getBaseUrl() + 'files/vendors/thumbs/';
+    this.exceptionFileThumbUrl = this.helpersProvider.getBaseUrl() + 'files/vendors/thumbs/default.png';
+    this.getVendors();
+    
+  }
+  
+  getVendors() {
+    this.apiProvider.get('vendor', {}, {'Content-Type': 'application/json', "Authorization": "Bearer " + localStorage.getItem('token')})
+      .then((data) => {
+        
+        let result = JSON.parse(data.data);
+        
+        this.vendors = result.data;
+        
+        console.log(result);
+
+      })
+      .catch((error) => {
+        let result = JSON.parse(error.error);
+        
+        if (result.status == '401') {
+          this.helpersProvider.toastPresent(result.message);
+          this.helpersProvider.clearLoggedIn();
+          this.app.getRootNav().setRoot("LoginPage");
+        }
+        console.log(error);
+      });
+  }
+  
+  goToVendorDetail(vendor) {
+    this.navCtrl.push("VendorDetailPage", {vendor: vendor});
+  }
+  
+  doRefresh(e) {
+    this.getVendors();
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      e.complete();
+    }, 2000);
   }
 
   ionViewDidLoad() {

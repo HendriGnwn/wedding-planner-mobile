@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HTTP } from '@ionic-native/http';
+import {HelpersProvider} from '../helpers/helpers';
 
 /*
   Generated class for the ApiProvider provider.
@@ -10,10 +11,12 @@ import { HTTP } from '@ionic-native/http';
 @Injectable()
 export class ApiProvider {
   
-  API_URL : string = 'http://agendanikah.com/dev/public/api/v1/';
+  API_URL : string;
 
-  constructor(private http: HTTP) {
+  constructor(private http: HTTP, private helpersProvider: HelpersProvider) {
     console.log('Hello ApiProvider Provider');
+    
+    this.API_URL = this.helpersProvider.getBaseUrl() + 'api/v1/';
   }
   
   get(url: string, params?: any, headers?: any) {

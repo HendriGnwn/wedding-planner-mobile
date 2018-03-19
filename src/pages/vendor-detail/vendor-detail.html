@@ -6,13 +6,60 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>VendorDetail</ion-title>
+  <ion-navbar color="primary">
+    <ion-title text-center>{{ vendor.name }}</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
-
+<ion-content>
+  <ion-slides class="vendor-slides" pager="true">
+    <ion-slide>
+      <img src="https://images.unsplash.com/photo-1490718687940-0ecadf414600?auto=format&fit=crop&w=1352&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D" class="slide-image" />
+    </ion-slide>
+    <ion-slide>
+      <img src="https://images.unsplash.com/photo-1490718687940-0ecadf414600?auto=format&fit=crop&w=1352&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D" class="slide-image" />
+    </ion-slide>
+    <ion-slide>
+      <img src="https://images.unsplash.com/photo-1490718687940-0ecadf414600?auto=format&fit=crop&w=1352&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D" class="slide-image" />
+    </ion-slide>
+  </ion-slides>
+  
+  <ion-row class="content-list">
+    <ion-col col-12>
+      <ion-list>
+        <ion-list-header text-center>
+          {{ vendor.category }}
+        </ion-list-header>
+        <ion-item>
+          <ion-row>
+            <ion-col col-1>
+              <ion-icon ios="ios-pin-outline" md="ios-pin-outline"></ion-icon>
+            </ion-col>
+            <ion-col col-11>
+              <p>{{ vendor.address }}</p>
+            </ion-col>
+          </ion-row>
+        </ion-item>
+        <ion-item>
+          <ion-row>
+            <ion-col col-1>
+              <ion-icon ios="ios-call-outline" md="ios-call-outline"></ion-icon> 
+            </ion-col>
+            <ion-col col-9>
+              <p (click)="callPhone()">
+                {{ vendor.phone }}
+              </p>
+            </ion-col>
+            <ion-col col-2>
+              <button ion-button rounded small (click)="callPhone()" color="primary">
+                <ion-icon ios="ios-call-outline" md="ios-call-outline"></ion-icon> 
+              </button>
+            </ion-col>
+          </ion-row>
+        </ion-item>
+      </ion-list>
+    </ion-col>
+  </ion-row>
 </ion-content>
