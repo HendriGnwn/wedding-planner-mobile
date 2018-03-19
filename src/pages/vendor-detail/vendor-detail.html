@@ -16,13 +16,10 @@
 <ion-content>
   <ion-slides class="vendor-slides" pager="true">
     <ion-slide>
-      <img src="https://images.unsplash.com/photo-1490718687940-0ecadf414600?auto=format&fit=crop&w=1352&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D" class="slide-image" />
+      <img src="{{ vendor.file != null ? fileUrl + vendor.file : defaultFileUrl }}" class="slide-image" (click)="showPicture(vendor.name, vendor.file != null ? fileUrl + vendor.file : defaultFileUrl)" />
     </ion-slide>
-    <ion-slide>
-      <img src="https://images.unsplash.com/photo-1490718687940-0ecadf414600?auto=format&fit=crop&w=1352&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D" class="slide-image" />
-    </ion-slide>
-    <ion-slide>
-      <img src="https://images.unsplash.com/photo-1490718687940-0ecadf414600?auto=format&fit=crop&w=1352&q=80&ixid=dW5zcGxhc2guY29tOzs7Ozs%3D" class="slide-image" />
+    <ion-slide *ngFor="let item of vendor.vendorDetails">
+      <img src="{{ item.file != null ? detailFileUrl + item.file : defaultFileUrl }}" class="slide-image" (click)="showPicture(item.name, item.file != null ? detailFileUrl + item.file : defaultFileUrl)" />
     </ion-slide>
   </ion-slides>
   
@@ -44,17 +41,30 @@
         </ion-item>
         <ion-item>
           <ion-row>
-            <ion-col col-1>
-              <ion-icon ios="ios-call-outline" md="ios-call-outline"></ion-icon> 
+            <ion-col col-12>
+              <button ion-button rounded (click)="callPhone()" color="primary">
+                <ion-icon ios="ios-call-outline" md="ios-call-outline"></ion-icon>
+                &nbsp;&nbsp;{{ vendor.phone }}
+              </button>
             </ion-col>
-            <ion-col col-9>
-              <p (click)="callPhone()">
-                {{ vendor.phone }}
-              </p>
+          </ion-row>
+        </ion-item>
+        <ion-item>
+          <ion-row>
+            <ion-col col-12>
+              <button ion-button rounded (click)="clickInstagram()" color="primary">
+                <ion-icon ios="logo-instagram" md="logo-instagram"></ion-icon>
+                &nbsp;&nbsp;{{ vendor.instagram }}
+              </button>
             </ion-col>
-            <ion-col col-2>
-              <button ion-button rounded small (click)="callPhone()" color="primary">
-                <ion-icon ios="ios-call-outline" md="ios-call-outline"></ion-icon> 
+          </ion-row>
+        </ion-item>
+        <ion-item>
+          <ion-row>
+            <ion-col col-12>
+              <button ion-button rounded (click)="clickWebsite()" color="primary">
+                <ion-icon ios="ios-globe-outline" md="ios-globe-outline"></ion-icon>
+                &nbsp;&nbsp;{{ vendor.website }}
               </button>
             </ion-col>
           </ion-row>
@@ -62,4 +72,5 @@
       </ion-list>
     </ion-col>
   </ion-row>
+  <ion-input type="file"></ion-input>
 </ion-content>

@@ -9,6 +9,8 @@ import { File } from '@ionic-native/file';
 import { Camera } from '@ionic-native/camera';
 import { Deeplinks } from '@ionic-native/deeplinks';
 import { CallNumber } from '@ionic-native/call-number';
+import { PhotoViewer } from '@ionic-native/photo-viewer';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 
 import { ApiProvider } from '../providers/api/api';
@@ -43,7 +45,9 @@ import { DatePicker } from '@ionic-native/date-picker';
     Camera,
     DatePicker,
     Deeplinks,
-    CallNumber
+    CallNumber,
+    PhotoViewer,
+    InAppBrowser
   ]
 })
 export class AppModule {}

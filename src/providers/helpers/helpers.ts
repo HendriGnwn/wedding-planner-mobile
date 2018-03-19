@@ -4,6 +4,8 @@ import { Device } from '@ionic-native/device';
 import { File } from '@ionic-native/file';
 import { DatePicker } from '@ionic-native/date-picker';
 import { CallNumber } from '@ionic-native/call-number';
+import { PhotoViewer } from '@ionic-native/photo-viewer';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 /*
   Generated class for the HelpersProvider provider.
@@ -22,7 +24,9 @@ export class HelpersProvider {
     public file: File,
     public device: Device,
     public datePicker: DatePicker,
-    public callNumber: CallNumber
+    public callNumber: CallNumber,
+    public photoViewer: PhotoViewer,
+    public inAppBrowser: InAppBrowser
     ) {
     
   }

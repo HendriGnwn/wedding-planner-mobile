@@ -19,18 +19,28 @@ import { HelpersProvider } from '../../providers/helpers/helpers';
 })
 export class ProfilePage {
   
+  loading: any;
   token: any;
   relation_name: any;
   venue: any;
   wedding_day: any;
   user: any = {};
+  photo: any = "https://static.pexels.com/photos/256737/pexels-photo-256737.jpeg";
   dirs: any;
-  options: CameraOptions = {
+  cameraOptions: CameraOptions = {
     quality: 100,
     destinationType: this.camera.DestinationType.DATA_URL,
     encodingType: this.camera.EncodingType.JPEG,
     mediaType: this.camera.MediaType.PICTURE
   }
+  openFileOptions: CameraOptions = {
+    quality: 100,
+    destinationType: this.camera.DestinationType.DATA_URL,
+    encodingType: this.camera.EncodingType.JPEG,
+    mediaType: this.camera.MediaType.PICTURE,
+    sourceType: this.camera.PictureSourceType.PHOTOLIBRARY
+  };
+  photoUrl: any;
   
   days: any;
   hours: any;
@@ -61,6 +71,8 @@ export class ProfilePage {
       this.app.getRootNav().setRoot("LoginPage");
       
     }
+    
+    this.photoUrl = this.helpersProvider.getBaseUrl() + "files/user-relations/";
 
     this.token = localStorage.getItem('token');
     
@@ -88,6 +100,7 @@ export class ProfilePage {
         this.relation_name = result.data.relation.relation_name;
         this.wedding_day = result.data.relation.wedding_day;
         this.venue = result.data.relation.venue;
+        this.photo = this.photoUrl + result.data.relation.photo;
         this.user = result.data;
 
       })
@@ -104,29 +117,41 @@ export class ProfilePage {
   }
   
   openFile() {
-//    this.file.resolveLocalFilesystemUrl(this.file.dataDirectory);
-//    console.log(this.file.dataDirectory);
-//    this.file.listDir(this.file.applicationDirectory, '').then(
-//  (files) => {
-//    // do something
-//    this.dirs = files;
-//    console.log('test');
-//  }
-//).catch(ç
-//  (err) => {
-    // do something
-//    console.log('test1');
-//  }
-//);
-    this.camera.getPicture(this.options).then((imageData) => {
-    // imageData is either a base64 encoded string or a file URI
-    // If it's base64:
-    let base64Image = 'data:image/jpeg;base64,' + imageData;
-    console.log(base64Image);
-   }, (err) => {
-    // Handle error
-      console.log(err);
-   });
+    this.camera.getPicture(this.openFileOptions).then((imageData) => {
+      // imageData is either a base64 encoded string or a file URI
+      // If it's base64:
+      
+      this.loading = this.helpersProvider.loadingPresent("");
+      
+      let params = {
+        "photo_base64": 'data:image/jpeg;base64,' + imageData
+      }
+      
+      this.apiProvider.post("user/upload-photo/" + localStorage.getItem("user_id"), params, {"Content-Type": "application/json", "Authorization": "Bearer " + localStorage.getItem("token")})
+        .then((data) => {
+          
+          let result = JSON.parse(data.data);
+          
+          this.loading.dismiss();
+          
+          this.photo = this.photoUrl + result.data.relation.photo;
+          
+          this.helpersProvider.toastPresent(result.message);
+          
+        })
+        .catch((error) => {
+          let result = JSON.parse(error.data);
+          
+          this.loading.dismiss();
+          
+          this.helpersProvider.toastPresent(result.message);
+        });
+      
+     }, (err) => {
+      // Handle error
+        console.log(err);
+     });
+    
   }
   
   getCountdown() {
