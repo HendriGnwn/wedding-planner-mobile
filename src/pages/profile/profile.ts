@@ -1,5 +1,5 @@
 import { Component,  } from '@angular/core';
-import { Platform, NavController, ToastController, App, IonicPage } from 'ionic-angular';
+import { Platform, NavController, ToastController, App, IonicPage, ActionSheetController, AlertController } from 'ionic-angular';
 import { File } from '@ionic-native/file';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { ApiProvider } from '../../providers/api/api';
@@ -56,7 +56,9 @@ export class ProfilePage {
     public apiProvider: ApiProvider,
     public helpersProvider: HelpersProvider,
     public app: App,
-    public platform: Platform
+    public platform: Platform,
+    public alertCtrl: AlertController,
+    public actionSheetCtrl: ActionSheetController
     ) {
     
     if (localStorage.getItem("isLoggedIn") == null) {
@@ -100,7 +102,10 @@ export class ProfilePage {
         this.relation_name = result.data.relation.relation_name;
         this.wedding_day = result.data.relation.wedding_day;
         this.venue = result.data.relation.venue;
-        this.photo = this.photoUrl + result.data.relation.photo;
+        if (result.data.relation.photo != null) {
+          this.photo = this.photoUrl + result.data.relation.photo;
+        }
+        
         this.user = result.data;
 
       })
@@ -194,6 +199,77 @@ export class ProfilePage {
   
   goToSetting() {
     this.navCtrl.push("SettingPage");
+  }
+  
+  doUploadPhoto() {
+    let actionSheet = this.actionSheetCtrl.create({
+      title: name,
+      buttons: [
+        {
+          text: 'Delete',
+          role: 'destructive',
+          icon: !this.platform.is('ios') ? 'trash' : null,
+          handler: () => {
+            
+            let alert = this.alertCtrl.create({
+              title: 'Anda yakin ingin menghapus foto ini?',
+              buttons: [
+                {
+                  text: 'Tidak',
+                  handler: () => {
+                    console.log('Disagree clicked');
+                  }
+                },
+                {
+                  text: 'Ya',
+                  handler: () => {
+                    this.loading = this.helpersProvider.loadingPresent("");
+                    this.deletePhoto();
+                  }
+                }
+              ]
+            });
+            alert.present();
+          }
+        },{
+          text: this.user.relation.photo != null ? 'Change' : 'Upload',
+          icon: !this.platform.is('ios') ? 'ios-folder' : null,
+          handler: () => {
+            this.openFile();
+          }
+        },{
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        }
+      ]
+    });
+    actionSheet.present();
+  }
+  
+  deletePhoto() {
+    this.apiProvider.delete("user/delete-photo/" + localStorage.getItem("user_id"), {}, {"Content-Type": "application/json", "Authorization": "Bearer " + localStorage.getItem("token")})
+        .then((data) => {
+          
+          let result = JSON.parse(data.data);
+          
+          this.loading.dismiss();
+          
+          this.photo = "https://static.pexels.com/photos/256737/pexels-photo-256737.jpeg";
+          
+          this.helpersProvider.toastPresent(result.message);
+          
+        })
+        .catch((error) => {
+          let result = JSON.parse(error.data);
+          
+          this.loading.dismiss();
+          
+          this.helpersProvider.toastPresent(result.message);
+        });
+      
   }
   
   ionViewDidLoad() {
