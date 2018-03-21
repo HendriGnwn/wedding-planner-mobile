@@ -1,0 +1,33 @@
+page-notification-modal {
+  .notification-slides {
+    height: auto;
+
+    .swiper-pagination {
+      .swiper-pagination-bullet {
+        background: color($colors, white);
+      }
+      .swiper-pagination-bullet-active {
+        background: color($colors, primary);
+      }
+    }
+  }
+  .item-md, .item-ios, .item-wp {
+	  padding-left: 0px;
+	}
+  .list {
+    .item {
+      padding: 0px;
+      .label-detail {
+        font-size: 1.5rem;
+      }
+    }
+  }
+  .page-content {
+    padding: 2rem;
+    p {
+      line-height: 3.2rem;
+      font-size: 1.6rem;
+      text-align: justify;
+    }
+  }
+}

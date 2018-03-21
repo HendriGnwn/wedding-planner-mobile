@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-  import { IonicPage, NavController, NavParams, App } from 'ionic-angular';
-import {NotificationPage} from '../notification/notification';
+import { IonicPage, NavController, NavParams, App } from 'ionic-angular';
 import { ApiProvider } from '../../providers/api/api';
 import { HelpersProvider } from '../../providers/helpers/helpers';
 
@@ -83,7 +82,7 @@ export class VendorPage {
   }
   
   goToNotification() {
-    this.navCtrl.push(NotificationPage);
+    this.navCtrl.push("NotificationPage");
   }
 
 }

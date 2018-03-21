@@ -13,6 +13,13 @@
 </ion-header>
 
 
-<ion-content padding>
-
+<ion-content class="card-background-page">
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-card *ngFor="let item of notifications" (click)="goToDetail(item)">
+    <img src="{{ item.file != null ? fileThumbUrl + item.file : exceptionFileThumbUrl }}"/>
+    <div class="card-title">{{ item.name }}</div>
+    <div class="card-subtitle">{{ item.message_at | date : 'dd MMM yyyy' }}</div>
+  </ion-card>
 </ion-content>

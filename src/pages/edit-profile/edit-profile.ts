@@ -34,6 +34,8 @@ export class EditProfilePage {
   userGender: any = '';
   userWeddingDay: any = '';
   userVenue: any = '';
+  weddingDayMin: any;
+  weddingDayMax: any;
 
   constructor(
     public navCtrl: NavController, 
@@ -61,6 +63,14 @@ export class EditProfilePage {
       wedding_day: [this.userWeddingDay, Validators.compose([Validators.required])],
       venue: [this.userVenue, Validators.compose([Validators.required])],
     });
+    
+    let d = new Date();
+    
+    let currentDate = new Date(d.getFullYear(), d.getMonth(), d.getDate(), 0, 0, 0);
+    let maxDate = new Date(d.getFullYear() + 3, d.getMonth(), d.getDate(), 0, 0, 0);
+    
+    this.weddingDayMin = currentDate.getFullYear();
+    this.weddingDayMax = maxDate.getFullYear();
   }
   
   getUser() {

@@ -50,7 +50,7 @@
 					</ion-item>
           <ion-item [ngClass]="{'error-border':!editProfileForm.controls.wedding_day.valid && editProfileForm.controls.wedding_day.touched}">
 						<ion-label floating>Hari Pernikahan</ion-label>
-            <ion-datetime displayFormat="YYYY-MM-DD" pickerFormat="DD MMMM YYYY" formControlName="wedding_day" required></ion-datetime>
+            <ion-datetime displayFormat="YYYY-MM-DD" pickerFormat="DD MMMM YYYY" formControlName="wedding_day" required min="{{ weddingDayMin }}" max="{{ weddingDayMax }}"></ion-datetime>
             <p color="danger" class="form-error" *ngIf="editProfileForm.controls.wedding_day.hasError('required') && editProfileForm.controls.wedding_day.touched">
               Hari pernikahan harus diisi
             </p>

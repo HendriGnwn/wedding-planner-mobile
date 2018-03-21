@@ -1,0 +1,25 @@
+page-content-detail-note {
+  .item-md, .item-ios, .item-wp {
+	  padding-left: 0px;
+	}
+  .notes {
+    padding: 0px;
+    textarea {
+      line-height: 3.1rem;
+      padding: 0px;
+      height: 100vh;
+      border: none;
+/*      background-attachment: local;
+      background-image:
+        linear-gradient(to right, white 1rem, transparent 1rem),
+        linear-gradient(to left, white 1rem, transparent 1rem),
+        repeating-linear-gradient(white, white 3rem, #ccc 3rem, #ccc 3.1rem, white 3.1rem);*/
+    }
+
+    
+  }
+  .notes:focus
+  {
+      outline: none;
+  }
+}

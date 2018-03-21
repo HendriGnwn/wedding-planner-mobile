@@ -8,11 +8,6 @@
 
   <ion-navbar color="primary">
     <ion-title text-center>{{ pageTitle }}</ion-title>
-    <ion-buttons end>
-      <button ion-button icon-only color="white">
-        <ion-icon name="settings"></ion-icon>
-      </button>
-    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
@@ -21,18 +16,18 @@
 <ion-content>
   <ion-list no-lines>
     <ion-item class="list-item" color="secondary" *ngFor="let item of contents.content_details">
-      <ion-label class="list-item-label" fixed *ngIf="!item.is_link && !item.is_cost">{{ item.name }}:</ion-label>
-      <ion-input class="list-item-input" placeholder="Isi {{ item.name }}" type="text" value="{{ item.value }}" (change)="eventChangeSaveContentDetail($event, item.id)" (keypress)="eventKeypressSaveContentDetail($event, item.id)" *ngIf="!item.is_link && !item.is_cost"></ion-input>
+      <ion-label (press)="contentDetailPressed($event, item.id, item.name, item.value)" class="list-item-label" fixed *ngIf="!item.is_link && !item.is_cost">{{ item.name }}:</ion-label>
+      <ion-input [disabled]="inputValueDisabled" (press)="contentDetailPressed($event, item.id, item.name, item.value)" class="list-item-input" placeholder="Isi {{ item.name }}" type="text" value="{{ item.value }}" (change)="eventChangeSaveContentDetail($event, item.id)" (keypress)="eventKeypressSaveContentDetail($event, item.id)" *ngIf="!item.is_link && !item.is_cost"></ion-input>
       
       <ion-label class="list-item-label" fixed *ngIf="!item.is_link && item.is_cost">{{ item.name }}:</ion-label>
       <ion-input class="list-item-input" placeholder="Isi {{ item.name }}" type="number" value="{{ item.value }}" (change)="eventChangeSaveContentDetail($event, item.id)" (keypress)="eventKeypressSaveContentDetail($event, item.id)" *ngIf="!item.is_link && item.is_cost"></ion-input>
       
-      <button text-left ion-item full class="list-item-button" color="secondary" *ngIf="item.is_link" detail-none>
+      <button text-left ion-item full class="list-item-button" color="secondary" *ngIf="item.is_link" detail-none (click)="clickDetail(item)">
         {{ item.name }}
       </button>
       <ion-icon ios="ios-arrow-forward-outline" md="ios-arrow-forward-outline" item-end *ngIf="item.is_link" color="primary"></ion-icon>
     </ion-item>
-    <button ion-item class="list-item list-item-icon-add" color="secondary" (click)="addContent()" detail-none>
+    <button ion-item class="list-item list-item-icon-add" color="secondary" (click)="addContentDetail()" detail-none>
       <ion-icon ios="ios-add-circle" md="ios-add-circle" item-start color="primary"></ion-icon>
     </button>
   </ion-list>

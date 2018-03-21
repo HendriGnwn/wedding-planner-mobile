@@ -31,6 +31,8 @@ export class RegisterPage {
   relation_email: AbstractControl;
   wedding_day: AbstractControl;
   venue: AbstractControl;
+  weddingDayMin: any;
+  weddingDayMax: any;
 
   constructor(
 		public navCtrl: NavController,
@@ -57,6 +59,14 @@ export class RegisterPage {
     if (localStorage.getItem("isLoggedIn") == "1") {
       this.navCtrl.setRoot("TabsPage");
     }
+    
+    let d = new Date();
+    
+    let currentDate = new Date(d.getFullYear(), d.getMonth(), d.getDate(), 0, 0, 0);
+    let maxDate = new Date(d.getFullYear() + 3, d.getMonth(), d.getDate(), 0, 0, 0);
+    
+    this.weddingDayMin = currentDate.getFullYear();
+    this.weddingDayMax = maxDate.getFullYear();
     
 	}
   

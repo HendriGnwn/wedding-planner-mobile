@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, App, ModalController } from 'ionic-angular';
+import { ApiProvider } from '../../providers/api/api';
+import { HelpersProvider } from '../../providers/helpers/helpers';
 
 /**
  * Generated class for the NotificationPage page.
@@ -14,8 +16,70 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'notification.html',
 })
 export class NotificationPage {
+  
+  loading: any;
+  notifications: any = [];
+  fileThumbUrl: string;
+  exceptionFileThumbUrl: string;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams,
+    public app: App,
+    public apiProvider: ApiProvider,
+    public modalCtrl: ModalController,
+    public helpersProvider: HelpersProvider) {
+    
+    if (localStorage.getItem("isLoggedIn") == null) {
+        
+      this.helpersProvider.toastPresent("Session expired, Please Login again.");
+      this.helpersProvider.clearLoggedIn();
+      this.app.getRootNav().setRoot("LoginPage");
+      
+    }
+    
+    this.loading = this.helpersProvider.loadingPresent("");
+    
+    this.fileThumbUrl = this.helpersProvider.getBaseUrl() + 'files/messages/thumbs/';
+    this.exceptionFileThumbUrl = this.helpersProvider.getBaseUrl() + 'files/messages/thumbs/default.png';
+    this.getNotifications();
+  }
+  
+  getNotifications() {
+    this.apiProvider.get('messages', {}, {'Content-Type': 'application/json', "Authorization": "Bearer " + localStorage.getItem('token')})
+      .then((data) => {
+        
+        let result = JSON.parse(data.data);
+        this.loading.dismiss();
+        this.notifications = result.data;
+        
+        console.log(result);
+
+      })
+      .catch((error) => {
+        let result = JSON.parse(error.error);
+        this.loading.dismiss();
+        if (result.status == '401') {
+          this.helpersProvider.toastPresent(result.message);
+          this.helpersProvider.clearLoggedIn();
+          this.app.getRootNav().setRoot("LoginPage");
+        }
+        console.log(error);
+      });
+  }
+  
+  goToDetail(notification) {
+    let modal = this.modalCtrl.create("NotificationModalPage", {notification: notification });
+    modal.present();
+  }
+  
+  doRefresh(e) {
+    this.getNotifications();
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      e.complete();
+    }, 2000);
   }
 
   ionViewDidLoad() {

@@ -79,7 +79,7 @@
           </ion-item>
           <ion-item class="cream-background" [ngClass]="{'error-border':!registerForm.controls.wedding_day.valid && registerForm.controls.wedding_day.touched}">
 						<ion-label floating>Tanggal Pernikahan</ion-label>
-						<ion-datetime displayFormat="YYYY-MM-DD" pickerFormat="DD MMMM YYYY" formControlName="wedding_day" required></ion-datetime>
+						<ion-datetime displayFormat="YYYY-MM-DD" pickerFormat="DD MMMM YYYY" formControlName="wedding_day" required min="{{ weddingDayMin }}" max="{{ weddingDayMax }}"></ion-datetime>
 					</ion-item>
           <ion-item color="danger" class="form-error" *ngIf="registerForm.controls.wedding_day.hasError('required') && registerForm.controls.wedding_day.touched">
             <p>Tanggal Pernikahan harus diisi</p>
