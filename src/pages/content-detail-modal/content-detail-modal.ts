@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController, App } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController, Events } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import {ApiProvider} from '../../providers/api/api';
 import {HelpersProvider} from '../../providers/helpers/helpers';
@@ -29,23 +29,17 @@ export class ContentDetailModalPage {
     public navCtrl: NavController, 
     public navParams: NavParams,
     public api: ApiProvider,
-    public app: App,
+    public events: Events,
     public viewCtrl: ViewController,
     private helpersProvider: HelpersProvider,
     private formBuilder: FormBuilder) {
     
-    if (localStorage.getItem("isLoggedIn") == null) {
-        
-      this.helpersProvider.toastPresent("Session expired, Please Login again.", );
-      this.helpersProvider.clearLoggedIn();
-      this.navCtrl.setRoot("LoginPage");
-    }
+    this.events.publish("auth:checkLogin");
     
     this.contentDetailForm = this.formBuilder.group({
       name: [this.navParams.get('contentDetailName'), Validators.compose([Validators.required])],
       value: [this.navParams.get('contentDetailValue'), Validators.compose([Validators.required])],
     });
-    
     
     if (this.navParams.get('contentDetailId') == null) {
       this.headerTitle = "Tambah baru";
@@ -71,7 +65,7 @@ export class ContentDetailModalPage {
 
             this.helpersProvider.toastPresent(result.message);
 
-            this.viewCtrl.dismiss(result.data);
+            this.dismiss(result.data);
           })
           .catch((error) => {
             this.loading.dismiss();
@@ -79,16 +73,11 @@ export class ContentDetailModalPage {
 
             let result = JSON.parse(error.error);
             if (result.status == '401') {
-              this.helpersProvider.toastPresent(result.message);
-              this.helpersProvider.clearLoggedIn();
-              this.app.getRootNav().setRoot("LoginPage");
-
+              this.events.publish("auth:forceLogout", result.message);
             }
 
             this.helpersProvider.toastPresent(result.message);
-
-
-            this.viewCtrl.dismiss(null);
+            this.dismiss(null);
           });
       } else {
         url = 'content-details/update/' + this.navParams.get('contentDetailId');
@@ -101,7 +90,7 @@ export class ContentDetailModalPage {
 
             this.helpersProvider.toastPresent(result.message);
 
-            this.viewCtrl.dismiss(result.data);
+            this.dismiss(result.data);
           })
           .catch((error) => {
             this.loading.dismiss();
@@ -109,16 +98,11 @@ export class ContentDetailModalPage {
 
             let result = JSON.parse(error.error);
             if (result.status == '401') {
-              this.helpersProvider.toastPresent(result.message);
-              this.helpersProvider.clearLoggedIn();
-              this.app.getRootNav().setRoot("LoginPage");
-
+              this.events.publish("auth:forceLogout", result.message);
             }
 
             this.helpersProvider.toastPresent(result.message);
-
-
-            this.viewCtrl.dismiss(null);
+            this.dismiss(null);
           });
       }
       
@@ -126,8 +110,8 @@ export class ContentDetailModalPage {
     }
   }
   
-  dismiss() {
-    this.viewCtrl.dismiss(null);
+  dismiss(data: any) {
+    this.viewCtrl.dismiss(data);
   }
 
   ionViewDidLoad() {

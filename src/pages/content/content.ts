@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController, ActionSheetController, Platform, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController, ActionSheetController, Platform, AlertController, Events } from 'ionic-angular';
 import { HelpersProvider } from '../../providers/helpers/helpers';
 import { ApiProvider } from '../../providers/api/api';
 
@@ -30,13 +30,12 @@ export class ContentPage {
     public actionSheetCtrl: ActionSheetController,
     public platform: Platform,
     public alertCtrl: AlertController,
-    public modalCtrl: ModalController) {
-    if (localStorage.getItem("isLoggedIn") == null) {
-        
-      this.helpersProvider.toastPresent("Session expired, Please Login again.", );
-      this.helpersProvider.clearLoggedIn();
-      this.navCtrl.setRoot("LoginPage");
-    }
+    public modalCtrl: ModalController,
+    public events: Events
+  ) {
+  
+    this.events.publish("auth:checkLogin");
+    
     this.pageTitle = this.navParams.get('name');
     
     this.getContents();
@@ -57,10 +56,7 @@ export class ContentPage {
         this.contents = [];
         let result = JSON.parse(error.error);
         if (result.status == '401') {
-          this.helpersProvider.toastPresent(result.message);
-          this.helpersProvider.clearLoggedIn();
-          this.navCtrl.setRoot("LoginPage");
-          
+          this.events.publish("auth:forceLogout", result.message);
         }
         console.log(this.contents);
         console.log(error);
@@ -112,9 +108,7 @@ export class ContentPage {
         let result = JSON.parse(error.error);
         
         if (result.status == '401') {
-          this.helpersProvider.toastPresent(result.message);
-          this.helpersProvider.clearLoggedIn();
-          this.navCtrl.setRoot("LoginPage");
+          this.events.publish("auth:forceLogout", result.message);
         }
         
         this.helpersProvider.toastPresent(result.message);

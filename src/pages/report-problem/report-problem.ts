@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Events } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { ApiProvider } from '../../providers/api/api';
 import { HelpersProvider } from '../../providers/helpers/helpers';
@@ -28,14 +28,10 @@ export class ReportProblemPage {
     public navParams: NavParams,
     public api: ApiProvider,
     private helpersProvider: HelpersProvider,
-    private formBuilder: FormBuilder) {
+    private formBuilder: FormBuilder,
+    public events: Events) {
       
-    if (localStorage.getItem("isLoggedIn") == null) {
-        
-      this.helpersProvider.toastPresent("Session expired, Please Login again.", );
-      this.helpersProvider.clearLoggedIn();
-      this.navCtrl.setRoot("LoginPage");
-    }
+    this.events.publish("auth:checkLogin");
     
     this.reportProblemForm = this.formBuilder.group({
       category: ['', Validators.compose([Validators.required])],
@@ -69,12 +65,8 @@ export class ReportProblemPage {
           let result = JSON.parse(error.error);
           
           if (result.status == '401') {
-            this.helpersProvider.toastPresent(result.message);
-            this.helpersProvider.clearLoggedIn();
-            this.navCtrl.setRoot("LoginPage");
-
+            this.events.publish("auth:forceLogout", result.message);
           }
-          
           this.helpersProvider.toastPresent(result.message);
         });
     }

@@ -20,18 +20,9 @@ export class SettingPage {
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams, 
-    private events: Events,
-    private helpers: HelpersProvider
+    private events: Events
     ) {
-    
-    if (localStorage.getItem("isLoggedIn") == null) {
-        
-      this.helpers.toastPresent('Session expired, Please Login again.');
-
-      this.navCtrl.setRoot("LoginPage");
-      
-    }
-    
+    this.events.publish("auth:checkLogin");
   }
   
   goToEditProfile() {

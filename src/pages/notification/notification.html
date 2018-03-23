@@ -20,6 +20,6 @@
   <ion-card *ngFor="let item of notifications" (click)="goToDetail(item)">
     <img src="{{ item.file != null ? fileThumbUrl + item.file : exceptionFileThumbUrl }}"/>
     <div class="card-title">{{ item.name }}</div>
-    <div class="card-subtitle">{{ item.message_at | date : 'dd MMM yyyy' }}</div>
+    <div class="card-subtitle">{{ item.message_at }}</div>
   </ion-card>
 </ion-content>

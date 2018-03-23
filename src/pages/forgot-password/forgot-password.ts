@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {IonicPage, NavController, NavParams, LoadingController, ToastController} from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import {ApiProvider} from '../../providers/api/api';
+import {HelpersProvider} from '../../providers/helpers/helpers';
 
 /**
  * Generated class for the ForgotPasswordPage page.
@@ -28,8 +29,7 @@ export class ForgotPasswordPage {
     public navCtrl: NavController, 
     public navParams: NavParams,
     public api: ApiProvider,
-		public loadingCtrl: LoadingController,
-		private toastCtrl: ToastController,
+		public helperProviders: HelpersProvider,
     private formBuilder: FormBuilder) {
     
     this.forgotForm = this.formBuilder.group({
@@ -44,10 +44,7 @@ export class ForgotPasswordPage {
   
   onSubmit(value:any) : void {
     if (this.forgotForm.valid) {
-      this.loading = this.loadingCtrl.create({
-        content: "Please Wait ..."
-      });
-      this.loading.present();
+      this.loading = this.helperProviders.loadingPresent("Please Wait ...");
       
       this.api.post('auth/forgot-password', {"email": value.email}, {'Content-Type':'application/json'})
         .then((data) => {
@@ -58,12 +55,7 @@ export class ForgotPasswordPage {
           this.forgotErrors = {};
           
           this.loading.dismiss();
-          this.toastCtrl.create({
-            message: result.message,
-            duration: 3000,
-            position: 'buttom',
-            dismissOnPageChange: false,
-          }).present();
+          this.helperProviders.toastPresent(result.message);
           
           this.navCtrl.setRoot("LoginPage");
         })
@@ -77,13 +69,7 @@ export class ForgotPasswordPage {
           this.forgotErrors = result.validators;
           
           console.log(this.forgotErrors);
-          
-          this.toastCtrl.create({
-            message: result.message,
-            duration: 3000,
-            position: 'buttom',
-            dismissOnPageChange: false,
-          }).present();
+          this.helperProviders.toastPresent(result.message);
         });
     }
   }

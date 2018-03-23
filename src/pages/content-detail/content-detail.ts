@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController, App, ActionSheetController, Platform, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController, ActionSheetController, Platform, AlertController, Events } from 'ionic-angular';
 import { HelpersProvider } from '../../providers/helpers/helpers';
 import { ApiProvider } from '../../providers/api/api';
 
@@ -31,14 +31,9 @@ export class ContentDetailPage {
     public modalCtrl: ModalController, 
     public actionSheetCtrl: ActionSheetController, 
     public alertCtrl: AlertController, 
-    public app: App
+    public events: Events
   ) {
-    if (localStorage.getItem("isLoggedIn") == null) {
-        
-      this.helpersProvider.toastPresent("Session expired, Please Login again.", );
-      this.helpersProvider.clearLoggedIn();
-      this.app.getRootNav().setRoot("LoginPage");
-    }
+    this.events.publish("auth:checkLogin");
     this.pageTitle = this.navParams.get('name');
     
     this.getContentDetails();
@@ -58,10 +53,9 @@ export class ContentDetailPage {
         this.contents = [];
         let result = JSON.parse(error.error);
         if (result.status == '401') {
-          this.helpersProvider.toastPresent(result.message);
-          this.helpersProvider.clearLoggedIn();
-          this.navCtrl.setRoot("LoginPage");
+          this.events.publish("auth:forceLogout", result.message);
         }
+        this.helpersProvider.toastPresent(result.message);
         console.log(error);
       });
   }
@@ -82,12 +76,10 @@ export class ContentDetailPage {
       this.loading.dismiss();
       this.contents = [];
       let result = JSON.parse(error.error);
-      this.helpersProvider.toastPresent(result.message);
       if (result.status == '401') {
-        this.helpersProvider.toastPresent(result.message);
-        this.helpersProvider.clearLoggedIn();
-        this.navCtrl.setRoot("LoginPage");
+        this.events.publish("auth:forceLogout", result.message);
       }
+      this.helpersProvider.toastPresent(result.message);
       console.log(error);
     });
   }
@@ -163,9 +155,7 @@ export class ContentDetailPage {
         let result = JSON.parse(error.error);
         
         if (result.status == '401') {
-          this.helpersProvider.toastPresent(result.message);
-          this.helpersProvider.clearLoggedIn();
-          this.navCtrl.setRoot("LoginPage");
+          this.events.publish("auth:forceLogout", result.message);
         }
         
         this.inputValueDisabled = false;

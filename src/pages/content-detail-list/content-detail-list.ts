@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Events } from 'ionic-angular';
 
 /**
  * Generated class for the ContentDetailListPage page.
@@ -14,8 +14,16 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'content-detail-list.html',
 })
 export class ContentDetailListPage {
+  
+  pageTitle: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams,
+    public events: Events
+  ) {
+    this.events.publish("auth:checkLogin");
+    this.pageTitle = 'Detail';
   }
 
   ionViewDidLoad() {

@@ -1,5 +1,5 @@
 import { Component,  } from '@angular/core';
-import { Platform, NavController, ToastController, App, IonicPage, ActionSheetController, AlertController } from 'ionic-angular';
+import { Platform, NavController, ToastController, App, IonicPage, ActionSheetController, AlertController, Events } from 'ionic-angular';
 import { File } from '@ionic-native/file';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { ApiProvider } from '../../providers/api/api';
@@ -25,7 +25,8 @@ export class ProfilePage {
   venue: any;
   wedding_day: any;
   user: any = {};
-  photo: any = "https://static.pexels.com/photos/256737/pexels-photo-256737.jpeg";
+  defaultPhoto: any = "https://static.pexels.com/photos/256737/pexels-photo-256737.jpeg";
+  photo: any = this.defaultPhoto;
   dirs: any;
   cameraOptions: CameraOptions = {
     quality: 100,
@@ -58,34 +59,17 @@ export class ProfilePage {
     public app: App,
     public platform: Platform,
     public alertCtrl: AlertController,
+    public events: Events,
     public actionSheetCtrl: ActionSheetController
-    ) {
-    
-    if (localStorage.getItem("isLoggedIn") == null) {
-        
-      this.toastCtrl.create({
-          message: "Session expired, Please Login again.",
-          duration: 3000,
-          position: 'buttom',
-          dismissOnPageChange: false,
-        }).present();
-      this.helpersProvider.clearLoggedIn();
-      this.app.getRootNav().setRoot("LoginPage");
-      
-    }
-    
+  ) {
+    this.events.publish("auth:checkLogin");
     this.photoUrl = this.helpersProvider.getBaseUrl() + "files/user-relations/";
-
     this.token = localStorage.getItem('token');
-    
     this.getUser();
-    
     this.getCountdown();
-
     setInterval(() => { 
       this.getCountdown(); 
     }, 1000);
-    
     if (this.platform.is('ios')) {
       this.bannerHeight = 200;
     } else {
@@ -113,9 +97,7 @@ export class ProfilePage {
         this.user = {};
         let result = JSON.parse(error.error);
         if (result.status == '401') {
-          this.helpersProvider.toastPresent(result.message);
-          this.helpersProvider.clearLoggedIn();
-          this.app.getRootNav().setRoot("LoginPage");
+          this.events.publish("auth:forceLogout", result.message);
         }
         console.log(error);
       });
@@ -148,6 +130,9 @@ export class ProfilePage {
           let result = JSON.parse(error.data);
           
           this.loading.dismiss();
+          if (result.status == '401') {
+            this.events.publish("auth:forceLogout", result.message);
+          }
           
           this.helpersProvider.toastPresent(result.message);
         });
@@ -254,19 +239,17 @@ export class ProfilePage {
         .then((data) => {
           
           let result = JSON.parse(data.data);
-          
           this.loading.dismiss();
-          
-          this.photo = "https://static.pexels.com/photos/256737/pexels-photo-256737.jpeg";
-          
+          this.photo = this.defaultPhoto;
           this.helpersProvider.toastPresent(result.message);
           
         })
         .catch((error) => {
           let result = JSON.parse(error.data);
-          
           this.loading.dismiss();
-          
+          if (result.status == '401') {
+            this.events.publish("auth:forceLogout", result.message);
+          }
           this.helpersProvider.toastPresent(result.message);
         });
       

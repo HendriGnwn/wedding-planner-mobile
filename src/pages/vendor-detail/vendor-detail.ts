@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, App, Slides } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Events, Slides } from 'ionic-angular';
 import { HelpersProvider } from '../../providers/helpers/helpers';
 import {InAppBrowser, InAppBrowserOptions} from '@ionic-native/in-app-browser';
 
@@ -36,18 +36,12 @@ export class VendorDetailPage {
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
-    public app: App,
+    public events: Events,
     public helpersProvider: HelpersProvider,
     public inAppBrowser: InAppBrowser
   ) {
   
-    if (localStorage.getItem("isLoggedIn") == null) {
-        
-      this.helpersProvider.toastPresent("Session expired, Please Login again.");
-      this.helpersProvider.clearLoggedIn();
-      this.app.getRootNav().setRoot("LoginPage");
-      
-    }
+    this.events.publish("auth:checkLogin");
     
     this.vendor = this.navParams.get('vendor');
     this.fileUrl = this.helpersProvider.getBaseUrl() + 'files/vendors/';

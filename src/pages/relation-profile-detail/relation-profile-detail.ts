@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Events } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { ApiProvider } from '../../providers/api/api';
 import { HelpersProvider } from '../../providers/helpers/helpers';
@@ -33,16 +33,11 @@ export class RelationProfileDetailPage {
     public navParams: NavParams,
     public helpersProvider: HelpersProvider,
     public apiProvider: ApiProvider,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private events: Events
   ) {
     
-    if (localStorage.getItem("isLoggedIn") == null) {
-        
-      this.helpersProvider.toastPresent("Session expired, Please Login again.", );
-      this.helpersProvider.clearLoggedIn();
-      this.navCtrl.setRoot("LoginPage");
-
-    }
+    this.events.publish("auth:checkLogin");
     
     this.getUser();
     this.relationProfileForm = this.formBuilder.group({
@@ -74,11 +69,9 @@ export class RelationProfileDetailPage {
         this.relation = [];
         let result = JSON.parse(error.error);
         if (result.status == '401') {
-          this.helpersProvider.toastPresent(result.message);
-          this.helpersProvider.clearLoggedIn();
-          this.navCtrl.setRoot("LoginPage");
-          
+          this.events.publish("auth:forceLogout", result.message);
         }
+        this.helpersProvider.toastPresent(result.message);
         console.log(error);
       });
   }
@@ -104,9 +97,9 @@ export class RelationProfileDetailPage {
           console.log(error);
           
           let result = JSON.parse(error.error);
-          
-          console.log(result);
-          
+          if (result.status == '401') {
+            this.events.publish("auth:forceLogout", result.message);
+          }
           this.helpersProvider.toastPresent(result.message);
         });
     }

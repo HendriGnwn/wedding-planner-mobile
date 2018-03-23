@@ -40,8 +40,16 @@ export class MyApp {
 //		console.log("splash screen hide");
 //      }, 3000);
       
-      this.events.subscribe('auth:logout', (token) => {
+      this.events.subscribe('auth:logout', (token: any) => {
         this.logout(token);
+      });
+      
+      this.events.subscribe('auth:checkLogin', () => {
+        this.checkLogin();
+      });
+      
+      this.events.subscribe('auth:forceLogout', (message: string) => {
+        this.forceLogout(message);
       });
       
       this.isLoggedIn = localStorage.getItem("isLoggedIn");
@@ -69,6 +77,26 @@ export class MyApp {
           // nomatch.$link - the full link data
           console.error('Got a deeplink that didn\'t match', nomatch);
         });
+    });
+  }
+  
+  /**
+   * Check login
+   */
+  checkLogin() {
+    if (this.isLoggedIn == null) {
+      this.forceLogout("Session expired, Please Login again.");
+    }
+  }
+  
+  /**
+   * force logout
+   */
+  forceLogout(message: string) {
+    this.helpers.toastPresent(message);
+    this.helpers.clearLoggedIn();
+    this.nav.setRoot("LoginPage", {}, {
+      animate: true
     });
   }
   

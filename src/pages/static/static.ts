@@ -18,6 +18,7 @@ import { HelpersProvider } from '../../providers/helpers/helpers';
 })
 export class StaticPage {
   
+  loading: any;
   headerTitle: any = "Halaman Statis";
   content: any = {};
 
@@ -25,15 +26,17 @@ export class StaticPage {
     public navCtrl: NavController, 
     public navParams: NavParams,
     public api: ApiProvider,
-    public helpersProvider: HelpersProvider) {
+    public helpersProvider: HelpersProvider
+  ) {
     this.headerTitle = this.navParams.get('header');
     this.getStatic();
   }
   
   getStatic() {
+    this.loading = this.helpersProvider.loadingPresent("");
     this.api.get('page/' + this.navParams.get('id'), {}, {'Content-Type': 'application/json'})
       .then((data) => {
-        
+        this.loading.dismiss();
         let result = JSON.parse(data.data);
         console.log(data.data);
         this.content = result.data;
@@ -41,6 +44,9 @@ export class StaticPage {
 
       })
       .catch((error) => {
+        this.loading.dismiss();
+        let result = JSON.parse(error.error);
+        this.helpersProvider.toastPresent(result.message);
         this.content = {};
         console.log(error);
       });

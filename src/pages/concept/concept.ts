@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, App } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Events } from 'ionic-angular';
 import {ApiProvider} from '../../providers/api/api';
 import { HelpersProvider } from '../../providers/helpers/helpers';
 
@@ -19,12 +19,15 @@ export class ConceptPage {
   
   concepts: any = [];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public api: ApiProvider, public helpersProvider: HelpersProvider, public app: App) {
-    if (localStorage.getItem("isLoggedIn") == null) {
-      this.helpersProvider.toastPresent("Session expired, Please Login again.", );
-      this.helpersProvider.clearLoggedIn();
-      this.app.getRootNav().setRoot("LoginPage");
-    }
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams, 
+    public api: ApiProvider, 
+    public helpersProvider: HelpersProvider, 
+    public events: Events
+  ) {
+  
+    this.events.publish("auth:checkLogin");
     this.getConcepts();
   }
 
@@ -45,11 +48,8 @@ export class ConceptPage {
         this.concepts = [];
         let result = JSON.parse(error.error);
         if (result.status == '401') {
-          this.helpersProvider.toastPresent(result.message);
-          this.helpersProvider.clearLoggedIn();
-          this.app.getRootNav().setRoot("LoginPage");
+          this.events.publish("auth:forceLogout", result.message);
         }
-        
       });
   }
   

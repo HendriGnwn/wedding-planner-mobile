@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, App, ViewController, Slides } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, App, ViewController, Slides, Events } from 'ionic-angular';
 import { ApiProvider } from '../../providers/api/api';
 import { HelpersProvider } from '../../providers/helpers/helpers';
 
@@ -30,14 +30,10 @@ export class NotificationModalPage {
     public app: App,
     public viewCtrl: ViewController,
     public apiProvider: ApiProvider,
+    public events: Events,
     public helpersProvider: HelpersProvider) {
     
-    if (localStorage.getItem("isLoggedIn") == null) {
-        
-      this.helpersProvider.toastPresent("Session expired, Please Login again.");
-      this.helpersProvider.clearLoggedIn();
-      this.app.getRootNav().setRoot("LoginPage");
-    }
+    this.events.publish("auth:checkLogin");
     
     this.fileUrl = this.helpersProvider.getBaseUrl() + 'files/messages/';
     this.defaultFileUrl = this.helpersProvider.getBaseUrl() + 'files/messages/default.png';

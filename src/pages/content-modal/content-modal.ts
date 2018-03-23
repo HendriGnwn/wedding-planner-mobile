@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController, LoadingController, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController, Events } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import {ApiProvider} from '../../providers/api/api';
 import {HelpersProvider} from '../../providers/helpers/helpers';
@@ -28,8 +28,7 @@ export class ContentModalPage {
     public navParams: NavParams,
     public api: ApiProvider,
     public viewCtrl: ViewController,
-		public loadingCtrl: LoadingController,
-		private toastCtrl: ToastController,
+		public events: Events,
     private helpersProvider: HelpersProvider,
     private formBuilder: FormBuilder) {
     
@@ -37,12 +36,7 @@ export class ContentModalPage {
       name: [this.navParams.get('contentName'), Validators.compose([Validators.required])],
     });
     
-    if (localStorage.getItem("isLoggedIn") == null) {
-        
-      this.helpersProvider.toastPresent("Session expired, Please Login again.", );
-      this.helpersProvider.clearLoggedIn();
-      this.navCtrl.setRoot("LoginPage");
-    }
+    this.events.publish("auth:checkLogin");
     
     if (this.navParams.get('contentId') == null) {
       this.headerTitle = "Tambah baru";
@@ -54,10 +48,7 @@ export class ContentModalPage {
   
   onSubmit(value:any) : void {
     if (this.contentForm.valid) {
-      this.loading = this.loadingCtrl.create({
-        content: "Please Wait ..."
-      });
-      this.loading.present();
+      this.loading = this.helpersProvider.loadingPresent("Please Wait ...");
       
       let params = {"name": value.name};
       let url = '';
@@ -65,85 +56,41 @@ export class ContentModalPage {
         url = 'contents/store/' + this.navParams.get('concept');
         this.api.post(url, params, {'Content-Type':'application/json', 'Authorization': 'Bearer ' + localStorage.getItem('token')})
           .then((data) => {
-
-            let result = JSON.parse(data.data);
-
             this.loading.dismiss();
-
-            this.toastCtrl.create({
-              message: result.message,
-              duration: 3000,
-              position: 'buttom',
-              dismissOnPageChange: false,
-            }).present();
-
-            this.viewCtrl.dismiss(result.data);
+            let result = JSON.parse(data.data);
+            this.helpersProvider.toastPresent(result.message);
+            this.dismiss(result.data);
           })
           .catch((error) => {
             this.loading.dismiss();
             console.log(error);
-
             let result = JSON.parse(error.error);
             if (result.status == '401') {
-              this.helpersProvider.toastPresent(result.message);
-              this.helpersProvider.clearLoggedIn();
-              this.navCtrl.setRoot("LoginPage");
-
+              this.events.publish("auth:forceLogout", result.message);
             }
-
-            this.toastCtrl.create({
-              message: result.message,
-              duration: 3000,
-              position: 'buttom',
-              dismissOnPageChange: false,
-            }).present();
-
-
-            this.viewCtrl.dismiss(null);
+            this.helpersProvider.toastPresent(result.message);
+            this.dismiss(null);
           });
       } else {
         url = 'contents/update/' + this.navParams.get('contentId');
         this.api.patch(url, params, {'Content-Type':'application/json', 'Authorization': 'Bearer ' + localStorage.getItem('token')})
           .then((data) => {
-
-            let result = JSON.parse(data.data);
-
             this.loading.dismiss();
-
-            this.toastCtrl.create({
-              message: result.message,
-              duration: 3000,
-              position: 'buttom',
-              dismissOnPageChange: false,
-            }).present();
-
-            this.viewCtrl.dismiss(result.data);
+            let result = JSON.parse(data.data);
+            this.helpersProvider.toastPresent(result.message);
+            this.dismiss(result.data);
           })
           .catch((error) => {
             this.loading.dismiss();
             console.log(error);
-
             let result = JSON.parse(error.error);
             if (result.status == '401') {
-              this.helpersProvider.toastPresent(result.message);
-              this.helpersProvider.clearLoggedIn();
-              this.navCtrl.setRoot("LoginPage");
-
+              this.events.publish("auth:forceLogout", result.message);
             }
-
-            this.toastCtrl.create({
-              message: result.message,
-              duration: 3000,
-              position: 'buttom',
-              dismissOnPageChange: false,
-            }).present();
-
-
-            this.viewCtrl.dismiss(null);
+            this.helpersProvider.toastPresent(result.message);
+            this.dismiss(null);
           });
       }
-      
-      
     }
   }
 
@@ -151,8 +98,8 @@ export class ContentModalPage {
     console.log('ionViewDidLoad ContentModalPage');
   }
   
-  dismiss() {
-    this.viewCtrl.dismiss(null);
+  dismiss(data: any) {
+    this.viewCtrl.dismiss(data);
   }
 
 }
