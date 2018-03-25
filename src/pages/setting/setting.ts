@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, Events } from 'ionic-angular';
 
-import {HelpersProvider} from '../../providers/helpers/helpers';
-
 /**
  * Generated class for the SettingPage page.
  *

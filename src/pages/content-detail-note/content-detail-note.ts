@@ -53,7 +53,7 @@ export class ContentDetailNotePage {
           let result = JSON.parse(data.data);
           this.helpersProvider.toastPresent(result.message);
           this.contentDetails = result.data;
-          this.navCtrl.pop();
+          //this.navCtrl.pop();
         })
         .catch((error) => {
           this.loading.dismiss();

@@ -1,5 +1,5 @@
 import { Component,  } from '@angular/core';
-import { Platform, NavController, ToastController, App, IonicPage, ActionSheetController, AlertController, Events } from 'ionic-angular';
+import { Platform, NavController, App, IonicPage, ActionSheetController, AlertController, Events } from 'ionic-angular';
 import { File } from '@ionic-native/file';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { ApiProvider } from '../../providers/api/api';
@@ -53,7 +53,6 @@ export class ProfilePage {
     public navCtrl: NavController, 
     public file: File,
     private camera: Camera,
-    private toastCtrl: ToastController, 
     public apiProvider: ApiProvider,
     public helpersProvider: HelpersProvider,
     public app: App,

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {ApiProvider} from '../../providers/api/api';
+import {HelpersProvider} from '../../providers/helpers/helpers';
 
 /**
  * Generated class for the ProcedurePage page.
@@ -18,7 +19,7 @@ export class ProcedurePage {
   
   procedureImgUrl : string = "http://agendanikah.com/dev/public/files/procedures/default.png";
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public apiProvider: ApiProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public apiProvider: ApiProvider, public helpersProvider: HelpersProvider) {
     this.getProcedure();
   }
   
@@ -31,6 +32,8 @@ export class ProcedurePage {
           this.procedureImgUrl = result.link + '/' + result.data.file;
         })
         .catch((error) => {
+          let result = JSON.parse(error.error);
+          this.helpersProvider.toastPresent(result.message);
           console.log(error);
         });
   }

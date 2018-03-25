@@ -1,5 +1,5 @@
 <!--
-  Generated template for the ContentDetailListPage page.
+  Generated template for the VendorPage page.
 
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
@@ -9,10 +9,19 @@
   <ion-navbar color="primary">
     <ion-title text-center>{{ pageTitle }}</ion-title>
   </ion-navbar>
-
 </ion-header>
 
 
-<ion-content padding>
-
+<ion-content class="card-background-page">
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-card (click)="storeData()">
+    <div class="card-title">
+      <ion-icon name="camera"></ion-icon>
+    </div>
+  </ion-card>
+  <ion-card *ngFor="let item of details" (click)="pictureDialog(item)">
+    <img src="{{ item.value != null ? fileThumbUrl + item.value : defaultFileThumbUrl }}"/>
+  </ion-card>
 </ion-content>
