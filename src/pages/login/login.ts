@@ -62,6 +62,8 @@ export class LoginPage {
           localStorage.setItem("token", result.data.token);
           localStorage.setItem("user_id", result.data.id);
           
+          console.log(localStorage.getItem("token"));
+          
           this.loading.dismiss();
           this.helpersProvider.toastPresent(result.message);
           

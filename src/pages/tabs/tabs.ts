@@ -18,6 +18,7 @@ export class TabsPage {
   @ViewChild('tabs') tabs;
   
   firstLoaded: boolean = false;
+  mySelectedIndex: any;
   
   procedureRoot = "ProcedurePage";
   costRoot = "CostPage";
@@ -26,13 +27,7 @@ export class TabsPage {
   profileRoot = "ProfilePage";
 
 
-  constructor(public navCtrl: NavController) {}
-  
-  ionViewDidEnter() {
-    if (!this.firstLoaded && this.tabs.getSelected().length() >= 2) {
-        this.tabs.getSelected().remove(0, this.tabs.getSelected().length() - 1);
-        this.firstLoaded = true;
-    }
+  constructor(public navCtrl: NavController) {
+    this.mySelectedIndex = 4;
   }
-
 }

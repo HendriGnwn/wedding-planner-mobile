@@ -3,7 +3,7 @@
     <name>Agenda Nikah</name>
     <description>Rencanakan Hari Bahagia Anda bersama kami.</description>
     <author email="hendri.gnw@gmail.com" href="http://hendrign.id/">Hendri Gunawan</author>
-    <content src="index.html" />
+    <content original-src="index.html" src="http://10.0.0.161:8100" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -120,6 +120,7 @@
     <allow-navigation href="http://192.168.43.29:8100" />
     <allow-navigation href="http://10.0.0.192:8100" />
     <plugin name="cordova-plugin-inappbrowser" spec="^2.0.2" />
+    <allow-navigation href="http://10.0.0.161:8100" />
     <engine name="ios" spec="4.5.4" />
     <engine name="android" spec="7.0.0" />
 </widget>

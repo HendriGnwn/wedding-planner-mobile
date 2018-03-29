@@ -10,19 +10,18 @@ page-profile {
       } 
     }
   }
-  .profile-banner {
+  .card {
+    border-radius: 0;
+    margin: 0;
     margin-bottom: 2rem;
-    .col {
-      padding: 0px !important;
-      .banner-profile {
-        background-position: 50% 50%;
-        height: 20rem;
-      }
-      .icon-upload {
-        font-size: 2.2em; 
-        top: -40px; 
-        position:relative;
-      }
+    width: 100vw;
+    box-shadow: none;
+    height: 20rem;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    .card-subtitle {
+      margin-top: 17rem;
     }
   }
   .content {

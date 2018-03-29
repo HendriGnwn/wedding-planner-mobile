@@ -19,17 +19,10 @@
 
 <ion-content>
   
-  <ion-row class="profile-banner">
-    <ion-col col-12 text-center>
-      <div class="banner-profile">
-        <img (click)="doUploadPhoto()" width="100%" height="{{ bannerHeight }}" src="{{ photo }}" />
-        <ion-icon name="camera" color="white" large class="icon-upload"></ion-icon>
-      </div>
-      
-      
-    </ion-col>
-  </ion-row>
-  
+  <ion-card (click)="doUploadPhoto()" [style.backgroundImage]="'url(' + photo + ')'">
+    <div class="card-subtitle" text-center><ion-icon name="camera" color="white" large class="icon-upload"></ion-icon></div>
+  </ion-card>
+
   <div class="content">
     
     <ion-row class="counting-down-container">

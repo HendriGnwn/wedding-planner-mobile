@@ -42,6 +42,7 @@ export class ProfilePage {
     sourceType: this.camera.PictureSourceType.PHOTOLIBRARY
   };
   photoUrl: any;
+  backgroundPhoto: any;
   
   days: any;
   hours: any;
