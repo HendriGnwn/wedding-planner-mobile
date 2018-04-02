@@ -21,7 +21,7 @@
   <ion-refresher (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
-  <ion-card *ngFor="let item of details" (click)="pictureDialog(item)" (press)="pressToDetail($event, item)">
+  <ion-card *ngFor="let item of details" (click)="pictureDialog(item)" (press)="pressToDetail(item)">
     <img src="{{ item.value != null ? fileThumbUrl + item.value : defaultFileThumbUrl }}"/>
   </ion-card>
 </ion-content>

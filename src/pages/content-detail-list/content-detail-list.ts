@@ -123,45 +123,27 @@ export class ContentDetailListPage {
     
   }
   
-  pressToDetail(event, item) {
-    let actionSheet = this.actionSheetCtrl.create({
-      title: item.name,
+  pressToDetail(item) {
+    
+    let alert = this.alertCtrl.create({
+      title: 'Anda yakin ingin menghapus Foto ini?',
       buttons: [
         {
-          text: 'Delete',
-          role: 'destructive',
-          icon: !this.platform.is('ios') ? 'trash' : null,
+          text: 'Tidak',
           handler: () => {
-            
-            let alert = this.alertCtrl.create({
-              title: 'Anda yakin ingin menghapus data ini?',
-              buttons: [
-                {
-                  text: 'Tidak',
-                  handler: () => {
-                    console.log('Disagree clicked');
-                  }
-                },
-                {
-                  text: 'Ya',
-                  handler: () => {
-                    this.deletePhoto(item.id);
-                  }
-                }
-              ]
-            });
-            alert.present();
+            console.log('Disagree clicked');
           }
-        },,{
-          text: 'Cancel',
-          role: 'cancel',
+        },
+        {
+          text: 'Ya',
           handler: () => {
-            console.log('Cancel clicked');
+            this.deletePhoto(item.id);
           }
         }
       ]
     });
-    actionSheet.present();
+    alert.present();
+          
   }
   
   deletePhoto(id) {
