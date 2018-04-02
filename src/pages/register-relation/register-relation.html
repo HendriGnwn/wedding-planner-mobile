@@ -13,6 +13,51 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content padding class="cream-background">
+  
+  <form autocomplete="off" [formGroup]="registerForm" (ngSubmit)="onSubmit(registerForm.value)">
+		<ion-row>
+			<ion-col>
+				<ion-list>
+					<ion-item class="cream-background" [ngClass]="{'error-border':!registerForm.controls.name.valid && registerForm.controls.name.touched}">
+						<ion-label floating>Nama</ion-label>
+						<ion-input formControlName="name" type="text" required ></ion-input>
+					</ion-item>
+          <ion-item color="danger" class="form-error" *ngIf="registerForm.controls.name.hasError('required') && registerForm.controls.name.touched">
+            <p>Nama harus diisi</p>
+          </ion-item>
+					<ion-item class="cream-background" [ngClass]="{'error-border':!registerForm.controls.phone.valid && registerForm.controls.phone.touched}">
+						<ion-label floating>No Handphone</ion-label>
+            <ion-input formControlName="phone" type="number" required ></ion-input>
+					</ion-item>
+          <ion-item color="danger" class="form-error" *ngIf="registerForm.controls.phone.hasError('required') && registerForm.controls.phone.touched">
+            <p>No Handphone harus diisi</p>
+          </ion-item>
+					<ion-item class="cream-background" [ngClass]="{'error-border':!registerForm.controls.password.valid && registerForm.controls.password.touched}">
+						<ion-label floating>Password</ion-label>
+						<ion-input formControlName="password" type="password" required show-password></ion-input>
+					</ion-item>
+          <ion-item color="danger" class="form-error" *ngIf="registerForm.controls.password.hasError('required') && registerForm.controls.password.touched">
+            <p>Password harus diisi</p>
+          </ion-item>
+					<ion-item class="cream-background" [ngClass]="{'error-border':!registerForm.controls.confirm_password.valid && registerForm.controls.confirm_password.touched}">
+						<ion-label floating>Konfirmasi Password</ion-label>
+						<ion-input formControlName="confirm_password" type="password" required show-password></ion-input>
+					</ion-item>
+          <ion-item color="danger" class="form-error" *ngIf="registerForm.controls.confirm_password.hasError('required') && registerForm.controls.confirm_password.touched">
+            <p>Konfirmasi Password harus diisi</p>
+          </ion-item>
+          <ion-item color="danger" *ngIf="registerForm.controls.confirm_password.touched && registerForm.hasError('mismatchedPasswords') && registerForm.controls.password.valid">
+            <ion-label no-margin stacked>Passwords do not match</ion-label>
+          </ion-item>
+				</ion-list>
+			</ion-col>
+		</ion-row>
+		<ion-row>
+			<ion-col>
+				<button ion-button color="primary" round full type="submit" [disabled]="!registerForm.valid" >REGISTER</button>
+			</ion-col>
+		</ion-row>
+	</form>
 
 </ion-content>

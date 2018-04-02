@@ -40,9 +40,15 @@ export class MyApp {
 //		console.log("splash screen hide");
 //      }, 3000);
       
+      this.isLoggedIn = localStorage.getItem("isLoggedIn");
+      
       this.events.subscribe('auth:logout', (token: any) => {
         this.logout(token);
       });
+      
+      this.events.subscribe("auth:setLogin", (params: any) => {
+        this.setLogin(params);
+      })
       
       this.events.subscribe('auth:checkLogin', () => {
         this.checkLogin();
@@ -52,9 +58,8 @@ export class MyApp {
         this.forceLogout(message);
       });
       
-      this.isLoggedIn = localStorage.getItem("isLoggedIn");
-      
-      if (this.isLoggedIn == true) {
+      console.log(this.isLoggedIn);
+      if (this.isLoggedIn != "1") {
         this.rootPage = "TabsPage";
         this.nav.setRoot("TabsPage");
       } else {
@@ -67,7 +72,8 @@ export class MyApp {
   ngAfterViewInit() {
     this.platform.ready().then(() => {
       this.deeplinks.routeWithNavController(this.nav, {
-        '/register-relation': "RegisterRelationPage"
+        '/register-relation': "RegisterRelationPage",
+        '/reset-password': "ResetPasswordPage"
       }).subscribe((match) => {
           // match.$route - the route we matched, which is the matched entry from the arguments to route()
           // match.$args - the args passed in the link
@@ -84,9 +90,17 @@ export class MyApp {
    * Check login
    */
   checkLogin() {
-    if (this.isLoggedIn == null) {
+    if (localStorage.getItem("isLoggedIn") != "1") {
       this.forceLogout("Session expired, Please Login again.");
     }
+  }
+  
+  setLogin(params: any) {
+    let result = params.user;
+    localStorage.setItem("isLoggedIn", "1");
+    localStorage.setItem("user", JSON.stringify(result.data));
+    localStorage.setItem("token", result.data.token);
+    localStorage.setItem("user_id", result.data.id);
   }
   
   /**

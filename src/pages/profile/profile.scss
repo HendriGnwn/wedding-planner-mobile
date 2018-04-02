@@ -21,7 +21,10 @@ page-profile {
     background-repeat: no-repeat;
     background-position: 50% 50%;
     .card-subtitle {
-      margin-top: 22rem;
+      margin-top: 21rem;
+      .icon-upload {
+        font-size: 3rem;
+      }
     }
   }
   .content {

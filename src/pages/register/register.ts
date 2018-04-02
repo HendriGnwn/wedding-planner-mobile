@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {IonicPage, NavController, NavParams, LoadingController, ToastController} from 'ionic-angular';
+import {IonicPage, NavController, NavParams, Events} from 'ionic-angular';
 import {Device} from '@ionic-native/device';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import {ApiProvider} from '../../providers/api/api';
@@ -37,10 +37,9 @@ export class RegisterPage {
   constructor(
 		public navCtrl: NavController,
 		public api: ApiProvider,
-		public loadingCtrl: LoadingController,
 		public navParams: NavParams,
-		private toastCtrl: ToastController,
 		private device: Device,
+		private events: Events,
     private formBuilder: FormBuilder,
     private helpers: HelpersProvider) {
     
@@ -72,10 +71,7 @@ export class RegisterPage {
   
   onSubmit(value:any) : void {
     if (this.registerForm.valid) {
-      this.loading = this.loadingCtrl.create({
-        content: "Please Wait ..."
-      });
-      this.loading.present();
+      this.loading = this.helpers.loadingPresent("Please Wait ...");
       
       let params = {
         "name": value.name,
@@ -99,18 +95,12 @@ export class RegisterPage {
           
           let result = JSON.parse(data.data);
           
-          localStorage.setItem("isLoggedIn", "1");
-          localStorage.setItem("user", JSON.stringify(result.data));
-          localStorage.setItem("token", result.data.token);
-          localStorage.setItem("user_id", result.data.id);
+          this.events.publish("auth:setLogin", {
+            user: result
+          });
           
           this.loading.dismiss();
-          this.toastCtrl.create({
-            message: result.message,
-            duration: 3000,
-            position: 'buttom',
-            dismissOnPageChange: false,
-          }).present();
+          this.helpers.toastPresent(result.message);
           
           this.navCtrl.setRoot("TabsPage");
         })
@@ -120,12 +110,7 @@ export class RegisterPage {
           
           let result = JSON.parse(error.error);
           
-          this.toastCtrl.create({
-            message: result.message,
-            duration: 3000,
-            position: 'buttom',
-            dismissOnPageChange: false,
-          }).present();
+          this.helpers.toastPresent(result.message);
         });
     }
   }

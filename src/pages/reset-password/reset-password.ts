@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Events } from 'ionic-angular';
-import {Device} from '@ionic-native/device';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import {ApiProvider} from '../../providers/api/api';
 import {HelpersProvider} from '../../providers/helpers/helpers';
 
 /**
- * Generated class for the RegisterRelationPage page.
+ * Generated class for the ResetPasswordPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -14,18 +13,15 @@ import {HelpersProvider} from '../../providers/helpers/helpers';
 
 @IonicPage()
 @Component({
-  selector: 'page-register-relation',
-  templateUrl: 'register-relation.html',
+  selector: 'page-reset-password',
+  templateUrl: 'reset-password.html',
 })
-export class RegisterRelationPage {
-  
+export class ResetPasswordPage {
+
   loading: any;
   requestToken: any;
   
-  registerForm: FormGroup;
-  name: AbstractControl;
-  email: AbstractControl;
-  phone: AbstractControl;
+  forgotForm: FormGroup;
   password: AbstractControl;
   confirm_password: AbstractControl;
 
@@ -34,8 +30,6 @@ export class RegisterRelationPage {
     public navParams: NavParams,
     public apiProvider: ApiProvider,
     public helpersProvider: HelpersProvider,
-    public device: Device,
-    public events: Events,
     public formBuilder: FormBuilder
   ) {
     this.requestToken = this.navParams.get('token');
@@ -49,55 +43,42 @@ export class RegisterRelationPage {
       }, 3000);
     }
     
-    this.registerForm = this.formBuilder.group({
-      //email: ['', Validators.compose([Validators.required])],
-      name: ['', Validators.compose([Validators.required])],
-      phone: ['', Validators.compose([Validators.required])],
+    this.forgotForm = this.formBuilder.group({
       password: ['', Validators.compose([Validators.required])],
       confirm_password: ['', Validators.compose([Validators.required])],
     }, {validator: this.matchingPasswords('password', 'confirm_password')});
+    this.loading.dismiss();
   }
-  
+
   onSubmit(value:any) : void {
-    if (this.registerForm.valid) {
+    if (this.forgotForm.valid) {
       this.loading = this.helpersProvider.loadingPresent("Please Wait ...");
       
       let params = {
-        "name": value.name,
-        "phone": value.phone,
         "password": value.password,
-        "confirm_password": value.confirm_password,
-        "registered_device_number": this.device.uuid,
-        "firebase_token": "xxx"
+        "confirm_password": value.confirm_password
       };
       
-      this.apiProvider.post('auth/register-invitation', params, {'Content-Type':'application/json'})
+      console.log(params);
+      
+      this.apiProvider.post('auth/reset-password?confirm=' + this.requestToken, params, {'Content-Type':'application/json'})
         .then((data) => {
-          
           let result = JSON.parse(data.data);
-          
-          this.events.publish("auth:setLogin", {
-            user: result
-          });
-          
           this.loading.dismiss();
           this.helpersProvider.toastPresent(result.message);
-          
-          this.navCtrl.setRoot("TabsPage");
+          this.navCtrl.setRoot("LoginPage");
         })
         .catch((error) => {
           this.loading.dismiss();
           console.log(error);
-          
           let result = JSON.parse(error.error);
-          
           this.helpersProvider.toastPresent(result.message);
         });
     }
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad RegisterRelationPage');
+    console.log('ionViewDidLoad ResetPasswordPage');
   }
   
   matchingPasswords(passwordKey: string, confirmPasswordKey: string) {
@@ -113,4 +94,5 @@ export class RegisterRelationPage {
       }
     }
   }
+
 }

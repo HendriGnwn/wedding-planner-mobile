@@ -22,10 +22,10 @@
     <ion-row>
       <ion-col col-12 class="grid-col" *ngFor="let item of costs;">
         <ion-row  class="grid-row-content">
-          <ion-col col-8>
+          <ion-col col-7>
             {{ item.content.name }}
           </ion-col>
-          <ion-col col-4 text-right>
+          <ion-col col-5 text-right>
             IDR {{ item.value | number : fractionSize }}
           </ion-col>
         </ion-row>

@@ -8,6 +8,11 @@
 
   <ion-navbar color="primary">
     <ion-title text-center>{{ pageTitle }}</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only color="white" (click)="storeData()">
+        <ion-icon name="camera"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
@@ -16,12 +21,7 @@
   <ion-refresher (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
-  <ion-card (click)="storeData()">
-    <div class="card-title">
-      <ion-icon name="camera"></ion-icon>
-    </div>
-  </ion-card>
-  <ion-card *ngFor="let item of details" (click)="pictureDialog(item)">
+  <ion-card *ngFor="let item of details" (click)="pictureDialog(item)" (press)="pressToDetail($event, item)">
     <img src="{{ item.value != null ? fileThumbUrl + item.value : defaultFileThumbUrl }}"/>
   </ion-card>
 </ion-content>

@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {IonicPage, NavController, NavParams, ViewController} from 'ionic-angular';
+import {IonicPage, NavController, NavParams, ViewController, Events} from 'ionic-angular';
 import {Device} from '@ionic-native/device';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import {ApiProvider} from '../../providers/api/api';
@@ -35,6 +35,7 @@ export class LoginPage {
 		private viewCtrl: ViewController,
     private helpersProvider: HelpersProvider,
 		private device: Device,
+		private events: Events,
     private formBuilder: FormBuilder) {
     
     this.loginForm = this.formBuilder.group({
@@ -57,12 +58,10 @@ export class LoginPage {
           
           let result = JSON.parse(data.data);
           
-          localStorage.setItem("isLoggedIn", "1");
-          localStorage.setItem("user", JSON.stringify(result.data));
-          localStorage.setItem("token", result.data.token);
-          localStorage.setItem("user_id", result.data.id);
-          
-          console.log(localStorage.getItem("token"));
+          this.events.publish("auth:setLogin", {
+            user: result,
+            isLoggedIn: true
+          });
           
           this.loading.dismiss();
           this.helpersProvider.toastPresent(result.message);

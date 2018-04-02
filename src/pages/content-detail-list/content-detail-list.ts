@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Events, ActionSheetController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Events, ActionSheetController, Platform, AlertController } from 'ionic-angular';
 import { HelpersProvider } from '../../providers/helpers/helpers';
 import { ApiProvider } from '../../providers/api/api';
 import { File } from '@ionic-native/file';
@@ -49,6 +49,8 @@ export class ContentDetailListPage {
     public apiProvider: ApiProvider,
     public helpersProvider: HelpersProvider,
     public actionSheetCtrl: ActionSheetController,
+    public platform: Platform, 
+    public alertCtrl: AlertController, 
     public file: File,
     private camera: Camera,
   ) {
@@ -119,6 +121,73 @@ export class ContentDetailListPage {
         console.log(err);
      });
     
+  }
+  
+  pressToDetail(event, item) {
+    let actionSheet = this.actionSheetCtrl.create({
+      title: item.name,
+      buttons: [
+        {
+          text: 'Delete',
+          role: 'destructive',
+          icon: !this.platform.is('ios') ? 'trash' : null,
+          handler: () => {
+            
+            let alert = this.alertCtrl.create({
+              title: 'Anda yakin ingin menghapus data ini?',
+              buttons: [
+                {
+                  text: 'Tidak',
+                  handler: () => {
+                    console.log('Disagree clicked');
+                  }
+                },
+                {
+                  text: 'Ya',
+                  handler: () => {
+                    this.deletePhoto(item.id);
+                  }
+                }
+              ]
+            });
+            alert.present();
+          }
+        },,{
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        }
+      ]
+    });
+    actionSheet.present();
+  }
+  
+  deletePhoto(id) {
+    this.apiProvider.delete("content-detail-lists/delete/" + id, {}, {"Content-Type": "application/json", "Authorization": "Bearer " + localStorage.getItem("token")})
+        .then((data) => {
+          
+          let result = JSON.parse(data.data);
+          console.log(result);
+          this.loading.dismiss();
+          
+          this.details = result.data.content_detail_list;
+          
+          this.helpersProvider.toastPresent(result.message);
+          
+        })
+        .catch((error) => {
+          let result = JSON.parse(error.data);
+          this.details = [];
+          this.loading.dismiss();
+          if (result.status == '401') {
+            this.events.publish("auth:forceLogout", result.message);
+          }
+          
+          this.helpersProvider.toastPresent(result.message);
+        });
+      
   }
   
   pictureDialog(data) {
