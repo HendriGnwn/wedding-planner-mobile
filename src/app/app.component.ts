@@ -59,13 +59,6 @@ export class MyApp {
       });
       
       console.log(this.isLoggedIn);
-      if (this.isLoggedIn != "1") {
-        this.rootPage = "TabsPage";
-        this.nav.setRoot("TabsPage");
-      } else {
-        this.rootPage = "WelcomePage";
-        this.nav.setRoot("WelcomePage");
-      }
     });
   }
   
@@ -82,6 +75,13 @@ export class MyApp {
         }, (nomatch) => {
           // nomatch.$link - the full link data
           console.error('Got a deeplink that didn\'t match', nomatch);
+          if (this.isLoggedIn != "1") {
+            this.rootPage = "TabsPage";
+            this.nav.setRoot("TabsPage");
+          } else {
+            this.rootPage = "WelcomePage";
+            this.nav.setRoot("WelcomePage");
+          }
         });
     });
   }

@@ -56,6 +56,8 @@ export class RegisterRelationPage {
       password: ['', Validators.compose([Validators.required])],
       confirm_password: ['', Validators.compose([Validators.required])],
     }, {validator: this.matchingPasswords('password', 'confirm_password')});
+    
+    this.loading.dismiss();
   }
   
   onSubmit(value:any) : void {
@@ -68,7 +70,8 @@ export class RegisterRelationPage {
         "password": value.password,
         "confirm_password": value.confirm_password,
         "registered_device_number": this.device.uuid,
-        "firebase_token": "xxx"
+        "firebase_token": "xxx",
+        "registered_token": this.requestToken
       };
       
       this.apiProvider.post('auth/register-invitation', params, {'Content-Type':'application/json'})

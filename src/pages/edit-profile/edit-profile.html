@@ -31,16 +31,6 @@
               Email harus diisi
             </p>
           </ion-item>
-          <ion-item [ngClass]="{'error-border':!editProfileForm.controls.gender.valid && editProfileForm.controls.gender.touched}">
-						<ion-label floating>Jenis kelamin</ion-label>
-            <ion-select formControlName="gender" required>
-              <ion-option value="1">Laki-laki</ion-option>
-              <ion-option value="0">Perempuan</ion-option>
-            </ion-select>
-            <p color="danger" class="form-error" *ngIf="editProfileForm.controls.gender.hasError('required') && editProfileForm.controls.gender.touched">
-              Email harus diisi
-            </p>
-					</ion-item>
           <ion-item [ngClass]="{'error-border':!editProfileForm.controls.phone.valid && editProfileForm.controls.phone.touched}">
 						<ion-label floating>No Handphone</ion-label>
             <ion-input formControlName="phone" type="number" required ></ion-input>

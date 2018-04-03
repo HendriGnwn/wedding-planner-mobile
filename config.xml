@@ -3,7 +3,7 @@
     <name>Agenda Nikah</name>
     <description>Rencanakan Hari Bahagia Anda bersama kami.</description>
     <author email="hendri.gnw@gmail.com" href="http://hendrign.id/">Hendri Gunawan</author>
-    <content src="index.html" />
+    <content original-src="index.html" src="http://10.0.0.171:8100" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />

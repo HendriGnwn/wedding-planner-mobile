@@ -22,7 +22,6 @@ export class EditProfilePage {
   editProfileForm: FormGroup;
   name: AbstractControl;
   email: AbstractControl;
-  gender: AbstractControl;
   phone: AbstractControl;
   wedding_day: AbstractControl;
   venue: AbstractControl;
@@ -31,7 +30,6 @@ export class EditProfilePage {
   userEmail: string = '';
   userName: string = '';
   userPhone: string = '';
-  userGender: any = '';
   userWeddingDay: any = '';
   userVenue: any = '';
   weddingDayMin: any;
@@ -54,7 +52,6 @@ export class EditProfilePage {
       email: [this.userEmail, Validators.compose([Validators.required, Validators.email])],
       name: [this.userName, Validators.compose([Validators.required])],
       phone: [this.userPhone, Validators.compose([Validators.required])],
-      gender: [this.userGender, Validators.compose([Validators.required])],
       wedding_day: [this.userWeddingDay, Validators.compose([Validators.required])],
       venue: [this.userVenue, Validators.compose([Validators.required])],
     });
@@ -74,7 +71,6 @@ export class EditProfilePage {
         this.user = JSON.parse(data.data).data;
         this.userEmail = this.user.email;
         this.userName = this.user.name;
-        this.userGender = this.user.gender;
         this.userPhone = this.user.phone;
         this.userWeddingDay = this.user.relation.wedding_day;
         this.userVenue = this.user.relation.venue;
@@ -87,7 +83,6 @@ export class EditProfilePage {
           email: [this.userEmail, Validators.compose([Validators.required, Validators.email])],
           name: [this.userName, Validators.compose([Validators.required])],
           phone: [this.userPhone, Validators.compose([Validators.required])],
-          gender: [this.userGender, Validators.compose([Validators.required])],
           wedding_day: [this.userWeddingDay, Validators.compose([Validators.required])],
           venue: [this.userVenue, Validators.compose([Validators.required])],
         });
@@ -111,7 +106,6 @@ export class EditProfilePage {
       let params = {
         "name": value.name,
         "email": value.email,
-        "gender": value.gender,
         "phone": value.phone,
         "wedding_day": value.wedding_day,
         "venue": value.venue

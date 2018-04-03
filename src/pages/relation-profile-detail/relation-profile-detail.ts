@@ -51,7 +51,8 @@ export class RelationProfileDetailPage {
         this.user = JSON.parse(data.data).data;
         this.relation = this.user.relation.partner;
         this.userEmail = this.relation.email;
-        if (this.relation.id == null) {
+        console.log(this.relation);
+        if (this.relation.name == null) {
           this.isFormRelation = true;
           this.isRelationDetail = false;
         } else {
