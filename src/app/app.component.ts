@@ -59,6 +59,7 @@ export class MyApp {
       });
       
       console.log(this.isLoggedIn);
+      this.rootPage = "WelcomePage";
     });
   }
   

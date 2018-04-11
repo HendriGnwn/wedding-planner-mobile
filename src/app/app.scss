@@ -42,3 +42,10 @@
     color: color($colors, danger)
   }
 }
+
+.tabs-ios {
+    .tabbar {
+      padding-bottom: 0.8rem;
+      padding-top: 0.3rem;
+    }
+  }
