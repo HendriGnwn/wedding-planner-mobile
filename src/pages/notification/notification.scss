@@ -13,7 +13,10 @@ page-notification {
       width: 100%;
       font-weight: bold;
       color: color($colors, white);
+      font-family: "Centaur";
       text-transform: uppercase;
+      -webkit-text-shadow: 2px 2px #999;
+      text-shadow: 2px 2px #999;
     }
 
     .card-subtitle {
@@ -22,7 +25,10 @@ page-notification {
       bottom: 12%;
       width: 100%;
       color: color($colors, white);
+      font-family: "Centaur";
       text-transform: uppercase;
+      -webkit-text-shadow: 2px 2px #999;
+      text-shadow: 2px 2px #999;
     }
 
   }

@@ -14,6 +14,9 @@ page-vendor {
       font-weight: bold;
       color: color($colors, white);
       text-transform: uppercase;
+      font-family: "Centaur";
+      -webkit-text-shadow: 2px 2px #999;
+      text-shadow: 2px 2px #999;
     }
 
     .card-subtitle {
@@ -22,7 +25,10 @@ page-vendor {
       bottom: 12%;
       width: 100%;
       color: color($colors, white);
+      font-family: "Centaur";
       text-transform: uppercase;
+      -webkit-text-shadow: 2px 2px #999;
+      text-shadow: 2px 2px #999;
     }
 
   }

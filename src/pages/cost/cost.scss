@@ -11,6 +11,8 @@ page-cost {
       border: 1px solid color($colors, secondary);
       background: color($colors, secondary);
       color: color($colors, primary);
+      font-family: "Centaur";
+      font-size: 1.3em;
       border-radius: 0.8rem;
       padding: 5px 10px;
       vertical-align: middle;
@@ -22,7 +24,8 @@ page-cost {
   ion-footer {
     padding: 0.8rem;
     padding: 0.8rem;
-    font-size: 1.2em;
+    font-size: 1.5em;
+    font-family: "Centaur";
     color: color($colors, primary);
     .grid-col {
       .grid-row-grand-cost {

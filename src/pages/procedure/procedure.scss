@@ -1,3 +1,19 @@
 page-procedure {
-  
+  .card {
+    border: 1px solid color($colors, primary);
+    border-radius: 2rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    color: color($colors,  primary);
+    font-family: "Centaur";
+    .card-title {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .card-subtitle {
+      font-size: 2rem;
+    }
+  }
 }

@@ -3,6 +3,8 @@ page-welcome {
     margin-top:3rem;
     font-size:4rem;
     font-family: 'Alex Brush', cursive;
+    font-weight: bold;
+    color: color($colors, primary);
   }
   .welcome-description {
     margin-top:2.5rem;

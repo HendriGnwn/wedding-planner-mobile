@@ -38,7 +38,7 @@ page-profile {
     margin-top: -20px;
     border-radius: 0.7rem;
     .counting-number {
-      font-size: 2.7rem;
+      font-size: 3rem;
       background: url("../assets/imgs/calendar_icon.png") no-repeat;
       background-size: 100% 100%;
       height: 6rem;
@@ -46,9 +46,11 @@ page-profile {
       justify-content:center;
       padding-top: 1rem;
       align-items:center;
+      font-family: "Centaur";
     }
     .counting-label {
-      font-size: 1.2rem;
+      font-size: 1.5rem;
+      font-family: "Centaur";
     }
   }
   
@@ -59,10 +61,11 @@ page-profile {
     border-radius: 0.7rem;
     .detail-title {
       font-size: 3.5rem;
-      font-family: 'Alex Brush', cursive !important;
+      font-family: 'Rochester', cursive !important;
     }
     .detail-subtitle {
-      font-size: 1.5rem;
+      font-size: 2rem;
+      font-family: "Centaur";
     }
   }
   
