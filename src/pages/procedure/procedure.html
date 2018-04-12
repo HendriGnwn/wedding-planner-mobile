@@ -15,13 +15,9 @@
 
 <ion-content>
   
-  <ion-card text-center>
-    <div class="card-title">RT/RW</div>
-    <div class="card-subtitle">Mengurus surat pengantar nikah untuk dibawa ke kelurahan</div>
-  </ion-card>
-  <ion-card text-center>
-    <div class="card-title">RT/RW</div>
-    <div class="card-subtitle">Mengurus surat pengantar nikah untuk dibawa ke kelurahan</div>
+  <ion-card text-center *ngFor="let item of procedures">
+    <div class="card-title">{{ item.name }}</div>
+    <div class="card-subtitle">{{ item.description }}</div>
   </ion-card>
 
 </ion-content>

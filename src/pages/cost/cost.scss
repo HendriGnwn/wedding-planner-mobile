@@ -6,19 +6,24 @@ page-cost {
   .item-md, .item-ios, .item-wp {
 	  padding-left: 0px;
 	}
-  .grid-col {
-    .grid-row-content {
-      border: 1px solid color($colors, secondary);
-      background: color($colors, secondary);
-      color: color($colors, primary);
-      font-family: "Centaur";
-      font-size: 1.3em;
-      border-radius: 0.8rem;
-      padding: 5px 10px;
-      vertical-align: middle;
-      margin-top: auto;
-      margin-bottom: auto;
-      display: table-flex;
+  .card {
+    border: 1px solid color($colors, secondary);
+    background: color($colors, secondary);
+    color: color($colors, primary);
+    border-radius: 0.8rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+    font-family: "Centaur";
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    .card-title {
+      font-size: 2.2rem;
+      margin-bottom: 0.5rem;
+    }
+    .card-subtitle {
+      font-size: 2rem;
     }
   }
   ion-footer {

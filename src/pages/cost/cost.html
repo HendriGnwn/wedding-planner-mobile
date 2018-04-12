@@ -19,18 +19,10 @@
 
 
 <ion-content>
-    <ion-row>
-      <ion-col col-12 class="grid-col" *ngFor="let item of costs;">
-        <ion-row  class="grid-row-content">
-          <ion-col col-7>
-            {{ item.content.name }}
-          </ion-col>
-          <ion-col col-5 text-right>
-            IDR {{ item.value | number : fractionSize }}
-          </ion-col>
-        </ion-row>
-      </ion-col>
-    </ion-row>
+    <ion-card text-center *ngFor="let item of costs;">
+      <div class="card-title">{{ item.content.name }}</div>
+      <div class="card-subtitle">IDR {{ item.value | number : fractionSize }}</div>
+    </ion-card>
 </ion-content>
 
 <ion-footer no-border transparent>

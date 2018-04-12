@@ -17,8 +17,8 @@ import {HelpersProvider} from '../../providers/helpers/helpers';
 })
 export class ProcedurePage {
   
-  procedureImgUrl : string = "http://agendanikah.com/dev/public/files/procedures/default.png";
-
+  procedures: any;
+  
   constructor(public navCtrl: NavController, public navParams: NavParams, public apiProvider: ApiProvider, public helpersProvider: HelpersProvider) {
     this.getProcedure();
   }
@@ -29,12 +29,12 @@ export class ProcedurePage {
           
           let result = JSON.parse(data.data);
           
-          this.procedureImgUrl = result.link + '/' + result.data.file;
+          this.procedures = result.data;
         })
         .catch((error) => {
           let result = JSON.parse(error.error);
           this.helpersProvider.toastPresent(result.message);
-          console.log(error);
+          this.procedures = [];
         });
   }
 
