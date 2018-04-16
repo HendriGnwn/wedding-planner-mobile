@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "587058412710",
+    "firebase_url": "https://agenda-nikah.firebaseio.com",
+    "project_id": "agenda-nikah",
+    "storage_bucket": "agenda-nikah.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:587058412710:android:84e35de1bf51d1aa",
+        "android_client_info": {
+          "package_name": "com.hendri.agendanikah"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "587058412710-pp398l3jprdr7kc6bsa21dpkn1ggrb7i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAhUBSusyxuj8mT0vGu9o5eqq_DQm7TAWs"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -5,6 +5,7 @@ import { ApiProvider } from '../../providers/api/api';
 import { File } from '@ionic-native/file';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 
+
 /**
  * Generated class for the ContentDetailListPage page.
  *
@@ -35,13 +36,14 @@ export class ContentDetailListPage {
     mediaType: this.camera.MediaType.PICTURE
   }
   openFileOptions: CameraOptions = {
+    allowEdit: true,
     quality: 70,
     destinationType: this.camera.DestinationType.DATA_URL,
     encodingType: this.camera.EncodingType.JPEG,
     mediaType: this.camera.MediaType.PICTURE,
     sourceType: this.camera.PictureSourceType.PHOTOLIBRARY
   };
-
+ 
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,

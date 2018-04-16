@@ -18,6 +18,7 @@ import { ApiProvider } from '../providers/api/api';
 import { MyApp } from './app.component';
 import { HelpersProvider } from '../providers/helpers/helpers';
 import { DatePicker } from '@ionic-native/date-picker';
+import { FCM } from '@ionic-native/fcm';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { DatePicker } from '@ionic-native/date-picker';
     Deeplinks,
     CallNumber,
     PhotoViewer,
-    InAppBrowser
+    InAppBrowser,
+    FCM
   ]
 })
 export class AppModule {}
