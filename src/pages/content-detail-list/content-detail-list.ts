@@ -30,10 +30,12 @@ export class ContentDetailListPage {
   defaultFileThumbUrl: string;
   dirs: any;
   cameraOptions: CameraOptions = {
+    allowEdit: true,
     quality: 70,
     destinationType: this.camera.DestinationType.DATA_URL,
     encodingType: this.camera.EncodingType.JPEG,
-    mediaType: this.camera.MediaType.PICTURE
+    mediaType: this.camera.MediaType.PICTURE,
+    sourceType: this.camera.PictureSourceType.CAMERA
   }
   openFileOptions: CameraOptions = {
     allowEdit: true,
@@ -84,44 +86,90 @@ export class ContentDetailListPage {
         });
   }
   
-  storeData() {
-    this.camera.getPicture(this.openFileOptions).then((imageData) => {
+  openActionSheet() {
+    let actionSheet = this.actionSheetCtrl.create({
+      title: "Upload File", 
+      buttons: [
+        {
+          text: 'Open Camera',
+          icon: !this.platform.is('ios') ? 'ios-camera' : null,
+          handler: () => {
+            this.storeFromCamera();
+          }
+        },{
+          text: 'Open File Manager',
+          icon: !this.platform.is('ios') ? 'ios-folder' : null,
+          handler: () => {
+            this.storeFromFile();
+          }
+        },{
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        }
+      ]
+    });
+    actionSheet.present();
+  }
+  
+  storeFromCamera() {
+    this.camera.getPicture(this.cameraOptions).then((imageData) => {
       // imageData is either a base64 encoded string or a file URI
       // If it's base64:
       
-      this.loading = this.helpersProvider.loadingPresent("");
-      
-      let params = {
-        "photo_base64": 'data:image/jpeg;base64,' + imageData
-      }
-      
-      this.apiProvider.post("content-detail-lists/store/" + this.contentDetail.id, params, {"Content-Type": "application/json", "Authorization": "Bearer " + localStorage.getItem("token")})
-        .then((data) => {
-          
-          let result = JSON.parse(data.data);
-          console.log(result);
-          this.loading.dismiss();
-          
-          this.details = result.data.content_detail_list;
-          
-          this.helpersProvider.toastPresent(result.message);
-          
-        })
-        .catch((error) => {
-          let result = JSON.parse(error.data);
-          this.details = [];
-          this.loading.dismiss();
-          if (result.status == '401') {
-            this.events.publish("auth:forceLogout", result.message);
-          }
-          
-          this.helpersProvider.toastPresent(result.message);
-        });
+      this.storeData('data:image/jpeg;base64,' + imageData);
       
      }, (err) => {
       // Handle error
         console.log(err);
      });
+  }
+  
+  storeFromFile() {
+    this.camera.getPicture(this.openFileOptions).then((imageData) => {
+      // imageData is either a base64 encoded string or a file URI
+      // If it's base64:
+      
+      this.storeData('data:image/jpeg;base64,' + imageData);
+      
+     }, (err) => {
+      // Handle error
+        console.log(err);
+     });
+  }
+  
+  storeData(imageData: string) {
+    this.loading = this.helpersProvider.loadingPresent("");
+      
+    let params = {
+      "photo_base64": imageData
+    }
+
+    this.apiProvider.post("content-detail-lists/store/" + this.contentDetail.id, params, {"Content-Type": "application/json", "Authorization": "Bearer " + localStorage.getItem("token")})
+      .then((data) => {
+
+        let result = JSON.parse(data.data);
+        console.log(result);
+        this.loading.dismiss();
+
+        this.details = result.data.content_detail_list;
+
+        this.helpersProvider.toastPresent(result.message);
+
+      })
+      .catch((error) => {
+        let result = JSON.parse(error.data);
+        this.details = [];
+        this.loading.dismiss();
+        if (result.status == '401') {
+          this.events.publish("auth:forceLogout", result.message);
+        }
+
+        this.helpersProvider.toastPresent(result.message);
+      });
+    
     
   }
   

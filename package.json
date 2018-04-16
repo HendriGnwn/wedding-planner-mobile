@@ -21,9 +21,11 @@
     "@angular/http": "5.0.3",
     "@angular/platform-browser": "5.0.3",
     "@angular/platform-browser-dynamic": "5.0.3",
+    "@ionic-native/base64": "^4.7.0",
     "@ionic-native/call-number": "^4.6.0",
     "@ionic-native/camera": "^4.6.0",
     "@ionic-native/core": "4.4.0",
+    "@ionic-native/crop": "^4.7.0",
     "@ionic-native/date-picker": "^4.6.0",
     "@ionic-native/deeplinks": "^4.6.0",
     "@ionic-native/device": "^4.6.0",
@@ -38,6 +40,7 @@
     "@ionic/pro": "1.0.17",
     "@ionic/storage": "2.1.3",
     "call-number": "^1.0.1",
+    "com-badrit-base64": "^0.2.0",
     "com-sarriaroman-photoviewer": "^1.1.16",
     "cordova-android": "7.0.0",
     "cordova-browser": "5.0.3",
@@ -100,7 +103,8 @@
       "mx.ferreyra.callnumber": {},
       "com-sarriaroman-photoviewer": {},
       "cordova-plugin-inappbrowser": {},
-      "call-number": {}
+      "call-number": {},
+      "com-badrit-base64": {}
     },
     "platforms": [
       "browser",

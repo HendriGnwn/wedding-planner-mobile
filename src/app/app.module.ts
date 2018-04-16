@@ -11,14 +11,11 @@ import { Deeplinks } from '@ionic-native/deeplinks';
 import { CallNumber } from '@ionic-native/call-number';
 import { PhotoViewer } from '@ionic-native/photo-viewer';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
-
-
 import { ApiProvider } from '../providers/api/api';
-
 import { MyApp } from './app.component';
 import { HelpersProvider } from '../providers/helpers/helpers';
 import { DatePicker } from '@ionic-native/date-picker';
-import { FCM } from '@ionic-native/fcm';
+import { Base64 } from '@ionic-native/base64';
 
 @NgModule({
   declarations: [
@@ -49,7 +46,7 @@ import { FCM } from '@ionic-native/fcm';
     CallNumber,
     PhotoViewer,
     InAppBrowser,
-    FCM
+    Base64
   ]
 })
 export class AppModule {}

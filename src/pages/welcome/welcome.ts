@@ -3,7 +3,6 @@ import { Platform } from 'ionic-angular';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { ApiProvider } from '../../providers/api/api';
-import { FCM } from '@ionic-native/fcm';
 
 /**
  * Generated class for the WelcomePage page.
@@ -22,7 +21,7 @@ export class WelcomePage {
   isLoggedIn: any;
   public result: any = [{name:''}];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public api: ApiProvider, platform: Platform, public fcm: FCM ) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public api: ApiProvider, platform: Platform) {
     
     this.isLoggedIn = localStorage.getItem("isLoggedIn");
 	  
@@ -31,13 +30,6 @@ export class WelcomePage {
         this.navCtrl.setRoot("TabsPage");
       }
     });
-    
-//    this.fcm.getToken().then(token => {
-//      console.log(token);
-//      // Your best bet is to here store the token on the user's profile on the
-//      // Firebase database, so that when you want to send notifications to this 
-//      // specific user you can do it from Cloud Functions.
-//    });
     
   }
   

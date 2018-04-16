@@ -4,6 +4,7 @@ import { File } from '@ionic-native/file';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { ApiProvider } from '../../providers/api/api';
 import { HelpersProvider } from '../../providers/helpers/helpers';
+import { Base64 } from '@ionic-native/base64';
 
 /**
  * Generated class for the ProfilePage page.
@@ -28,18 +29,15 @@ export class ProfilePage {
   defaultPhoto: any = "https://static.pexels.com/photos/256737/pexels-photo-256737.jpeg";
   photo: any = this.defaultPhoto;
   dirs: any;
-  cameraOptions: CameraOptions = {
-    quality: 100,
-    destinationType: this.camera.DestinationType.DATA_URL,
-    encodingType: this.camera.EncodingType.JPEG,
-    mediaType: this.camera.MediaType.PICTURE
-  }
   openFileOptions: CameraOptions = {
+    allowEdit: true,
     quality: 100,
     destinationType: this.camera.DestinationType.DATA_URL,
     encodingType: this.camera.EncodingType.JPEG,
     mediaType: this.camera.MediaType.PICTURE,
-    sourceType: this.camera.PictureSourceType.PHOTOLIBRARY
+    sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+    targetWidth: 780,
+    targetHeight: 560,
   };
   photoUrl: any;
   backgroundPhoto: any;
@@ -60,7 +58,8 @@ export class ProfilePage {
     public platform: Platform,
     public alertCtrl: AlertController,
     public events: Events,
-    public actionSheetCtrl: ActionSheetController
+    public actionSheetCtrl: ActionSheetController,
+    public base64: Base64
   ) {
     this.events.publish("auth:checkLogin");
     this.photoUrl = this.helpersProvider.getBaseUrl() + "files/user-relations/";

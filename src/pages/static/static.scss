@@ -8,10 +8,14 @@ page-static {
     margin-top: 0.5rem;
   }
   .page-content {
+    text-align: center;
+    font-family: "Centaur";
     p {
       line-height: 3.2rem;
-      font-size: 1.6rem;
-      text-align: justify;
+      font-size: 2rem;
+    }
+    h2, h3, h4 {
+      font-weight: bold;
     }
   }
   
