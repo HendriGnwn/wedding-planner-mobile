@@ -1,11 +1,11 @@
 import { Component, ViewChild } from '@angular/core';
-import { Platform, Events, ToastController, Nav, LoadingController } from 'ionic-angular';
+import { Platform, Events, ToastController, Nav, LoadingController, AlertController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import {ApiProvider} from '../providers/api/api';
 import { Deeplinks } from '@ionic-native/deeplinks';
-
 import { HelpersProvider } from '../providers/helpers/helpers';
+import { FCM } from '@ionic-native/fcm';
 
 @Component({
   templateUrl: 'app.html'
@@ -27,6 +27,8 @@ export class MyApp {
     public loadingCtrl: LoadingController,
     public deeplinks: Deeplinks,
     public helpers: HelpersProvider,
+    public alertCtrl: AlertController,
+    public fcm: FCM
     ) {
     
     platform.ready().then(() => {
@@ -60,7 +62,28 @@ export class MyApp {
       
       console.log(this.isLoggedIn);
       this.rootPage = "WelcomePage";
+      
+      this.pushSetup();
     });
+  }
+  
+  pushSetup() {
+    //Notifications
+    this.fcm.subscribeToTopic('all');
+    this.fcm.getToken().then(token=>{
+     console.log(token);
+    });
+    this.fcm.onNotification().subscribe(data=>{
+        if(data.wasTapped){
+          console.log("Received in background");
+        } else {
+          console.log("Received in foreground");
+        };
+    });
+    this.fcm.onTokenRefresh().subscribe(token=>{
+        console.log(token);
+      });
+
   }
   
   ngAfterViewInit() {
