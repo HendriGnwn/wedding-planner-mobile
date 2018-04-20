@@ -46,14 +46,14 @@ export class LoginPage {
     if (localStorage.getItem("isLoggedIn") == "1") {
       this.navCtrl.setRoot("TabsPage");
     }
-    
+    console.log(localStorage.getItem("firebaseToken"));
 	}
   
   onSubmit(value:any) : void {
     if (this.loginForm.valid) {
       this.loading = this.helpersProvider.loadingPresent("Authenticating ...");
       
-      this.api.post('auth/login', {"email": value.email, "password": value.password, "firebase_token":"xxx", "device_number": this.device.uuid}, {'Content-Type':'application/json'})
+      this.api.post('auth/login', {"email": value.email, "password": value.password, "firebase_token": localStorage.getItem("firebaseToken"), "device_number": this.device.uuid}, {'Content-Type':'application/json'})
         .then((data) => {
           
           let result = JSON.parse(data.data);

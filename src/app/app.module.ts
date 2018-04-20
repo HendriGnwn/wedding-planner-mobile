@@ -16,7 +16,7 @@ import { MyApp } from './app.component';
 import { HelpersProvider } from '../providers/helpers/helpers';
 import { DatePicker } from '@ionic-native/date-picker';
 import { Base64 } from '@ionic-native/base64';
-import { FCM } from '@ionic-native/fcm';
+import { OneSignal } from '@ionic-native/onesignal';
 
 @NgModule({
   declarations: [
@@ -48,7 +48,7 @@ import { FCM } from '@ionic-native/fcm';
     PhotoViewer,
     InAppBrowser,
     Base64,
-    FCM
+    OneSignal
   ]
 })
 export class AppModule {}

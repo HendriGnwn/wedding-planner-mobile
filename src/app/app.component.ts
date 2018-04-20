@@ -5,7 +5,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import {ApiProvider} from '../providers/api/api';
 import { Deeplinks } from '@ionic-native/deeplinks';
 import { HelpersProvider } from '../providers/helpers/helpers';
-import { FCM } from '@ionic-native/fcm';
+import { OneSignal } from '@ionic-native/onesignal';
 
 @Component({
   templateUrl: 'app.html'
@@ -28,7 +28,7 @@ export class MyApp {
     public deeplinks: Deeplinks,
     public helpers: HelpersProvider,
     public alertCtrl: AlertController,
-    public fcm: FCM
+    public oneSignal: OneSignal
     ) {
     
     platform.ready().then(() => {
@@ -63,32 +63,37 @@ export class MyApp {
       console.log(this.isLoggedIn);
       this.rootPage = "WelcomePage";
       
-      this.pushSetup();
+      this.oneSignalSetup();
     });
   }
   
-  pushSetup() {
-    //Notifications
-    this.fcm.subscribeToTopic('all');
-    this.fcm.getToken().then(token=>{
-     console.log(token);
+  oneSignalSetup() {
+    this.oneSignal.startInit('c054887d-802a-4395-9603-51e82b790459', '587058412710');
+
+    this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.InAppAlert);
+
+    this.oneSignal.handleNotificationReceived().subscribe(() => {
+     // do something when notification is received
+      console.log('handle notification receive');
     });
-    this.fcm.onNotification().subscribe(data=>{
-        if(data.wasTapped){
-          console.log("Received in background");
-        } else {
-          console.log("Received in foreground");
-        };
+
+    this.oneSignal.handleNotificationOpened().subscribe(() => {
+      // do something when a notification is opened
+      console.log('handle notification opened');
     });
-    this.fcm.onTokenRefresh().subscribe(token=>{
-        console.log(token);
-      });
+    
+    this.oneSignal.getIds().then((data) => {
+      localStorage.setItem("firebaseToken", data.pushToken);
+    });
+
+    this.oneSignal.endInit();
 
   }
   
   ngAfterViewInit() {
     this.platform.ready().then(() => {
       this.deeplinks.routeWithNavController(this.nav, {
+        '/': 'WelcomePage',
         '/register-relation': "RegisterRelationPage",
         '/reset-password': "ResetPasswordPage"
       }).subscribe((match) => {
