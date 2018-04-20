@@ -52,8 +52,16 @@ export class LoginPage {
   onSubmit(value:any) : void {
     if (this.loginForm.valid) {
       this.loading = this.helpersProvider.loadingPresent("Authenticating ...");
+
+      let params = {
+        "email": value.email, 
+        "password": value.password, 
+        "firebase_token": localStorage.getItem("firebaseToken"), 
+        "user_id_token": localStorage.getItem("userIdToken"), 
+        "device_number": this.device.uuid
+      };
       
-      this.api.post('auth/login', {"email": value.email, "password": value.password, "firebase_token": localStorage.getItem("firebaseToken"), "device_number": this.device.uuid}, {'Content-Type':'application/json'})
+      this.api.post('auth/login', params, {'Content-Type':'application/json'})
         .then((data) => {
           
           let result = JSON.parse(data.data);

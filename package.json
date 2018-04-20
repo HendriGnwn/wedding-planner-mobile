@@ -42,7 +42,7 @@
     "call-number": "^1.0.1",
     "com-badrit-base64": "^0.2.0",
     "com-sarriaroman-photoviewer": "^1.1.16",
-    "cordova-android": "6.3.0",
+    "cordova-android": "6.4.0",
     "cordova-ios": "4.5.4",
     "cordova-plugin-advanced-http": "^1.11.1",
     "cordova-plugin-camera": "^4.0.3",

@@ -47,7 +47,7 @@ export class MyApp {
       this.events.subscribe('auth:logout', (token: any) => {
         this.logout(token);
       });
-      
+
       this.events.subscribe("auth:setLogin", (params: any) => {
         this.setLogin(params);
       })
@@ -70,24 +70,29 @@ export class MyApp {
   oneSignalSetup() {
     this.oneSignal.startInit('c054887d-802a-4395-9603-51e82b790459', '587058412710');
 
-    this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.InAppAlert);
+    this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.Notification);
 
-    this.oneSignal.handleNotificationReceived().subscribe(() => {
+    this.oneSignal.handleNotificationReceived().subscribe((data) => {
      // do something when notification is received
-      console.log('handle notification receive');
+      console.log('handle notification receive', data);
     });
 
-    this.oneSignal.handleNotificationOpened().subscribe(() => {
+    this.oneSignal.handleNotificationOpened().subscribe((data) => {
       // do something when a notification is opened
-      console.log('handle notification opened');
+      console.log('handle notification opened', data);
+      this.nav.push("NotificationPage");
     });
     
     this.oneSignal.getIds().then((data) => {
       localStorage.setItem("firebaseToken", data.pushToken);
+      localStorage.setItem("userIdToken", data.userId);
+    });
+
+    this.oneSignal.getIds().then(data => {
+      console.log(data);
     });
 
     this.oneSignal.endInit();
-
   }
   
   ngAfterViewInit() {
