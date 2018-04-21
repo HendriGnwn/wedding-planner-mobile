@@ -84,8 +84,16 @@ export class MyApp {
     });
     
     this.oneSignal.getIds().then((data) => {
-      localStorage.setItem("firebaseToken", data.pushToken);
-      localStorage.setItem("userIdToken", data.userId);
+      let pushToken = data.pushToken;
+      let userId = data.userId;
+      if (pushToken == null) {
+        pushToken = "kosong";
+      }
+      if (userId == null) {
+        userId = "kosong";
+      }
+      localStorage.setItem("firebaseToken", pushToken);
+      localStorage.setItem("userIdToken", userId);
     });
 
     this.oneSignal.getIds().then(data => {
