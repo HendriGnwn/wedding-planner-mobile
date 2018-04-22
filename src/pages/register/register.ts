@@ -83,8 +83,9 @@ export class RegisterPage {
         "relation_email": value.relation_email,
         "wedding_day": value.wedding_day,
         "venue": value.venue,
+        "firebase_token": localStorage.getItem("firebaseToken"), 
+        "user_id_token": localStorage.getItem("userIdToken"), 
         "registered_device_number": this.device.uuid,
-        "firebase_token": "xxx",
         "device_number": this.device.uuid
       };
       

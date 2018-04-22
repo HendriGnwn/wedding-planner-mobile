@@ -94,10 +94,7 @@ export class MyApp {
       }
       localStorage.setItem("firebaseToken", pushToken);
       localStorage.setItem("userIdToken", userId);
-    });
-
-    this.oneSignal.getIds().then(data => {
-      console.log(data);
+      console.log(localStorage.getItem("firebaseToken"));
     });
 
     this.oneSignal.endInit();

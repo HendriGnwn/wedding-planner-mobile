@@ -70,7 +70,8 @@ export class RegisterRelationPage {
         "password": value.password,
         "confirm_password": value.confirm_password,
         "registered_device_number": this.device.uuid,
-        "firebase_token": "xxx",
+        "firebase_token": localStorage.getItem("firebaseToken"), 
+        "user_id_token": localStorage.getItem("userIdToken"), 
         "registered_token": this.requestToken
       };
       

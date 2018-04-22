@@ -46,7 +46,6 @@ export class LoginPage {
     if (localStorage.getItem("isLoggedIn") == "1") {
       this.navCtrl.setRoot("TabsPage");
     }
-    console.log(localStorage.getItem("firebaseToken"));
 	}
   
   onSubmit(value:any) : void {
@@ -60,6 +59,8 @@ export class LoginPage {
         "user_id_token": localStorage.getItem("userIdToken"), 
         "device_number": this.device.uuid
       };
+
+      console.log(params);
       
       this.api.post('auth/login', params, {'Content-Type':'application/json'})
         .then((data) => {
