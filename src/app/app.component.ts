@@ -13,7 +13,7 @@ import { OneSignal } from '@ionic-native/onesignal';
 export class MyApp {
   @ViewChild (Nav) nav: Nav;
   
-  rootPage:any;
+  rootPage = "WelcomePage";
   isLoggedIn: any;
   loading: any;
   
@@ -61,29 +61,33 @@ export class MyApp {
       });
       
       console.log(this.isLoggedIn);
-      this.rootPage = "WelcomePage";
-      
+
       this.oneSignalSetup();
     });
   }
   
   oneSignalSetup() {
-    this.oneSignal.startInit('c054887d-802a-4395-9603-51e82b790459', '587058412710');
+    this.oneSignal.startInit(
+      "c054887d-802a-4395-9603-51e82b790459",
+      "587058412710"
+    );
 
-    this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.Notification);
+    this.oneSignal.inFocusDisplaying(
+      this.oneSignal.OSInFocusDisplayOption.Notification
+    );
 
-    this.oneSignal.handleNotificationReceived().subscribe((data) => {
-     // do something when notification is received
-      console.log('handle notification receive', data);
+    this.oneSignal.handleNotificationReceived().subscribe(data => {
+      // do something when notification is received
+      console.log("handle notification receive", data);
     });
 
-    this.oneSignal.handleNotificationOpened().subscribe((data) => {
+    this.oneSignal.handleNotificationOpened().subscribe(data => {
       // do something when a notification is opened
-      console.log('handle notification opened', data);
+      console.log("handle notification opened", data);
       this.nav.push("NotificationPage");
     });
-    
-    this.oneSignal.getIds().then((data) => {
+
+    this.oneSignal.getIds().then(data => {
       let pushToken = data.pushToken;
       let userId = data.userId;
       if (pushToken == null) {
@@ -98,6 +102,7 @@ export class MyApp {
     });
 
     this.oneSignal.endInit();
+    
   }
   
   ngAfterViewInit() {
@@ -114,13 +119,13 @@ export class MyApp {
         }, (nomatch) => {
           // nomatch.$link - the full link data
           console.error('Got a deeplink that didn\'t match', nomatch);
-          if (this.isLoggedIn != "1") {
-            this.rootPage = "TabsPage";
-            this.nav.setRoot("TabsPage");
-          } else {
-            this.rootPage = "WelcomePage";
-            this.nav.setRoot("WelcomePage");
-          }
+          // if (this.isLoggedIn != "1") {
+          //   this.rootPage = "TabsPage";
+          //   this.nav.setRoot("TabsPage");
+          // } else {
+          //   this.rootPage = "WelcomePage";
+          //   this.nav.setRoot("WelcomePage");
+          // }
         });
     });
   }

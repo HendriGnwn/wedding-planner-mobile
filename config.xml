@@ -57,7 +57,6 @@
         <resource-file src="resources/android/icon/drawable-xxxhdpi-icon.png" target="res/drawable-xxxhdpi/ic_stat_onesignal_default.png" />
     </platform>
     <platform name="ios">
-        <resource-file src="GoogleService-Info.plist" />
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
         <icon height="57" src="resources/ios/icon/icon.png" width="57" />
@@ -131,5 +130,5 @@
     <plugin name="com-badrit-base64" spec="^0.2.0" />
     <plugin name="onesignal-cordova-plugin" spec="^2.3.3" />
     <engine name="android" spec="6.4.0" />
-    <engine name="ios" spec="4.5.4" />
+    <engine name="ios" spec="~4.5.4" />
 </widget>
