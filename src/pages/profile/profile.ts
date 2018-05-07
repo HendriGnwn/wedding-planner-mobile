@@ -26,7 +26,7 @@ export class ProfilePage {
   venue: any;
   wedding_day: any;
   user: any = {};
-  defaultPhoto: any = "https://static.pexels.com/photos/256737/pexels-photo-256737.jpeg";
+  defaultPhoto: any = "assets/imgs/profile.jpeg";
   photo: any = this.defaultPhoto;
   dirs: any;
   openFileOptions: CameraOptions = {
