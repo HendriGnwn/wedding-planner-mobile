@@ -44,6 +44,7 @@ export class VendorDetailPage {
     this.events.publish("auth:checkLogin");
     
     this.vendor = this.navParams.get('vendor');
+    console.log(this.vendor);
     this.fileUrl = this.helpersProvider.getBaseUrl() + 'files/vendors/';
     this.detailFileUrl = this.helpersProvider.getBaseUrl() + 'files/vendor-details/';
     this.defaultFileUrl = this.detailFileUrl + 'default.png'; 

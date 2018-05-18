@@ -21,6 +21,7 @@ export class NotificationPage {
   notifications: any = [];
   fileThumbUrl: string;
   exceptionFileThumbUrl: string;
+  dataNotFound: boolean = false;
 
 
   constructor(
@@ -47,6 +48,9 @@ export class NotificationPage {
         let result = JSON.parse(data.data);
         this.loading.dismiss();
         this.notifications = result.data;
+        if (this.notifications.length == 0) {
+          this.dataNotFound = true;
+        }
         console.log(result);
       })
       .catch((error) => {
@@ -65,6 +69,7 @@ export class NotificationPage {
   }
   
   doRefresh(e) {
+    this.dataNotFound = false;
     this.getNotifications();
     setTimeout(() => {
       console.log('Async operation has ended');

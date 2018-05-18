@@ -18,7 +18,7 @@
     <ion-slide>
       <img src="{{ vendor.file != null ? fileUrl + vendor.file : defaultFileUrl }}" class="slide-image" (click)="showPicture(vendor.name, vendor.file != null ? fileUrl + vendor.file : defaultFileUrl)" />
     </ion-slide>
-    <ion-slide *ngFor="let item of vendor.vendorDetails">
+    <ion-slide *ngFor="let item of vendor.vendor_details">
       <img src="{{ item.file != null ? detailFileUrl + item.file : defaultFileUrl }}" class="slide-image" (click)="showPicture(item.name, item.file != null ? detailFileUrl + item.file : defaultFileUrl)" />
     </ion-slide>
   </ion-slides>

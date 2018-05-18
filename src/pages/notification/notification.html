@@ -22,4 +22,7 @@
     <div class="card-title">{{ item.name }}</div>
     <div class="card-subtitle">{{ item.message_at }}</div>
   </ion-card>
+  <ion-title text-center *ngIf="dataNotFound">
+    Data kosong
+  </ion-title>
 </ion-content>
