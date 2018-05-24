@@ -13,7 +13,7 @@ import { OneSignal } from '@ionic-native/onesignal';
 export class MyApp {
   @ViewChild (Nav) nav: Nav;
   
-  rootPage = "WelcomePage";
+  rootPage: any = null;
   isLoggedIn: any;
   loading: any;
   
@@ -32,15 +32,8 @@ export class MyApp {
     ) {
     
     platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
-      //splashScreen.show();
       splashScreen.hide();
-//      setTimeout(function() {
-//        splashScreen.hide();
-//		console.log("splash screen hide");
-//      }, 3000);
       
       this.isLoggedIn = localStorage.getItem("isLoggedIn");
       
@@ -63,6 +56,13 @@ export class MyApp {
       console.log(this.isLoggedIn);
 
       this.oneSignalSetup();
+
+      if (this.isLoggedIn == true) {
+        this.rootPage = "TabsPage";
+        this.nav.setRoot("TabsPage");
+      } else {
+        this.rootPage = "WelcomePage";
+      }
     });
   }
   
@@ -108,7 +108,7 @@ export class MyApp {
   ngAfterViewInit() {
     this.platform.ready().then(() => {
       this.deeplinks.routeWithNavController(this.nav, {
-        '/': 'WelcomePage',
+        //'/': 'WelcomePage',
         '/register-relation': "RegisterRelationPage",
         '/reset-password': "ResetPasswordPage"
       }).subscribe((match) => {

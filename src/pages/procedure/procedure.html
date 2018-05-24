@@ -15,9 +15,16 @@
 
 <ion-content>
   
-  <ion-card text-center *ngFor="let item of procedures">
-    <div class="card-title">{{ item.name }}</div>
-    <div class="card-subtitle">{{ item.description }}</div>
+  <ion-card text-center (click)="administrationPage()" ion-button>
+    <div class="card-title">Administrasi</div>
+  </ion-card>
+
+  <ion-card text-center (click)="schedulePreparationPage()" ion-button>
+    <div class="card-title">Jadwal Persiapan</div>
+  </ion-card>
+
+  <ion-card text-center (click)="schedulePaymentPage()" ion-button>
+    <div class="card-title">Jadwal Pembayaran</div>
   </ion-card>
 
 </ion-content>

@@ -17,25 +17,20 @@ import {HelpersProvider} from '../../providers/helpers/helpers';
 })
 export class ProcedurePage {
   
-  procedures: any;
-  
   constructor(public navCtrl: NavController, public navParams: NavParams, public apiProvider: ApiProvider, public helpersProvider: HelpersProvider) {
-    this.getProcedure();
+
   }
-  
-  getProcedure() {
-    this.apiProvider.get('procedure', {}, {'Content-Type':'application/json'})
-        .then((data) => {
-          
-          let result = JSON.parse(data.data);
-          
-          this.procedures = result.data;
-        })
-        .catch((error) => {
-          let result = JSON.parse(error.error);
-          this.helpersProvider.toastPresent(result.message);
-          this.procedures = [];
-        });
+
+  administrationPage() {
+    this.navCtrl.push("ProcedureAdministrationPage");
+  }
+
+  schedulePaymentPage() {
+    this.navCtrl.push("ProcedureSchedulePaymentPage");
+  }
+
+  schedulePreparationPage() {
+    this.navCtrl.push("ProcedureSchedulePreparationPage");
   }
 
   ionViewDidLoad() {

@@ -1,16 +1,13 @@
 page-procedure {
   .card {
     border: 1px solid color($colors, primary);
-    border-radius: 2rem;
-    padding: 1.5rem;
+    border-radius: 1.5rem;
+    padding: 2.8rem;
     color: color($colors,  primary);
-    font-family: "Centaur";
+    font-family: "Demo Coneria Script";
     .card-title {
-      font-size: 2rem;
-      margin-bottom: 0.5rem;
-    }
-    .card-subtitle {
-      font-size: 1.5rem;
+      font-size: 1.8rem;
+      text-transform: none;
     }
   }
 }
