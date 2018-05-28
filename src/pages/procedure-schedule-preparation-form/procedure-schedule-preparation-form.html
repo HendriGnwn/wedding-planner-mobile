@@ -20,5 +20,34 @@
 
 
 <ion-content padding>
-
+  <form autocomplete="off" [formGroup]="preparationForm" (ngSubmit)="onSubmit(preparationForm.value)">
+    <ion-row>
+      <ion-col>
+        <ion-list>
+          <ion-item [ngClass]="{'error-border':!preparationForm.controls.name.valid && preparationForm.controls.name.touched}">
+            <ion-label floating>Nama Kegiatan</ion-label>
+            <ion-input formControlName="name" type="text" required ></ion-input>
+          </ion-item>
+          <ion-item color="danger" class="form-error" *ngIf="preparationForm.controls.name.hasError('required') && preparationForm.controls.name.touched">
+            <p>Nama kegiatan harus diisi</p>
+          </ion-item>
+          <ion-item [ngClass]="{'error-border':!preparationForm.controls.venue.valid && preparationForm.controls.venue.touched}">
+            <ion-label floating>Tempat</ion-label>
+            <ion-input formControlName="venue" type="text" required ></ion-input>
+          </ion-item>
+          <ion-item color="danger" class="form-error" *ngIf="preparationForm.controls.venue.hasError('required') && preparationForm.controls.venue.touched">
+            <p>Tempat harus diisi</p>
+          </ion-item>
+          <ion-item [ngClass]="{'error-border':!preparationForm.controls.date.valid && preparationForm.controls.date.touched}" class="item-datetime">
+            <ion-label floating>Tanggal dan Waktu</ion-label>
+            <ion-datetime item-end displayFormat="YYYY-MM-DD HH:mm" pickerFormat="DD MMMM YYYY HH mm"  formControlName="date" min="{{ dateMin }}" max="{{ dateMax }}"></ion-datetime>
+          </ion-item>
+          <ion-item color="danger" class="form-error" *ngIf="preparationForm.controls.date.hasError('required') && preparationForm.controls.date.touched">
+            <p>Tanggal dan waktu harus diisi</p>
+          </ion-item>
+        </ion-list>
+        <button ion-button color="primary" round full type="submit" [disabled]="!preparationForm.valid" >SIMPAN</button>
+      </ion-col>
+    </ion-row>
+  </form>
 </ion-content>

@@ -16,7 +16,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
 @Injectable()
 export class HelpersProvider {
   
-  BASE_URL: string = 'http://agendanikah.com/';
+  BASE_URL: string = 'http://10.0.0.171/agendanikah/';
 
   constructor(
     public loadingCtrl: LoadingController,

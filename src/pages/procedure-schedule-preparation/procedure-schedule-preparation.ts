@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ActionSheetController, Platform, ModalController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ActionSheetController, Platform, ModalController, AlertController } from 'ionic-angular';
 
 /**
  * Generated class for the ProcedureSchedulePreparationPage page.
@@ -20,7 +20,8 @@ export class ProcedureSchedulePreparationPage {
     public navParams: NavParams,
     public actionSheetCtrl: ActionSheetController,
     public platform: Platform,
-    public modalCtrl: ModalController
+    public modalCtrl: ModalController,
+    public alertCtrl: AlertController
   ) {
 
   }
@@ -34,6 +35,10 @@ export class ProcedureSchedulePreparationPage {
     modal.present();
   }
 
+  delete(id) {
+
+  }
+
   pressOptions(params:any) {
     let actionSheet = this.actionSheetCtrl.create({
       title: "Opsi", 
@@ -42,13 +47,31 @@ export class ProcedureSchedulePreparationPage {
           text: 'Edit',
           icon: !this.platform.is('ios') ? 'create' : null,
           handler: () => {
-            
+            let modal = this.modalCtrl.create("ProcedureSchedulePreparationFormPage", {headerTitle: "Edit Jadwal Persiapan", data: {}});
+            modal.present();
           }
         },{
           text: 'Delete',
           icon: !this.platform.is('ios') ? 'trash' : null,
           handler: () => {
-            
+            let alert = this.alertCtrl.create({
+              title: 'Anda yakin ingin menghapus data ini?',
+              buttons: [
+                {
+                  text: 'Tidak',
+                  handler: () => {
+                    console.log('Disagree clicked');
+                  }
+                },
+                {
+                  text: 'Ya',
+                  handler: () => {
+                    this.delete(1);
+                  }
+                }
+              ]
+            });
+            alert.present();
           }
         },{
           text: 'Cancel',
