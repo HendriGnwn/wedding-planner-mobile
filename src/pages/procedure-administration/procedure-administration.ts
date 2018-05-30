@@ -18,13 +18,14 @@ import {HelpersProvider} from '../../providers/helpers/helpers';
 export class ProcedureAdministrationPage {
 
   administrations: any;
+  loading: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public apiProvider: ApiProvider, public helpersProvider: HelpersProvider) {
     this.getAdministrations();
   }
 
   getAdministrations() {
-    this.apiProvider.get('procedure', {}, {'Content-Type':'application/json'})
+    this.apiProvider.get('procedure-administrations', {}, {'Content-Type':'application/json', 'Authorization': 'Bearer ' + localStorage.getItem("token")})
       .then((data) => {
         
         let result = JSON.parse(data.data);
@@ -35,6 +36,34 @@ export class ProcedureAdministrationPage {
         let result = JSON.parse(error.error);
         this.helpersProvider.toastPresent(result.message);
         this.administrations = [];
+      });
+  }
+
+  checked(item) {
+    if (!item.procedure_administrations) {
+      return false;
+    }
+
+    return (item.procedure_administrations.checklist == '1') ? true : false;
+  }
+
+  checking(events, item) {
+    this.loading = this.helpersProvider.loadingPresent("");
+    let params = {
+      "procedure_id": item.id,
+      "checklist": item.checklist == true ? '1' : '0'
+    };
+    this.apiProvider.post('procedure-administrations', params, {'Content-Type':'application/json', 'Authorization': 'Bearer ' + localStorage.getItem("token")})
+      .then((data) => {
+        let result = JSON.parse(data.data);
+        this.administrations = result.data;
+        this.loading.dismiss();
+        this.helpersProvider.toastPresent(result.message);
+      })
+      .catch((error) => {
+        let result = JSON.parse(error.error);
+        this.helpersProvider.toastPresent(result.message);
+        this.loading.dismiss();
       });
   }
 

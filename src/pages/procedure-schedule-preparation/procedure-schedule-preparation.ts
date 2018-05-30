@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ActionSheetController, Platform, ModalController, AlertController } from 'ionic-angular';
+import {ApiProvider} from '../../providers/api/api';
+import {HelpersProvider} from '../../providers/helpers/helpers';
 
 /**
  * Generated class for the ProcedureSchedulePreparationPage page.
@@ -15,15 +17,36 @@ import { IonicPage, NavController, NavParams, ActionSheetController, Platform, M
 })
 export class ProcedureSchedulePreparationPage {
 
+  models: any;
+  loading: any;
+
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
     public actionSheetCtrl: ActionSheetController,
     public platform: Platform,
     public modalCtrl: ModalController,
-    public alertCtrl: AlertController
+    public alertCtrl: AlertController,
+    public apiProvider: ApiProvider,
+    public helpersProvider: HelpersProvider
   ) {
+    this.getModels();
+  }
 
+  getModels() {
+    this.loading = this.helpersProvider.loadingPresent("");
+    this.apiProvider.get('procedure-preparation', {}, {'Content-Type':'application/json', 'Authorization': 'Bearer ' + localStorage.getItem("token")})
+      .then((data) => {
+        let result = JSON.parse(data.data);
+        this.models = result.data;
+        this.loading.dismiss();
+      })
+      .catch((error) => {
+        let result = JSON.parse(error.error);
+        this.helpersProvider.toastPresent(result.message);
+        this.models = [];
+        this.loading.dismiss();
+      });
   }
 
   ionViewDidLoad() {
@@ -31,15 +54,33 @@ export class ProcedureSchedulePreparationPage {
   }
 
   addNew() {
-    let modal = this.modalCtrl.create("ProcedureSchedulePreparationFormPage", {headerTitle: "Tambah Jadwal Persiapan"});
+    let modal = this.modalCtrl.create("ProcedureSchedulePreparationFormPage", {headerTitle: "Tambah Jadwal Persiapan", isNewRecord: true});
+    modal.onDidDismiss(data => {
+      if (data == null) {
+      } else {
+        this.models = data;
+      }
+    });
     modal.present();
   }
 
   delete(id) {
-
+    this.loading = this.helpersProvider.loadingPresent("");
+    this.apiProvider.delete('procedure-preparation/' + id, {}, {'Content-Type':'application/json', 'Authorization': 'Bearer ' + localStorage.getItem("token")})
+      .then((data) => {
+        let result = JSON.parse(data.data);
+        this.models = result.data;
+        this.loading.dismiss();
+      })
+      .catch((error) => {
+        let result = JSON.parse(error.error);
+        this.helpersProvider.toastPresent(result.message);
+        this.loading.dismiss();
+      });
   }
 
   pressOptions(params:any) {
+    console.log(params);
     let actionSheet = this.actionSheetCtrl.create({
       title: "Opsi", 
       buttons: [
@@ -47,7 +88,13 @@ export class ProcedureSchedulePreparationPage {
           text: 'Edit',
           icon: !this.platform.is('ios') ? 'create' : null,
           handler: () => {
-            let modal = this.modalCtrl.create("ProcedureSchedulePreparationFormPage", {headerTitle: "Edit Jadwal Persiapan", data: {}});
+            let modal = this.modalCtrl.create("ProcedureSchedulePreparationFormPage", {headerTitle: "Edit Jadwal Persiapan", data: params, isNewRecord: false});
+            modal.onDidDismiss(data => {
+              if (data == null) {
+              } else {
+                this.models = data;
+              }
+            });
             modal.present();
           }
         },{
@@ -66,7 +113,7 @@ export class ProcedureSchedulePreparationPage {
                 {
                   text: 'Ya',
                   handler: () => {
-                    this.delete(1);
+                    this.delete(params.id);
                   }
                 }
               ]
@@ -86,7 +133,11 @@ export class ProcedureSchedulePreparationPage {
   }
 
   doRefresh(event) {
-
+    this.getModels();
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      event.complete();
+    }, 2000);
   }
 
 }

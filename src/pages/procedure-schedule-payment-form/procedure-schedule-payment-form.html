@@ -33,7 +33,7 @@
         </ion-item>
         <ion-item [ngClass]="{'error-border':!paymentForm.controls.account_number.valid && paymentForm.controls.account_number.touched}">
           <ion-label floating>No Rekening</ion-label>
-          <ion-input formControlName="account_number" type="text" required ></ion-input>
+          <ion-input formControlName="account_number" type="number" required ></ion-input>
         </ion-item>
         <ion-item color="danger" class="form-error" *ngIf="paymentForm.controls.account_number.hasError('required') && paymentForm.controls.account_number.touched">
           <p>No rekening harus diisi</p>
@@ -58,7 +58,7 @@
           <ion-list>
             <ion-item [ngClass]="{'error-border':!paymentForm.controls.payment_total_1.valid && paymentForm.controls.payment_total_1.touched}">
               <ion-label floating>Pembayaran 1</ion-label>
-              <ion-input formControlName="payment_total_1" type="number" (keyup)="updatePaymentTotal($event, 1)"></ion-input>
+              <ion-input formControlName="payment_total_1" type="number" (keyup)="updatePaymentTotal($event, 1)" #paymentTotal1></ion-input>
             </ion-item>
             <ion-item color="danger" class="form-error" *ngIf="paymentForm.controls.payment_total_1.hasError('required') && paymentForm.controls.payment_total_1.touched">
               <p>Total Pembayaran 1 harus diisi</p>
@@ -82,7 +82,7 @@
           <ion-list>
             <ion-item [ngClass]="{'error-border':!paymentForm.controls.payment_total_2.valid && paymentForm.controls.payment_total_2.touched}">
               <ion-label floating>Pembayaran 2</ion-label>
-              <ion-input formControlName="payment_total_2" type="number" (keyup)="updatePaymentTotal($event, 2)"></ion-input>
+              <ion-input formControlName="payment_total_2" type="number" (keyup)="updatePaymentTotal($event, 2)" #paymentTotal2></ion-input>
             </ion-item>
             <ion-item color="danger" class="form-error" *ngIf="paymentForm.controls.payment_total_2.hasError('required') && paymentForm.controls.payment_total_2.touched">
               <p>Total Pembayaran 2 harus diisi</p>
@@ -105,11 +105,11 @@
         <ion-col col-6>
           <ion-list>
             <ion-item [ngClass]="{'error-border':!paymentForm.controls.payment_total_3.valid && paymentForm.controls.payment_total_3.touched}">
-              <ion-label floating>Pembayaran 3</ion-label>
-              <ion-input formControlName="payment_total_3" type="number" (keyup)="updatePaymentTotal($event, 3)"></ion-input>
+              <ion-label floating>Pelunasan</ion-label>
+              <ion-input formControlName="payment_total_3" type="number" (keyup)="updatePaymentTotal($event, 3)" #paymentTotal3></ion-input>
             </ion-item>
             <ion-item color="danger" class="form-error" *ngIf="paymentForm.controls.payment_total_3.hasError('required') && paymentForm.controls.payment_total_3.touched">
-              <p>Total Pembayaran 3 harus diisi</p>
+              <p>Total Pelunasan harus diisi</p>
             </ion-item>
           </ion-list>
         </ion-col>
@@ -126,12 +126,19 @@
         </ion-col>
       </ion-row>
       <ion-list>
-        <ion-item [ngClass]="{'error-border':!paymentForm.controls.payment_total.valid && paymentForm.controls.payment_total.touched}">
-          <ion-label floating>Total Keseluruhan</ion-label>
-          <ion-input formControlName="payment_total" type="text" required [value]="paymentTotal"></ion-input>
+          <ion-item [ngClass]="{'error-border':!paymentForm.controls.payment_total.valid && paymentForm.controls.payment_total.touched}">
+              <ion-label floating>Total Keseluruhan</ion-label>
+              <ion-input formControlName="payment_total" type="text" required [value]="paymentTotal"></ion-input>
+            </ion-item>
+            <ion-item color="danger" class="form-error" *ngIf="paymentForm.controls.payment_total.hasError('required') && paymentForm.controls.payment_total.touched">
+              <p>Total Keseluruhan harus diisi</p>
+            </ion-item>
+        <ion-item [ngClass]="{'error-border':!paymentForm.controls.description.valid && paymentForm.controls.description.touched}">
+          <ion-label floating>Keterangan</ion-label>
+          <ion-textarea formControlName="description"></ion-textarea>
         </ion-item>
-        <ion-item color="danger" class="form-error" *ngIf="paymentForm.controls.payment_total.hasError('required') && paymentForm.controls.payment_total.touched">
-          <p>Total Keseluruhan harus diisi</p>
+        <ion-item color="danger" class="form-error" *ngIf="paymentForm.controls.description.hasError('required') && paymentForm.controls.description.touched">
+          <p>Deskripsi harus diisi</p>
         </ion-item>
       </ion-list>
       <button ion-button color="primary" round full type="submit" [disabled]="!paymentForm.valid" >SIMPAN</button>

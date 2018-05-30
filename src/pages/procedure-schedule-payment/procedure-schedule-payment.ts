@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ActionSheetController, Platform, ModalController, AlertController } from 'ionic-angular';
+import {ApiProvider} from '../../providers/api/api';
+import {HelpersProvider} from '../../providers/helpers/helpers';
 
 /**
  * Generated class for the ProcedureSchedulePaymentPage page.
@@ -15,14 +17,36 @@ import { IonicPage, NavController, NavParams, ActionSheetController, Platform, M
 })
 export class ProcedureSchedulePaymentPage {
 
+  loading: any;
+  models: any;
+
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
     public actionSheetCtrl: ActionSheetController,
     public platform: Platform,
     public modalCtrl: ModalController,
-    public alertCtrl: AlertController
+    public alertCtrl: AlertController,
+    public apiProvider: ApiProvider,
+    public helpersProvider: HelpersProvider
   ) {
+    this.getModels();
+  }
+
+  getModels() {
+    this.loading = this.helpersProvider.loadingPresent("");
+    this.apiProvider.get('procedure-payment', {}, {'Content-Type':'application/json', 'Authorization': 'Bearer ' + localStorage.getItem("token")})
+      .then((data) => {
+        let result = JSON.parse(data.data);
+        this.models = result.data;
+        this.loading.dismiss();
+      })
+      .catch((error) => {
+        let result = JSON.parse(error.error);
+        this.helpersProvider.toastPresent(result.message);
+        this.models = [];
+        this.loading.dismiss();
+      });
   }
 
   ionViewDidLoad() {
@@ -30,12 +54,29 @@ export class ProcedureSchedulePaymentPage {
   }
 
   addNew() {
-    let modal = this.modalCtrl.create("ProcedureSchedulePaymentFormPage", {headerTitle: "Tambah Jadwal Pembayaran"});
+    let modal = this.modalCtrl.create("ProcedureSchedulePaymentFormPage", {headerTitle: "Tambah Jadwal Pembayaran", isNewRecord:true});
+    modal.onDidDismiss(data => {
+      if (data == null) {
+      } else {
+        this.models = data;
+      }
+    });
     modal.present();
   }
 
   delete(id) {
-
+    this.loading = this.helpersProvider.loadingPresent("");
+    this.apiProvider.delete('procedure-payment/' + id, {}, {'Content-Type':'application/json', 'Authorization': 'Bearer ' + localStorage.getItem("token")})
+      .then((data) => {
+        let result = JSON.parse(data.data);
+        this.models = result.data;
+        this.loading.dismiss();
+      })
+      .catch((error) => {
+        let result = JSON.parse(error.error);
+        this.helpersProvider.toastPresent(result.message);
+        this.loading.dismiss();
+      });
   }
 
   pressOptions(params:any) {
@@ -46,7 +87,13 @@ export class ProcedureSchedulePaymentPage {
           text: 'Edit',
           icon: !this.platform.is('ios') ? 'create' : null,
           handler: () => {
-            let modal = this.modalCtrl.create("ProcedureSchedulePaymentFormPage", {headerTitle: "Edit Jadwal Pembayaran", data: {}});
+            let modal = this.modalCtrl.create("ProcedureSchedulePaymentFormPage", {headerTitle: "Edit Jadwal Pembayaran", data: params, isNewRecord:false});
+            modal.onDidDismiss(data => {
+              if (data == null) {
+              } else {
+                this.models = data;
+              }
+            });
             modal.present();
           }
         },{
@@ -65,7 +112,7 @@ export class ProcedureSchedulePaymentPage {
                 {
                   text: 'Ya',
                   handler: () => {
-                    this.delete(1);
+                    this.delete(params.id);
                   }
                 }
               ]
@@ -85,7 +132,11 @@ export class ProcedureSchedulePaymentPage {
   }
 
   doRefresh(event) {
-
+    this.getModels();
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      event.complete();
+    }, 2000);
   }
 
 }

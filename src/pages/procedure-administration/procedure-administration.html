@@ -16,7 +16,7 @@
 <ion-content>
 
   <ion-card text-center *ngFor="let item of administrations">
-    <ion-checkbox></ion-checkbox>
+    <ion-checkbox [checked]="item.checklist" (click)="checking($event, item)" [(ngModel)]="item.checklist"></ion-checkbox>
     <div class="card-title">{{ item.name }}</div>
     <div class="card-subtitle">{{ item.description }}</div>
   </ion-card>

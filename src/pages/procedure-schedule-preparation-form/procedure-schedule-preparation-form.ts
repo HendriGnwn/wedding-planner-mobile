@@ -18,6 +18,12 @@ import {HelpersProvider} from '../../providers/helpers/helpers';
 })
 export class ProcedureSchedulePreparationFormPage {
 
+  model:any = {
+    id: '',
+    name: '',
+    venue: '',
+    preparation_at: ''
+  }
   loading: any;
   headerTitle: string;
   preparationForm: FormGroup;
@@ -26,6 +32,7 @@ export class ProcedureSchedulePreparationFormPage {
   date: AbstractControl;
   dateMin: any;
   dateMax: any;
+  isNewRecord: boolean = false;
 
   constructor(
     public navCtrl: NavController, 
@@ -36,10 +43,14 @@ export class ProcedureSchedulePreparationFormPage {
     public formBuilder: FormBuilder
   ) {
     this.headerTitle = this.navParams.get("headerTitle");
+    this.isNewRecord = this.navParams.get("isNewRecord");
+    if (!this.isNewRecord) {
+      this.model = this.navParams.get('data');
+    }
     this.preparationForm = this.formBuilder.group({
-      name: [this.navParams.get('name'), Validators.compose([Validators.required])],
-      venue: [this.navParams.get('venue'), Validators.compose([Validators.required])],
-      date: [this.navParams.get('date'), Validators.compose([Validators.required])],
+      name: [this.model.name, Validators.compose([Validators.required])],
+      venue: [this.model.venue, Validators.compose([Validators.required])],
+      date: [(this.model.preparation_at != '') ? (new Date(this.model.preparation_at)).toISOString() : '', Validators.compose([Validators.required])],
     });
 
     let d = new Date();
@@ -52,14 +63,60 @@ export class ProcedureSchedulePreparationFormPage {
   }
 
   onSubmit(value: any) {
-
+    if (this.preparationForm.valid) {
+      this.loading = this.helpersProvider.loadingPresent("Please Wait ...");
+      
+      let params = {
+        "name": value.name,
+        "venue": value.venue,
+        "preparation_at": value.date
+      };
+      
+      if (this.isNewRecord == true) {
+        this.apiProvider.post('procedure-preparation', params, {'Content-Type':'application/json', 'Authorization':'Bearer ' + localStorage.getItem("token")})
+          .then((data) => {
+            
+            let result = JSON.parse(data.data);
+            
+            this.loading.dismiss();
+            this.helpersProvider.toastPresent(result.message);
+            this.dismiss(result.data);
+          })
+          .catch((error) => {
+            this.loading.dismiss();
+            console.log(error);
+            
+            let result = JSON.parse(error.error);
+            
+            this.helpersProvider.toastPresent(result.message);
+          });
+      } else {
+        this.apiProvider.patch('procedure-preparation/' + this.model.id, params, {'Content-Type':'application/json', 'Authorization':'Bearer ' + localStorage.getItem("token")})
+          .then((data) => {
+            
+            let result = JSON.parse(data.data);
+            
+            this.loading.dismiss();
+            this.helpersProvider.toastPresent(result.message);
+            this.dismiss(result.data);
+          })
+          .catch((error) => {
+            this.loading.dismiss();
+            console.log(error);
+            
+            let result = JSON.parse(error.error);
+            
+            this.helpersProvider.toastPresent(result.message);
+          });
+      }
+    }
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProcedureSchedulePreparationFormPage');
   }
 
-  dismiss(params:any) {
+  dismiss(params:any = []) {
     this.viewCtrl.dismiss(params);
   }
 
