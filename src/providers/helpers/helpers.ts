@@ -16,7 +16,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
 @Injectable()
 export class HelpersProvider {
   
-  TEST_MODE: boolean = true;
+  TEST_MODE: boolean = false;
   SANDBOX_BASE_URL: string = 'http://10.0.0.171/agendanikah/';
   PRODUCTION_BASE_URL: string = 'http://agendanikah.com/';
 
