@@ -24,8 +24,18 @@
   <ion-grid>
     <ion-row>
       <ion-col col-6 *ngFor="let concept of concepts">
-        <button ion-button clear class="grid-col" text-center (click)="goToDetail(concept.id, concept.name)">
+        <button ion-button clear class="grid-col" text-center (click)="goToDetail(concept.id, concept.name, 0)">
           {{ concept.name }}
+        </button>
+      </ion-col>
+      <ion-col col-6 *ngFor="let concept of userRelationConcepts">
+        <button ion-button clear class="grid-col" text-center (click)="goToDetail(concept.id, concept.name, 1)" (press)="pressDetail($event, concept)">
+          {{ concept.name }}
+        </button>
+      </ion-col>
+      <ion-col col-6>
+        <button ion-button clear class="grid-col" text-center (click)="addNew()">
+          <ion-icon ios="ios-add-circle" md="ios-add-circle" item-start color="primary" large></ion-icon>
         </button>
       </ion-col>
     </ion-row>

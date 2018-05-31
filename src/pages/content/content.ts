@@ -21,6 +21,7 @@ export class ContentPage {
   pageTitle: string = "Content";
   contents: any = [];
   loading: any;
+  isCustomConcept: any;
 
   constructor(
     public navCtrl: NavController, 
@@ -37,13 +38,14 @@ export class ContentPage {
     this.events.publish("auth:checkLogin");
     
     this.pageTitle = this.navParams.get('name');
+    this.isCustomConcept = this.navParams.get("isCustomConcept");
     
     this.getContents();
     this.loading = this.helpersProvider.loadingPresent("");
   }
   
   getContents() {
-    this.api.get('contents/' + this.navParams.get('id'), {}, {'Content-Type': 'application/json', "Authorization": "Bearer " + localStorage.getItem('token')})
+    this.api.get('contents/' + this.navParams.get('id')  + '/' + this.isCustomConcept, {}, {'Content-Type': 'application/json', "Authorization": "Bearer " + localStorage.getItem('token')})
       .then((data) => {
         this.loading.dismiss();
         this.contents = JSON.parse(data.data).data;
@@ -71,7 +73,7 @@ export class ContentPage {
   }
   
   addContent() {
-    let modal = this.modalCtrl.create("ContentModalPage", {concept: this.navParams.get('id'), contentId: null, contentName: null });
+    let modal = this.modalCtrl.create("ContentModalPage", {concept: this.navParams.get('id'), contentId: null, contentName: null, isCustomConcept: this.isCustomConcept });
     modal.onDidDismiss((data) => {
       if (data != null) {
         this.contents = data;
@@ -81,7 +83,7 @@ export class ContentPage {
   }
   
   updateContent(id, name) {
-    let modal = this.modalCtrl.create("ContentModalPage", {concept: this.navParams.get('id'), contentId: id, contentName: name });
+    let modal = this.modalCtrl.create("ContentModalPage", {concept: this.navParams.get('id'), contentId: id, contentName: name, isCustomConcept: this.isCustomConcept });
     modal.onDidDismiss((data) => {
       if (data != null) {
         this.contents = data;

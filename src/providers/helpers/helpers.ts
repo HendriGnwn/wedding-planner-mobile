@@ -16,7 +16,9 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
 @Injectable()
 export class HelpersProvider {
   
-  BASE_URL: string = 'http://agendanikah.com/';
+  TEST_MODE: boolean = true;
+  SANDBOX_BASE_URL: string = 'http://10.0.0.171/agendanikah/';
+  PRODUCTION_BASE_URL: string = 'http://agendanikah.com/';
 
   constructor(
     public loadingCtrl: LoadingController,
@@ -32,7 +34,10 @@ export class HelpersProvider {
   }
   
   getBaseUrl() {
-    return this.BASE_URL;
+    if (this.TEST_MODE == true) {
+      return this.SANDBOX_BASE_URL;
+    }
+    return this.PRODUCTION_BASE_URL;
   }
   
   loadingPresent(content: string) {
