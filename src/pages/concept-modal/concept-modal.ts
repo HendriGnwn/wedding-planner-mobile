@@ -5,7 +5,7 @@ import {ApiProvider} from '../../providers/api/api';
 import {HelpersProvider} from '../../providers/helpers/helpers';
 
 /**
- * Generated class for the ContentModalPage page.
+ * Generated class for the ConceptModalPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -13,52 +13,53 @@ import {HelpersProvider} from '../../providers/helpers/helpers';
 
 @IonicPage()
 @Component({
-  selector: 'page-content-modal',
-  templateUrl: 'content-modal.html',
+  selector: 'page-concept-modal',
+  templateUrl: 'concept-modal.html',
 })
-export class ContentModalPage {
+export class ConceptModalPage {
 
   loading: any;
-  contentForm: FormGroup;
+  form: FormGroup;
   name: AbstractControl;
   headerTitle: string;
-  isCustomConcept: boolean;
+  model: any = {
+    id: '',
+    name: ''
+  };
+  isNewRecord: boolean;
+
 
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
     public api: ApiProvider,
+    public events: Events,
     public viewCtrl: ViewController,
-		public events: Events,
     private helpersProvider: HelpersProvider,
     private formBuilder: FormBuilder) {
     
-    this.contentForm = this.formBuilder.group({
-      name: [this.navParams.get('contentName'), Validators.compose([Validators.required])],
-    });
-    
     this.events.publish("auth:checkLogin");
-    this.isCustomConcept = this.navParams.get("isCustomConcept");
-    if (this.navParams.get('contentId') == null) {
-      this.headerTitle = "Tambah baru";
-    } else {
-      this.headerTitle = "Edit " + this.navParams.get('contentName');
+    this.isNewRecord = this.navParams.get("isNewRecord");
+    this.headerTitle = this.navParams.get("headerTitle");
+    if (this.isNewRecord == false) {
+      this.model = this.navParams.get("model");
     }
     
+    this.form = this.formBuilder.group({
+      name: [this.model.name, Validators.compose([Validators.required])],
+    });
   }
-  
+
   onSubmit(value:any) : void {
-    if (this.contentForm.valid) {
+    if (this.form.valid) {
       this.loading = this.helpersProvider.loadingPresent("Please Wait ...");
       
       let params = {"name": value.name};
-      let url = '';
-      if (this.navParams.get('contentId') == null) {
-        url = 'contents/store/' + this.navParams.get('concept') + '/' + this.isCustomConcept;
-        this.api.post(url, params, {'Content-Type':'application/json', 'Authorization': 'Bearer ' + localStorage.getItem('token')})
+      if (this.isNewRecord) {
+        this.api.post('concepts/store', params, {'Content-Type':'application/json', 'Authorization': 'Bearer ' + localStorage.getItem('token')})
           .then((data) => {
-            this.loading.dismiss();
             let result = JSON.parse(data.data);
+            this.loading.dismiss();
             this.helpersProvider.toastPresent(result.message);
             this.dismiss(result.data);
           })
@@ -70,14 +71,12 @@ export class ContentModalPage {
               this.events.publish("auth:forceLogout", result.message);
             }
             this.helpersProvider.toastPresent(result.message);
-            this.dismiss(null);
           });
       } else {
-        url = 'contents/update/' + this.navParams.get('contentId');
-        this.api.patch(url, params, {'Content-Type':'application/json', 'Authorization': 'Bearer ' + localStorage.getItem('token')})
+        this.api.patch('concepts/update/' + this.model.id, params, {'Content-Type':'application/json', 'Authorization': 'Bearer ' + localStorage.getItem('token')})
           .then((data) => {
-            this.loading.dismiss();
             let result = JSON.parse(data.data);
+            this.loading.dismiss();
             this.helpersProvider.toastPresent(result.message);
             this.dismiss(result.data);
           })
@@ -89,18 +88,17 @@ export class ContentModalPage {
               this.events.publish("auth:forceLogout", result.message);
             }
             this.helpersProvider.toastPresent(result.message);
-            this.dismiss(null);
           });
       }
     }
   }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ContentModalPage');
-  }
   
   dismiss(data: any) {
     this.viewCtrl.dismiss(data);
+  }
+
+  ionViewDidLoad() {
+    console.log('ionViewDidLoad ConceptModalPage');
   }
 
 }

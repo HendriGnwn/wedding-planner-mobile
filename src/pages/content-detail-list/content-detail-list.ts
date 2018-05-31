@@ -62,7 +62,7 @@ export class ContentDetailListPage {
     this.contentDetail = this.navParams.get("contentDetail");
     this.loading = this.helpersProvider.loadingPresent("");
     this.pageTitle = this.contentDetail.name;
-    this.fileUrl = this.helpersProvider.BASE_URL + 'files/content-detail-lists/';
+    this.fileUrl = this.helpersProvider.getBaseUrl() + 'files/content-detail-lists/';
     this.fileThumbUrl = this.fileUrl + 'thumbs/';
     this.defaultFileUrl = this.fileUrl + 'default.png';
     this.defaultFileThumbUrl = this.fileThumbUrl + 'default.png';

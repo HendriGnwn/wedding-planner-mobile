@@ -70,6 +70,13 @@
           <ion-item color="danger" *ngIf="registerForm.controls.confirm_password.touched && registerForm.hasError('mismatchedPasswords') && registerForm.controls.password.valid">
             <ion-label no-margin stacked>Passwords do not match</ion-label>
           </ion-item>
+          <ion-item class="cream-background" [ngClass]="{'error-border':!registerForm.controls.relation_name.valid && registerForm.controls.relation_name.touched}">
+						<ion-label floating>Nama Pasangan</ion-label>
+						<ion-input formControlName="relation_name" type="text" required ></ion-input>
+					</ion-item>
+          <ion-item color="danger" class="form-error" *ngIf="registerForm.controls.relation_name.hasError('required') && registerForm.controls.relation_name.touched">
+            <p>Nama harus diisi</p>
+          </ion-item>
           <ion-item class="cream-background" [ngClass]="{'error-border':!registerForm.controls.relation_email.valid && registerForm.controls.relation_email.touched}">
 						<ion-label floating>Email Pasangan</ion-label>
 						<ion-input formControlName="relation_email" type="email" required ></ion-input>

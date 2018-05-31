@@ -1,0 +1,26 @@
+page-procedure-administration {
+  .card {
+    border: 1px solid color($colors, primary);
+    border-radius: 2rem;
+    padding: 1.5rem;
+    color: color($colors,  primary);
+    font-family: "Centaur";
+    .checkbox {
+      float: right;
+      position: relative;
+      right: 0;
+      top: 0;
+      .checkbox-icon {
+        border-color: color($colors, primary);
+      }
+    }
+    .card-title {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+      
+    }
+    .card-subtitle {
+      font-size: 1.5rem;
+    }
+  }
+}

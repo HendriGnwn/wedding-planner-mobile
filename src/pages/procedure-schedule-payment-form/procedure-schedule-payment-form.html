@@ -1,0 +1,148 @@
+<!--
+  Generated template for the ProcedureSchedulepaymentFormPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="primary">
+  <ion-title text-center>{{ headerTitle }}</ion-title>
+  <ion-buttons start>
+    <button ion-button (click)="dismiss(null)">
+      <span ion-text color="white" showWhen="ios">Batal</span>
+      <ion-icon name="md-close" color="white" showWhen="android,windows"></ion-icon>
+    </button>
+  </ion-buttons>
+</ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+<form autocomplete="off" [formGroup]="paymentForm" (ngSubmit)="onSubmit(paymentForm.value)">
+  <ion-row>
+    <ion-col>
+      <ion-list>
+        <ion-item [ngClass]="{'error-border':!paymentForm.controls.name.valid && paymentForm.controls.name.touched}">
+          <ion-label floating>Nama Barang / Jasa</ion-label>
+          <ion-input formControlName="name" type="text" required ></ion-input>
+        </ion-item>
+        <ion-item color="danger" class="form-error" *ngIf="paymentForm.controls.name.hasError('required') && paymentForm.controls.name.touched">
+          <p>Nama barang / jasa harus diisi</p>
+        </ion-item>
+        <ion-item [ngClass]="{'error-border':!paymentForm.controls.account_number.valid && paymentForm.controls.account_number.touched}">
+          <ion-label floating>No Rekening</ion-label>
+          <ion-input formControlName="account_number" type="number" required ></ion-input>
+        </ion-item>
+        <ion-item color="danger" class="form-error" *ngIf="paymentForm.controls.account_number.hasError('required') && paymentForm.controls.account_number.touched">
+          <p>No rekening harus diisi</p>
+        </ion-item>
+        <ion-item [ngClass]="{'error-border':!paymentForm.controls.account_bank.valid && paymentForm.controls.account_bank.touched}">
+          <ion-label floating>Nama Bank</ion-label>
+          <ion-input formControlName="account_bank" type="text" required ></ion-input>
+        </ion-item>
+        <ion-item color="danger" class="form-error" *ngIf="paymentForm.controls.account_bank.hasError('required') && paymentForm.controls.account_bank.touched">
+          <p>Nama bank harus diisi</p>
+        </ion-item>
+        <ion-item [ngClass]="{'error-border':!paymentForm.controls.account_holder.valid && paymentForm.controls.account_holder.touched}">
+          <ion-label floating>Pemilik Rekening</ion-label>
+          <ion-input formControlName="account_holder" type="text" required ></ion-input>
+        </ion-item>
+        <ion-item color="danger" class="form-error" *ngIf="paymentForm.controls.account_holder.hasError('required') && paymentForm.controls.account_holder.touched">
+          <p>Pemilik rekening harus diisi</p>
+        </ion-item>
+      </ion-list>
+      <ion-row>
+        <ion-col col-6>
+          <ion-list>
+            <ion-item [ngClass]="{'error-border':!paymentForm.controls.payment_total_1.valid && paymentForm.controls.payment_total_1.touched}">
+              <ion-label floating>Pembayaran 1</ion-label>
+              <ion-input formControlName="payment_total_1" type="number" (keyup)="updatePaymentTotal($event, 1)" #paymentTotal1></ion-input>
+            </ion-item>
+            <ion-item color="danger" class="form-error" *ngIf="paymentForm.controls.payment_total_1.hasError('required') && paymentForm.controls.payment_total_1.touched">
+              <p>Total Pembayaran 1 harus diisi</p>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+        <ion-col col-6>
+          <ion-list>
+            <ion-item [ngClass]="{'error-border':!paymentForm.controls.payment_date_1.valid && paymentForm.controls.payment_date_1.touched}" class="item-datetime">
+              <ion-label floating>Tanggal</ion-label>
+              <ion-datetime item-end displayFormat="YYYY-MM-DD" pickerFormat="DD MMMM YYYY" formControlName="payment_date_1" min="{{ dateMin }}" max="{{ dateMax }}"></ion-datetime>
+            </ion-item>
+            <ion-item color="danger" class="form-error" *ngIf="paymentForm.controls.payment_date_1.hasError('required') && paymentForm.controls.payment_date_1.touched">
+              <p>Tanggal harus diisi</p>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-6>
+          <ion-list>
+            <ion-item [ngClass]="{'error-border':!paymentForm.controls.payment_total_2.valid && paymentForm.controls.payment_total_2.touched}">
+              <ion-label floating>Pembayaran 2</ion-label>
+              <ion-input formControlName="payment_total_2" type="number" (keyup)="updatePaymentTotal($event, 2)" #paymentTotal2></ion-input>
+            </ion-item>
+            <ion-item color="danger" class="form-error" *ngIf="paymentForm.controls.payment_total_2.hasError('required') && paymentForm.controls.payment_total_2.touched">
+              <p>Total Pembayaran 2 harus diisi</p>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+        <ion-col col-6>
+          <ion-list>
+            <ion-item [ngClass]="{'error-border':!paymentForm.controls.payment_date_2.valid && paymentForm.controls.payment_date_2.touched}" class="item-datetime">
+              <ion-label floating>Tanggal</ion-label>
+              <ion-datetime item-end displayFormat="YYYY-MM-DD" pickerFormat="DD MMMM YYYY" formControlName="payment_date_2" min="{{ dateMin }}" max="{{ dateMax }}"></ion-datetime>
+            </ion-item>
+            <ion-item color="danger" class="form-error" *ngIf="paymentForm.controls.payment_date_2.hasError('required') && paymentForm.controls.payment_date_2.touched">
+              <p>Tanggal harus diisi</p>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-6>
+          <ion-list>
+            <ion-item [ngClass]="{'error-border':!paymentForm.controls.payment_total_3.valid && paymentForm.controls.payment_total_3.touched}">
+              <ion-label floating>Pelunasan</ion-label>
+              <ion-input formControlName="payment_total_3" type="number" (keyup)="updatePaymentTotal($event, 3)" #paymentTotal3></ion-input>
+            </ion-item>
+            <ion-item color="danger" class="form-error" *ngIf="paymentForm.controls.payment_total_3.hasError('required') && paymentForm.controls.payment_total_3.touched">
+              <p>Total Pelunasan harus diisi</p>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+        <ion-col col-6>
+          <ion-list>
+            <ion-item [ngClass]="{'error-border':!paymentForm.controls.payment_date_3.valid && paymentForm.controls.payment_date_3.touched}" class="item-datetime">
+              <ion-label floating>Tanggal</ion-label>
+              <ion-datetime item-end displayFormat="YYYY-MM-DD" pickerFormat="DD MMMM YYYY" formControlName="payment_date_3" min="{{ dateMin }}" max="{{ dateMax }}"></ion-datetime>
+            </ion-item>
+            <ion-item color="danger" class="form-error" *ngIf="paymentForm.controls.payment_date_3.hasError('required') && paymentForm.controls.payment_date_3.touched">
+              <p>Tanggal harus diisi</p>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+      <ion-list>
+          <ion-item [ngClass]="{'error-border':!paymentForm.controls.payment_total.valid && paymentForm.controls.payment_total.touched}">
+              <ion-label floating>Total Keseluruhan</ion-label>
+              <ion-input formControlName="payment_total" type="text" required [value]="paymentTotal"></ion-input>
+            </ion-item>
+            <ion-item color="danger" class="form-error" *ngIf="paymentForm.controls.payment_total.hasError('required') && paymentForm.controls.payment_total.touched">
+              <p>Total Keseluruhan harus diisi</p>
+            </ion-item>
+        <ion-item [ngClass]="{'error-border':!paymentForm.controls.description.valid && paymentForm.controls.description.touched}">
+          <ion-label floating>Keterangan</ion-label>
+          <ion-textarea formControlName="description"></ion-textarea>
+        </ion-item>
+        <ion-item color="danger" class="form-error" *ngIf="paymentForm.controls.description.hasError('required') && paymentForm.controls.description.touched">
+          <p>Deskripsi harus diisi</p>
+        </ion-item>
+      </ion-list>
+      <button ion-button color="primary" round full type="submit" [disabled]="!paymentForm.valid" >SIMPAN</button>
+    </ion-col>
+  </ion-row>
+</form>
+</ion-content>

@@ -1,0 +1,25 @@
+page-procedure-schedule-preparation-form {
+  .item-md, .item-ios, .item-wp {
+	  padding-left: 0px;
+	}
+  
+  .error-border {
+    .label {
+      color: color($colors, danger);
+    }
+  }
+
+  .item-datetime {
+    border-bottom: 1px solid #dedede !important;
+    .datetime {
+      padding: 0rem 0.5rem 0.3rem 1rem;
+    }
+  }
+  
+  .form-error {
+    background: transparent;
+    p {
+      color: color($colors, danger)
+    }
+  }
+}

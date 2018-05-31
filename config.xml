@@ -134,4 +134,9 @@
     <plugin name="com-badrit-base64" spec="^0.2.0" />
     <plugin name="onesignal-cordova-plugin" spec="^2.3.3" />
     <plugin name="cordova-plugin-ios-camera-permissions" spec="^1.2.0" />
+    <allow-navigation href="http://10.0.0.64:8100" />
+    <allow-navigation href="http://10.0.0.64:8101" />
+    <allow-navigation href="http://10.0.0.171:8101" />
+    <engine name="android" spec="6.4.0" />
+    <engine name="ios" spec="4.5.4" />
 </widget>
