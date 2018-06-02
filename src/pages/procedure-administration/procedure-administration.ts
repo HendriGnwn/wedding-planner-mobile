@@ -56,12 +56,14 @@ export class ProcedureAdministrationPage {
     this.apiProvider.post('procedure-administrations', params, {'Content-Type':'application/json', 'Authorization': 'Bearer ' + localStorage.getItem("token")})
       .then((data) => {
         let result = JSON.parse(data.data);
+        console.log(result);
         this.administrations = result.data;
         this.loading.dismiss();
         this.helpersProvider.toastPresent(result.message);
       })
       .catch((error) => {
         let result = JSON.parse(error.error);
+        console.log(result);
         this.helpersProvider.toastPresent(result.message);
         this.loading.dismiss();
       });
