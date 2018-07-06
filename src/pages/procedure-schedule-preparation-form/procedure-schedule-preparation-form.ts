@@ -45,12 +45,15 @@ export class ProcedureSchedulePreparationFormPage {
     this.headerTitle = this.navParams.get("headerTitle");
     this.isNewRecord = this.navParams.get("isNewRecord");
     if (!this.isNewRecord) {
-      this.model = this.navParams.get('data');
+      let data = this.navParams.get('data');
+      this.model = data;
+      let arr = data.preparation_at.split(/[- :]/);
+      this.model.preparation_at = new Date(arr[0], arr[1] - 1, arr[2], arr[3], arr[4], arr[5]).toISOString();
     }
     this.preparationForm = this.formBuilder.group({
       name: [this.model.name, Validators.compose([Validators.required])],
       venue: [this.model.venue, Validators.compose([Validators.required])],
-      date: [(this.model.preparation_at != '') ? (new Date(this.model.preparation_at)).toISOString() : '', Validators.compose([Validators.required])],
+      date: [this.model.preparation_at, Validators.compose([Validators.required])],
     });
 
     let d = new Date();
