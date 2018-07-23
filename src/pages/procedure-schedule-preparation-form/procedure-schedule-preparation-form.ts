@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angul
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import {ApiProvider} from '../../providers/api/api';
 import {HelpersProvider} from '../../providers/helpers/helpers';
+import moment from 'moment';
 
 /**
  * Generated class for the ProcedureSchedulePreparationFormPage page.
@@ -47,10 +48,17 @@ export class ProcedureSchedulePreparationFormPage {
     if (!this.isNewRecord) {
       this.model = this.navParams.get('data');
     }
+    
+    let preparationAt = '';
+    if (this.model.preparation_at != '') {
+      let date = moment(this.model.preparation_at).locale('id').format('YYYY-MM-DD');
+      let time = moment(this.model.preparation_at).locale('id').format('HH:mm:ss');
+      preparationAt = date +'T'+ time +'.000Z';
+    }
     this.preparationForm = this.formBuilder.group({
       name: [this.model.name, Validators.compose([Validators.required])],
       venue: [this.model.venue, Validators.compose([Validators.required])],
-      date: [(this.model.preparation_at != '') ? (new Date(this.model.preparation_at)).toISOString() : '', Validators.compose([Validators.required])],
+      date: [preparationAt, Validators.compose([Validators.required])],
     });
 
     let d = new Date();

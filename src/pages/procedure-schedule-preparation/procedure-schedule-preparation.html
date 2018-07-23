@@ -26,7 +26,7 @@
     <button ion-item  (press)="pressOptions(item)" *ngFor="let item of models">
       <h2>{{item.name}}</h2>
       <p>{{item.venue}}</p>
-      <ion-note item-end>{{ item.preparation_at | date: 'dd MMM yyyy H:mm' }}</ion-note>
+      <ion-note item-end>{{ preparationAt(item) }}</ion-note>
     </button>
     <ion-list-header>tap dan tahan daftar untuk memilih opsi</ion-list-header>
   </ion-list>

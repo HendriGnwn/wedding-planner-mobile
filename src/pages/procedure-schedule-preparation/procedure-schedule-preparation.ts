@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ActionSheetController, Platform, ModalController, AlertController } from 'ionic-angular';
 import {ApiProvider} from '../../providers/api/api';
 import {HelpersProvider} from '../../providers/helpers/helpers';
+import moment from 'moment';
 
 /**
  * Generated class for the ProcedureSchedulePreparationPage page.
@@ -51,6 +52,10 @@ export class ProcedureSchedulePreparationPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProcedureSchedulePreparationPage');
+  }
+
+  preparationAt(item) {
+    return moment(item.preparation_at).format('DD MMM YYYY HH:mm');
   }
 
   addNew() {
