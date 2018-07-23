@@ -81,13 +81,20 @@ export class ProcedureSchedulePaymentPage {
 
   pressOptions(params:any) {
     let actionSheet = this.actionSheetCtrl.create({
-      title: "Opsi", 
+      title: "Opsi",
       buttons: [
         {
-          text: 'Edit',
-          icon: !this.platform.is('ios') ? 'create' : null,
+          text: "Edit",
+          icon: !this.platform.is("ios") ? "create" : null,
           handler: () => {
-            let modal = this.modalCtrl.create("ProcedureSchedulePaymentFormPage", {headerTitle: "Edit Jadwal Pembayaran", data: params, isNewRecord:false});
+            let modal = this.modalCtrl.create(
+              "ProcedureSchedulePaymentFormPage",
+              {
+                headerTitle: "Edit Jadwal Pembayaran",
+                data: params,
+                isNewRecord: false
+              }
+            );
             modal.onDidDismiss(data => {
               if (data == null) {
               } else {
@@ -96,21 +103,23 @@ export class ProcedureSchedulePaymentPage {
             });
             modal.present();
           }
-        },{
-          text: 'Delete',
-          icon: !this.platform.is('ios') ? 'trash' : null,
+        },
+        {
+          text: "Delete",
+          role: "destructive",
+          icon: !this.platform.is("ios") ? "trash" : null,
           handler: () => {
             let alert = this.alertCtrl.create({
-              title: 'Anda yakin ingin menghapus data ini?',
+              title: "Anda yakin ingin menghapus data ini?",
               buttons: [
                 {
-                  text: 'Tidak',
+                  text: "Tidak",
                   handler: () => {
-                    console.log('Disagree clicked');
+                    console.log("Disagree clicked");
                   }
                 },
                 {
-                  text: 'Ya',
+                  text: "Ya",
                   handler: () => {
                     this.delete(params.id);
                   }
@@ -119,11 +128,12 @@ export class ProcedureSchedulePaymentPage {
             });
             alert.present();
           }
-        },{
-          text: 'Cancel',
-          role: 'cancel',
+        },
+        {
+          text: "Cancel",
+          role: "cancel",
           handler: () => {
-            console.log('Cancel clicked');
+            console.log("Cancel clicked");
           }
         }
       ]
