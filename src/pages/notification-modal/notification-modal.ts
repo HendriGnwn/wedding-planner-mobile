@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, App, ViewController, Slides, Events } from 'ionic-angular';
 import { ApiProvider } from '../../providers/api/api';
 import { HelpersProvider } from '../../providers/helpers/helpers';
+import moment from 'moment';
 
 /**
  * Generated class for the NotificationModalPage page.
@@ -52,5 +53,9 @@ export class NotificationModalPage {
   
   showPicture(name, url) {
     this.helpersProvider.photoViewer.show(url, name);
+  }
+
+  messageAt(item) {
+    return moment(item.message_at).format('DD MMM YYYY HH:mm');
   }
 }

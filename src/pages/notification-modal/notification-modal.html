@@ -23,11 +23,14 @@
       <img src="{{ notification.file != null ? fileUrl + notification.file : defaultFileUrl }}" class="slide-image" (click)="showPicture(notification.name, notification.file != null ? fileUrl + notification.file : defaultFileUrl)" />
     </ion-slide>
   </ion-slides>
+  <div class="card-title">
+    <div class="elipse">{{ notification.name }}</div>
+  </div>
   <ion-row class="content-list">
     <ion-col col-12>
       <ion-list>
         <ion-list-header text-right>
-          {{ notification.message_at }}
+          {{ messageAt(notification) }}
         </ion-list-header>
       </ion-list>
     </ion-col>

@@ -26,7 +26,7 @@ export class ProfilePage {
   venue: any;
   wedding_day: any;
   user: any = {};
-  defaultPhoto: any = "assets/imgs/profile.jpeg";
+  defaultPhoto: any = "assets/imgs/profile.png";
   photo: any = this.defaultPhoto;
   dirs: any;
   openFileOptions: CameraOptions = {

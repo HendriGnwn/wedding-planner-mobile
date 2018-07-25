@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, App, ModalController, Events } from 'ionic-angular';
 import { ApiProvider } from '../../providers/api/api';
 import { HelpersProvider } from '../../providers/helpers/helpers';
+import moment from 'moment';
 
 /**
  * Generated class for the NotificationPage page.
@@ -61,6 +62,10 @@ export class NotificationPage {
         }
         console.log(error);
       });
+  }
+
+  messageAt(item) {
+    return moment(item.message_at).format('DD MMM YYYY HH:mm');
   }
   
   goToDetail(notification) {
