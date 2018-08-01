@@ -49,6 +49,14 @@ export class CostPage {
       });
   }
 
+  doRefresh(event) {
+    this.getCost();
+    setTimeout(() => {
+      console.log("Async operation has ended");
+      event.complete();
+    }, 2000);
+  }
+
   ionViewDidLoad() {
     console.log('ionViewDidLoad CostPage');
   }

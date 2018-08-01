@@ -1,0 +1,50 @@
+<h4>1. Definisi Agenda Nikah</h4>
+<p>Agenda Nikah adalah aplikasi seluler yang bertujuan untuk menjadi acuan/catatan bagi calon pengantin yang didalamnya 
+terdapat kolom-kolom yang dapat diisi sendiri oleh kedua calon pengantin.</p>
+<p>Calon pengguna adalah sebuah individu yang memiliki pasangan yang mendaftar sebagai pengguna aplikasi Agenda Nikah. Calon pengguna mendaftar
+di aplikasi Agenda Nikah dengan tambahan memasukkan nama dan email pasangannya. Sehingga nanti pasangan Calon Pengguna tersebut akan dapat mengakses
+aplikasi Agenda Nikah ini. Selanjutnya disebut pengguna Agenda Nikah.</p>
+<p>Pengguna adalah pasangan laki-laki dan perempuan, jadi konten dalam aplikasi dapat diakses oleh kedua pasangan tersebut.</p>
+<p>Pengguna aplikasi ini tidak dipungut biaya apapun, aplikasi ini berguna untuk membantu mencatat pasangan calon pengantin untuk mengatur segala
+kebutuhan dan estimasi biaya dalam pernikahan</p>
+<p>Email dibutuhkan pengguna untuk mengakses aplikasi Agenda Nikah</p>
+<p>Terdapat Daftar Vendor Pernikahan yang bekerja sama dengan Agenda Nikah, sehingga pengguna dapat melihat vendor-vendor pernikahan seperti Photography, Bridal dan lain sebagainya
+yang diharapkan pengguna dapat menyewa vendor yang bekerja sama dengan Agenda Nikah ini</p>
+
+<h4>2. Ketentuan Umum</h4>
+<p>Agenda Nikah adalah sebuah aplikasi yang bertujuan untuk membantu pengguna dalam mengatur dan mencatat kebutuhan serta estimasi biaya pernikahan.
+Pengguna dapat menggunakan aplikasi Agenda Nikah dengan ketentuan sebagai berikut.</p>
+- Memiliki Email pribadi dan email pasangannya<br/>
+- Jaringan data tersedia.<br/>
+
+<h4>3. Informasi Pengguna</h4>
+<p>Ketika calon pengguna berhasil melakukan registrasi dan langsung dapat memakai aplikasi agenda nikah ini.
+Beda halnya dengan pasangannya, lakukan aktivasi terlebih dahulu dengan link aktivasi yang dikirimkan melalui email pasangannya, kemudian bisa mengakses aplikasi agenda nikah.
+Informasi Pengguna yang di wajibkan untuk dapat mengakses aplikasi Agenda Nikah adalah sebagai berikut:</p>
+- Nama<br/>
+- Email<br/>
+- Nomor Handphone<br/>
+- Tanggal Pernikahan<br/>
+- Tempat Resepsi<br/>
+- Nama Pasangan<br/>
+- Email Pasangan<br/>
+- No Handphone Pasangan<br/>
+<br/>
+<h4>4. Registrasi</h4>
+<p>Pengguna diwajibkan untuk mengisi data identitas seperti:</p>
+- Nama<br/>
+- Jenis Kelamin<br/>
+- Email<br/>
+- Nomor Handphone<br/>
+- Password<br/>
+- Konfirmasi Password<br/>
+- Nama Pasangan<br/>
+- Email Pasangan<br/>
+- Tanggal Pernikahan<br/>
+- Tempat Resepsi<br/>
+<br/>
+<h4>5. Penyimpanan Data User</h4>
+<p>Data pribadi user disimpan dalam database Agenda Nikah dan tidak akan di publikasikan dan tidak akan diserahkan kepada pihak manapun.</p>
+<h4>6. Lain-lain</h4>
+<p>Syarat dan ketentuan dapat berubah sewaktu-waktu.<br/>
+Pengguna dapat menghubungi Kontak Agenda Nikah melalui: website agendanikah.com dan dapat mengisi form Laporkan Masalah pada menu Setting.</p>

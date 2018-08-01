@@ -51,11 +51,19 @@
       <ion-icon ios="ios-alert-outline" md="ios-alert-outline" item-start></ion-icon>
       Laporkan Masalah
       <ion-icon md="ios-arrow-forward-outline" item-end></ion-icon>
-    </button>  
+    </button>
+    <button ion-item (click)="goToSupport()">
+      <ion-icon ios="ios-help-circle-outline" md="ios-help-circle-outline" item-start></ion-icon>
+      Bantuan
+      <ion-icon md="ios-arrow-forward-outline" item-end></ion-icon>
+    </button>
     <button ion-item (click)="doLogout()">
       <ion-icon ios="ios-log-out-outline" md="ios-log-out-outline" item-start></ion-icon>
       Keluar
-    </button>  
+    </button>
+    <ion-list-header>
+      Versi 0.1
+    </ion-list-header>  
   </ion-list>
 
 </ion-content>

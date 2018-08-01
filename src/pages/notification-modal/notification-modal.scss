@@ -1,6 +1,7 @@
 page-notification-modal {
   .notification-slides {
     height: auto;
+    z-index: -10;
 
     .swiper-pagination {
       .swiper-pagination-bullet {
@@ -16,9 +17,9 @@ page-notification-modal {
   }
   .card-title {
     position: absolute;
-    top: 15%;
+    top: 13%;
     z-index: 100;
-    font-size: 3rem;
+    font-size: 2rem;
     width: 85%;
     left: 0;
     text-align: center;

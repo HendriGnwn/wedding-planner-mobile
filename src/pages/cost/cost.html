@@ -19,6 +19,9 @@
 
 
 <ion-content>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
     <ion-card text-center *ngFor="let item of costs;">
       <div class="card-title">{{ item.content.name }}</div>
       <div class="card-subtitle">IDR {{ item.value == null ? 0 : item.value | number : fractionSize }}</div>

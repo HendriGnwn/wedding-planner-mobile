@@ -1,0 +1,26 @@
+page-register-term {
+  .header-title {
+    font-size: 1rem;
+  }
+  .scroll-content, .fixed-content {
+    padding: 1.5rem 1.3rem;
+    color: color($colors, dark);
+  }
+  .page-title {
+    font-size: 2.2rem;
+    margin-top: 0.5rem;
+  }
+  .page-content {
+    text-align: left;
+    font-family: "Centaur";
+    font-size: 1.8rem;
+    line-height: 3rem;
+    p {
+      line-height: 3rem;
+      font-size: 1.8rem;
+    }
+    h2, h3, h4 {
+      font-weight: bold;
+    }
+  }
+}

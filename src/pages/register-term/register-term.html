@@ -1,0 +1,26 @@
+<!--
+  Generated template for the RegisterTermPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title class="header-title" text-center>{{ headerTitle }}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col col-12 class="page-content" [innerHTML]="content.description"></ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+<ion-footer no-padding>
+  <button ion-button full color="primary" type="button" (click)="goToRegister()">Agree</button>
+</ion-footer>

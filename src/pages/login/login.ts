@@ -96,7 +96,7 @@ export class LoginPage {
 	}
   
   goToRegisterPage() {
-    this.navCtrl.push("RegisterPage");
+    this.navCtrl.push("RegisterTermPage");
   }
   
   goToForgotPasswordPage() {
