@@ -31,12 +31,16 @@
               Email harus diisi
             </p>
           </ion-item>
-          <ion-item [ngClass]="{'error-border':!editProfileForm.controls.phone.valid && editProfileForm.controls.phone.touched}">
+          <ion-item>
+            <ion-label floating>Jenis kelamin</ion-label>
+            <ion-select formControlName="gender">
+              <ion-option value="1">Laki-laki</ion-option>
+              <ion-option value="0">Perempuan</ion-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
 						<ion-label floating>No Handphone</ion-label>
-            <ion-input formControlName="phone" type="number" required ></ion-input>
-            <p color="danger" class="form-error" *ngIf="editProfileForm.controls.phone.hasError('required') && editProfileForm.controls.phone.touched">
-              No Hanphone harus diisi
-            </p>
+            <ion-input formControlName="phone" type="number"></ion-input>
 					</ion-item>
           <ion-item [ngClass]="{'error-border':!editProfileForm.controls.wedding_day.valid && editProfileForm.controls.wedding_day.touched}">
 						<ion-label floating>Hari Pernikahan</ion-label>

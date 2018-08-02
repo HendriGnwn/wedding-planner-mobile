@@ -68,5 +68,21 @@ page-profile {
       font-family: "Centaur";
     }
   }
+
+  .alert-container {
+    background: color($colors, info);
+    padding: 0.8rem;
+    margin-top: 10px;
+    border-radius: 0.7rem;
+    .detail-title {
+      font-size: 3.5rem;
+      font-family: 'Rochester', cursive !important;
+    }
+    .detail-subtitle {
+      font-size: 2rem;
+      color: color($colors, darkinfo);
+      font-family: "Centaur";
+    }
+  }
   
 }

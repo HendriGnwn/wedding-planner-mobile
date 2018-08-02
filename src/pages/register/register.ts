@@ -24,16 +24,9 @@ export class RegisterPage {
   registerForm: FormGroup;
   name: AbstractControl;
   gender: AbstractControl;
-  phone: AbstractControl;
   email: AbstractControl;
   password: AbstractControl;
   confirm_password: AbstractControl;
-  relation_name: AbstractControl;
-  relation_email: AbstractControl;
-  wedding_day: AbstractControl;
-  venue: AbstractControl;
-  weddingDayMin: any;
-  weddingDayMax: any;
 
   constructor(
 		public navCtrl: NavController,
@@ -46,29 +39,15 @@ export class RegisterPage {
     
     this.registerForm = this.formBuilder.group({
       name: ['', Validators.compose([Validators.required])],
-      gender: ['', Validators.compose([Validators.required])],
-      phone: ['', Validators.compose([Validators.required])],
+      gender: ['', null],
       email: ['', Validators.compose([Validators.required, Validators.email])],
       password: ['', Validators.compose([Validators.required])],
       confirm_password: ['', Validators.compose([Validators.required])],
-      relation_name: ['', Validators.compose([Validators.required])],
-      relation_email: ['', Validators.compose([Validators.required, Validators.email])],
-      wedding_day: ['', Validators.compose([Validators.required])],
-      venue: ['', Validators.compose([Validators.required])]
     }, {validator: this.matchingPasswords('password', 'confirm_password')});
     
     if (localStorage.getItem("isLoggedIn") == "1") {
       this.navCtrl.setRoot("TabsPage");
     }
-    
-    let d = new Date();
-    
-    let currentDate = new Date(d.getFullYear(), d.getMonth(), d.getDate(), 0, 0, 0);
-    let maxDate = new Date(d.getFullYear() + 3, d.getMonth(), d.getDate(), 0, 0, 0);
-    
-    this.weddingDayMin = currentDate.getFullYear();
-    this.weddingDayMax = maxDate.getFullYear();
-    
 	}
   
   onSubmit(value:any) : void {
@@ -78,14 +57,9 @@ export class RegisterPage {
       let params = {
         "name": value.name,
         "gender": value.gender,
-        "phone": value.phone,
         "email": value.email,
         "password": value.password,
         "confirm_password": value.confirm_password,
-        "relation_name": value.relation_name,
-        "relation_email": value.relation_email,
-        "wedding_day": value.wedding_day,
-        "venue": value.venue,
         "firebase_token": localStorage.getItem("firebaseToken"), 
         "user_id_token": localStorage.getItem("userIdToken"), 
         "registered_device_number": this.device.uuid,
@@ -124,7 +98,6 @@ export class RegisterPage {
   }
   
   matchingPasswords(passwordKey: string, confirmPasswordKey: string) {
-    // TODO maybe use this https://github.com/yuyang041060120/ng2-validation#notequalto-1
     return (group: FormGroup): {[key: string]: any} => {
       let password = group.controls[passwordKey];
       let confirmPassword = group.controls[confirmPasswordKey];

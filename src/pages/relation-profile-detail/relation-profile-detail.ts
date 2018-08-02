@@ -20,10 +20,12 @@ export class RelationProfileDetailPage {
   
   loading: any;
   relationProfileForm: FormGroup;
+  name: AbstractControl;
   email: AbstractControl;
   
   user: any;
   relation: any;
+  userName: any = '';
   userEmail: any = '';
   isFormRelation: any = false;
   isRelationDetail: any = false;
@@ -41,6 +43,7 @@ export class RelationProfileDetailPage {
     
     this.getUser();
     this.relationProfileForm = this.formBuilder.group({
+      name: [this.userName, Validators.compose([Validators.required])],
       email: [this.userEmail, Validators.compose([Validators.required, Validators.email])]
     });
   }
@@ -50,6 +53,7 @@ export class RelationProfileDetailPage {
       .then((data) => {
         this.user = JSON.parse(data.data).data;
         this.relation = this.user.relation.partner;
+        this.userName = this.relation.name;
         this.userEmail = this.relation.email;
         console.log(this.relation);
         if (this.relation.name == null) {
@@ -61,6 +65,7 @@ export class RelationProfileDetailPage {
         }
         
         this.relationProfileForm = this.formBuilder.group({
+          name: [this.userName, Validators.compose([Validators.required])],
           email: [this.userEmail, Validators.compose([Validators.required, Validators.email])]
         });
       })
@@ -82,6 +87,7 @@ export class RelationProfileDetailPage {
       this.loading = this.helpersProvider.loadingPresent("Please Wait ...");
       
       let params = {
+        "name": value.name,
         "email": value.email,
       };
       
@@ -92,6 +98,7 @@ export class RelationProfileDetailPage {
           
           this.loading.dismiss();
           this.helpersProvider.toastPresent(result.message);
+          this.navCtrl.setRoot("ProfilePage");
         })
         .catch((error) => {
           this.loading.dismiss();

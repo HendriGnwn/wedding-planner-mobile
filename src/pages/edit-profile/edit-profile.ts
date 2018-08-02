@@ -22,6 +22,7 @@ export class EditProfilePage {
   editProfileForm: FormGroup;
   name: AbstractControl;
   email: AbstractControl;
+  gender: AbstractControl;
   phone: AbstractControl;
   wedding_day: AbstractControl;
   venue: AbstractControl;
@@ -29,6 +30,7 @@ export class EditProfilePage {
   user: any;
   userEmail: string = '';
   userName: string = '';
+  userGender: string = '';
   userPhone: string = '';
   userWeddingDay: any = '';
   userVenue: any = '';
@@ -51,7 +53,8 @@ export class EditProfilePage {
     this.editProfileForm = this.formBuilder.group({
       email: [this.userEmail, Validators.compose([Validators.required, Validators.email])],
       name: [this.userName, Validators.compose([Validators.required])],
-      phone: [this.userPhone, Validators.compose([Validators.required])],
+      gender: [this.userGender, null],
+      phone: [this.userPhone, null],
       wedding_day: [this.userWeddingDay, Validators.compose([Validators.required])],
       venue: [this.userVenue, Validators.compose([Validators.required])],
     });
@@ -71,6 +74,7 @@ export class EditProfilePage {
         this.user = JSON.parse(data.data).data;
         this.userEmail = this.user.email;
         this.userName = this.user.name;
+        this.userGender = this.user.gender_label;
         this.userPhone = this.user.phone;
         this.userWeddingDay = this.user.relation.wedding_day;
         this.userVenue = this.user.relation.venue;
@@ -82,7 +86,8 @@ export class EditProfilePage {
         this.editProfileForm = this.formBuilder.group({
           email: [this.userEmail, Validators.compose([Validators.required, Validators.email])],
           name: [this.userName, Validators.compose([Validators.required])],
-          phone: [this.userPhone, Validators.compose([Validators.required])],
+          gender: [this.userGender, null],
+          phone: [this.userPhone, null],
           wedding_day: [this.userWeddingDay, Validators.compose([Validators.required])],
           venue: [this.userVenue, Validators.compose([Validators.required])],
         });
@@ -106,6 +111,7 @@ export class EditProfilePage {
       let params = {
         "name": value.name,
         "email": value.email,
+        "gender": value.gender,
         "phone": value.phone,
         "wedding_day": value.wedding_day,
         "venue": value.venue

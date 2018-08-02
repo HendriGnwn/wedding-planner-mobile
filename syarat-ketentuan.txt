@@ -16,6 +16,7 @@ yang diharapkan pengguna dapat menyewa vendor yang bekerja sama dengan Agenda Ni
 Pengguna dapat menggunakan aplikasi Agenda Nikah dengan ketentuan sebagai berikut.</p>
 - Memiliki Email pribadi dan email pasangannya<br/>
 - Jaringan data tersedia.<br/>
+- Perizinan untuk mengakses Library Photo dan Camera serta Notification.<br/>
 
 <h4>3. Informasi Pengguna</h4>
 <p>Ketika calon pengguna berhasil melakukan registrasi dan langsung dapat memakai aplikasi agenda nikah ini.
@@ -35,13 +36,8 @@ Informasi Pengguna yang di wajibkan untuk dapat mengakses aplikasi Agenda Nikah 
 - Nama<br/>
 - Jenis Kelamin<br/>
 - Email<br/>
-- Nomor Handphone<br/>
 - Password<br/>
 - Konfirmasi Password<br/>
-- Nama Pasangan<br/>
-- Email Pasangan<br/>
-- Tanggal Pernikahan<br/>
-- Tempat Resepsi<br/>
 <br/>
 <h4>5. Penyimpanan Data User</h4>
 <p>Data pribadi user disimpan dalam database Agenda Nikah dan tidak akan di publikasikan dan tidak akan diserahkan kepada pihak manapun.</p>

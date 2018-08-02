@@ -26,23 +26,13 @@
           <ion-item color="danger" class="form-error" *ngIf="registerForm.controls.name.hasError('required') && registerForm.controls.name.touched">
             <p>Nama harus diisi</p>
           </ion-item>
-					<ion-item class="cream-background" [ngClass]="{'error-border':!registerForm.controls.gender.valid && registerForm.controls.gender.touched}">
+					<ion-item class="cream-background">
 						<ion-label floating>Jenis kelamin</ion-label>
-            <ion-select formControlName="gender" required>
+            <ion-select formControlName="gender">
               <ion-option value="1">Laki-laki</ion-option>
               <ion-option value="0">Perempuan</ion-option>
             </ion-select>
 					</ion-item>
-          <ion-item color="danger" class="form-error" *ngIf="registerForm.controls.gender.hasError('required') && registerForm.controls.gender.touched">
-            <p>Jenis kelamin harus diisi</p>
-          </ion-item>
-					<ion-item class="cream-background" [ngClass]="{'error-border':!registerForm.controls.phone.valid && registerForm.controls.phone.touched}">
-						<ion-label floating>No Handphone</ion-label>
-            <ion-input formControlName="phone" type="number" required ></ion-input>
-					</ion-item>
-          <ion-item color="danger" class="form-error" *ngIf="registerForm.controls.phone.hasError('required') && registerForm.controls.phone.touched">
-            <p>No Handphone harus diisi</p>
-          </ion-item>
 					<ion-item class="cream-background" [ngClass]="{'error-border':!registerForm.controls.email.valid && registerForm.controls.email.touched}">
 						<ion-label floating>Email</ion-label>
 						<ion-input formControlName="email" type="email" required ></ion-input>
@@ -69,34 +59,6 @@
           </ion-item>
           <ion-item color="danger" *ngIf="registerForm.controls.confirm_password.touched && registerForm.hasError('mismatchedPasswords') && registerForm.controls.password.valid">
             <ion-label no-margin stacked>Passwords do not match</ion-label>
-          </ion-item>
-          <ion-item class="cream-background" [ngClass]="{'error-border':!registerForm.controls.relation_name.valid && registerForm.controls.relation_name.touched}">
-						<ion-label floating>Nama Pasangan</ion-label>
-						<ion-input formControlName="relation_name" type="text" required ></ion-input>
-					</ion-item>
-          <ion-item color="danger" class="form-error" *ngIf="registerForm.controls.relation_name.hasError('required') && registerForm.controls.relation_name.touched">
-            <p>Nama harus diisi</p>
-          </ion-item>
-          <ion-item class="cream-background" [ngClass]="{'error-border':!registerForm.controls.relation_email.valid && registerForm.controls.relation_email.touched}">
-						<ion-label floating>Email Pasangan</ion-label>
-						<ion-input formControlName="relation_email" type="email" required ></ion-input>
-					</ion-item>
-          <ion-item color="danger" class="form-error" *ngIf="registerForm.controls.relation_email.hasError('required') && registerForm.controls.relation_email.touched">
-            <p>Email harus diisi</p>
-          </ion-item>
-          <ion-item class="cream-background" [ngClass]="{'error-border':!registerForm.controls.wedding_day.valid && registerForm.controls.wedding_day.touched}">
-						<ion-label floating>Tanggal Pernikahan</ion-label>
-						<ion-datetime displayFormat="YYYY-MM-DD" pickerFormat="DD MMMM YYYY" formControlName="wedding_day" required min="{{ weddingDayMin }}" max="{{ weddingDayMax }}"></ion-datetime>
-					</ion-item>
-          <ion-item color="danger" class="form-error" *ngIf="registerForm.controls.wedding_day.hasError('required') && registerForm.controls.wedding_day.touched">
-            <p>Tanggal Pernikahan harus diisi</p>
-          </ion-item>
-          <ion-item class="cream-background" [ngClass]="{'error-border':!registerForm.controls.venue.valid && registerForm.controls.venue.touched}">
-						<ion-label floating>Tempat Resepsi</ion-label>
-						<ion-input formControlName="venue" type="text" required ></ion-input>
-					</ion-item>
-          <ion-item color="danger" class="form-error" *ngIf="registerForm.controls.venue.hasError('required') && registerForm.controls.venue.touched">
-            <p>Tanggal Pernikahan harus diisi</p>
           </ion-item>
 				</ion-list>
 			</ion-col>

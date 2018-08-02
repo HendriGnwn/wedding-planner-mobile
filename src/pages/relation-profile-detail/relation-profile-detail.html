@@ -7,7 +7,8 @@
 <ion-header>
 
   <ion-navbar color="primary">
-    <ion-title text-center>Profil Pasangan Anda</ion-title>
+    <ion-title text-center *ngIf="isFormRelation">Daftarkan Pasangan Anda</ion-title>
+    <ion-title text-center *ngIf="isRelationDetail">Profil Pasangan Anda</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -18,11 +19,18 @@
     <ion-row>
       <ion-col>
         <p>
-          Pasangan Anda belum mendaftar, silahkan Kirim ulang email agar mengingatkan untuk segera daftar.
+          Daftarkan pasangan Anda untuk dapat mengakses informasi yang sama dengan Anda di Aplikasi Agenda Nikah ini.
         </p>
         <ion-list>
+          <ion-item [ngClass]="{'error-border':!relationProfileForm.controls.name.valid && relationProfileForm.controls.name.touched}">
+            <ion-label floating>Nama Pasangan</ion-label>
+            <ion-input formControlName="name" type="name" required ></ion-input>
+            <p color="danger" class="form-error" *ngIf="relationProfileForm.controls.name.hasError('required') && relationProfileForm.controls.name.touched">
+              Nama Pasangan harus diisi
+            </p>
+          </ion-item>
           <ion-item [ngClass]="{'error-border':!relationProfileForm.controls.email.valid && relationProfileForm.controls.email.touched}">
-            <ion-label floating>Email</ion-label>
+            <ion-label floating>Email (untuk kirim email dan login)</ion-label>
             <ion-input formControlName="email" type="email" required ></ion-input>
             <p color="danger" class="form-error" *ngIf="relationProfileForm.controls.email.hasError('required') && relationProfileForm.controls.email.touched">
               Email harus diisi
@@ -33,7 +41,7 @@
     </ion-row>
     <ion-row>
       <ion-col>
-        <button ion-button color="primary" round full type="submit" [disabled]="!relationProfileForm.valid" >Kirim Ulang</button>
+        <button ion-button color="primary" round full type="submit" [disabled]="!relationProfileForm.valid" >SUBMIT</button>
       </ion-col>
     </ion-row>
   </form>

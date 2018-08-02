@@ -42,11 +42,13 @@ export class ProfilePage {
   photoUrl: any;
   backgroundPhoto: any;
   
-  days: any;
-  hours: any;
-  minutes: any;
-  seconds: any;
+  days: any = '-';
+  hours: any = '-';
+  minutes: any = '-';
+  seconds: any = '-';
   bannerHeight: any;
+  isRequired: boolean = false;
+  requiredLabel: any = '';
 
   constructor(
     public navCtrl: NavController, 
@@ -82,6 +84,15 @@ export class ProfilePage {
         
         let result = JSON.parse(data.data);
         
+        if (result.data.relation.venue == null) {
+          this.isRequired = true;
+          this.requiredLabel = 'Silahkan atur tanggal pernikahan dan tempat pernikahan Anda di menu Edit Profile';
+        } else if (result.data.relation.partner.name == null) {
+          this.isRequired = true;
+          this.requiredLabel = 'Silahkan daftarkan pasangan Anda di menu Detail Pasangan Anda';
+        } else {
+          this.isRequired = false;
+        }
         this.relation_name = result.data.relation.relation_name;
         this.wedding_day = result.data.relation.wedding_day;
         this.venue = result.data.relation.venue;
