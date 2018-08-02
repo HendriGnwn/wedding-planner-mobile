@@ -29,6 +29,7 @@
     "@ionic-native/date-picker": "^4.6.0",
     "@ionic-native/deeplinks": "^4.6.0",
     "@ionic-native/device": "^4.6.0",
+    "@ionic-native/diagnostic": "^4.11.0",
     "@ionic-native/file": "^4.6.0",
     "@ionic-native/http": "^4.6.0",
     "@ionic-native/in-app-browser": "^4.6.0",
@@ -43,8 +44,8 @@
     "call-number": "^1.0.1",
     "com-badrit-base64": "^0.2.0",
     "com-sarriaroman-photoviewer": "^1.1.16",
-    "cordova-android": "6.4.0",
-    "cordova-ios": "4.5.4",
+    "cordova-android": "^7.1.1",
+    "cordova-ios": "4.5.5",
     "cordova-plugin-advanced-http": "^1.11.1",
     "cordova-plugin-camera": "^4.0.3",
     "cordova-plugin-datepicker": "^0.9.3",
@@ -57,6 +58,7 @@
     "cordova-plugin-splashscreen": "^5.0.2",
     "cordova-plugin-statusbar": "^2.4.2",
     "cordova-plugin-whitelist": "^1.3.3",
+    "cordova.plugins.diagnostic": "^4.0.8",
     "ionic-angular": "3.9.2",
     "ionic-plugin-deeplinks": "^1.0.15",
     "ionicons": "3.0.0",
@@ -110,7 +112,11 @@
       "call-number": {},
       "com-badrit-base64": {},
       "onesignal-cordova-plugin": {},
-      "cordova-plugin-ios-camera-permissions": {}
+      "cordova-plugin-ios-camera-permissions": {
+        "CAMERA_USAGE_DESCRIPTION": "This app needs camera access for user photo profile and wedding events",
+        "PHOTOLIBRARY_ADD_USAGE_DESCRIPTION": "This app needs write-access to photo library for user photo profile and wedding events",
+        "PHOTOLIBRARY_USAGE_DESCRIPTION": "This app needs read to photo library for user photo profile and wedding events"
+      }
     },
     "platforms": [
       "android",

@@ -26,8 +26,6 @@
     <preference name="loadUrlTimeoutValue" value="700000" />
     <preference name="AndroidPersistentFileLocation" value="Internal" />
     <preference name="AndroidPersistentFileLocation" value="Compatibility" />
-    <preference name="iosPersistentFileLocation" value="Library" />
-    <preference name="iosPersistentFileLocation" value="Compatibility" />
     <preference name="orientation" value="portrait" />
     <platform name="android">
         <hook src="hooks/copy_android_notification_icons.js" type="after_prepare" />
@@ -91,6 +89,13 @@
         <splash height="960" src="resources/ios/splash/Default@2x~iphone.png" width="640" />
         <splash height="480" src="resources/ios/splash/Default~iphone.png" width="320" />
         <splash height="2732" src="resources/ios/splash/Default@2x~universal~anyany.png" width="2732" />
+        <custom-config-file parent="NSCameraUsageDescription" platform="ios" target="*-Info.plist">
+            <string>need camera access to take pictures</string>
+        </custom-config-file>
+        <custom-config-file parent="NSPhotoLibraryUsageDescription" platform="ios" target="*-Info.plist">
+            <string>need photo library access to get pictures from there</string>
+        </custom-config-file>
+        <resource-file src="GoogleService-Info.plist" target="resources/GoogleService-Info.plist" />
     </platform>
     <allow-navigation href="*" />
     <allow-navigation href="http://10.0.0.171:8100" />
@@ -128,16 +133,17 @@
     <plugin name="mx.ferreyra.callnumber" spec="0.0.2" />
     <plugin name="com-sarriaroman-photoviewer" spec="^1.1.16" />
     <plugin name="cordova-plugin-inappbrowser" spec="^2.0.2" />
-    <plugin name="call-number" spec="^1.0.1" />
     <plugin name="com-badrit-base64" spec="^0.2.0" />
     <plugin name="onesignal-cordova-plugin" spec="^2.3.3" />
     <plugin name="cordova-plugin-ios-camera-permissions" spec="^1.2.0">
-        <variable name="CAMERA_USAGE_DESCRIPTION" value="YOUR-PERMISSION-REQUEST" />
-        <variable name="PHOTOLIBRARY_USAGE_DESCRIPTION" value="YOUR-PERMISSION-REQUEST" />
+        <variable name="CAMERA_USAGE_DESCRIPTION" value="This app needs camera access for user photo profile and wedding events" />
+        <variable name="PHOTOLIBRARY_ADD_USAGE_DESCRIPTION" value="This app needs write-access to photo library for user photo profile and wedding events" />
+        <variable name="PHOTOLIBRARY_USAGE_DESCRIPTION" value="This app needs read to photo library for user photo profile and wedding events" />
     </plugin>
     <allow-navigation href="http://10.0.0.64:8100" />
     <allow-navigation href="http://10.0.0.64:8101" />
     <allow-navigation href="http://10.0.0.171:8101" />
-    <engine name="android" spec="6.4.0" />
-    <engine name="ios" spec="4.5.4" />
+    <plugin name="call-number" spec="^1.0.1" />
+    <engine name="android" spec="^7.1.1" />
+    <engine name="ios" spec="4.5.5" />
 </widget>

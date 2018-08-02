@@ -6,6 +6,7 @@ import { ApiProvider } from '../../providers/api/api';
 import { HelpersProvider } from '../../providers/helpers/helpers';
 import { Base64 } from '@ionic-native/base64';
 
+
 /**
  * Generated class for the ProfilePage page.
  *
@@ -147,11 +148,10 @@ export class ProfilePage {
           this.helpersProvider.toastPresent(result.message);
         });
       
-     }, (err) => {
+    }, (err) => {
       // Handle error
         console.log(err);
-     });
-    
+    });
   }
   
   getCountdown() {
