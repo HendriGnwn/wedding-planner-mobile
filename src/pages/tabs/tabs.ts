@@ -26,6 +26,7 @@ export class TabsPage {
   vendorRoot = "VendorPage";
   profileRoot = "ProfilePage";
 
+  isVisibleVendor = false;
 
   constructor(public navCtrl: NavController) {
     this.mySelectedIndex = 4;
