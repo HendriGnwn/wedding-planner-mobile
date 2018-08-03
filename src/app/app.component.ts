@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Platform, Events, ToastController, Nav, LoadingController, AlertController } from 'ionic-angular';
+import { Platform, Events, ToastController, Nav, LoadingController, AlertController, App } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import {ApiProvider} from '../providers/api/api';
@@ -28,7 +28,8 @@ export class MyApp {
     public deeplinks: Deeplinks,
     public helpers: HelpersProvider,
     public alertCtrl: AlertController,
-    public oneSignal: OneSignal
+    public oneSignal: OneSignal,
+    public app: App
     ) {
     
     platform.ready().then(() => {
@@ -49,6 +50,10 @@ export class MyApp {
         this.checkLogin();
       });
       
+      this.events.subscribe('auth:checkLoginPushLogin', () => {
+        this.checkLoginPushLogin();
+      });
+      
       this.events.subscribe('auth:forceLogout', (message: string) => {
         this.forceLogout(message);
       });
@@ -59,7 +64,7 @@ export class MyApp {
 
       if (this.isLoggedIn == true) {
         this.rootPage = "TabsPage";
-        this.nav.setRoot("TabsPage");
+        this.app.getRootNav().setRoot("TabsPage");
       } else {
         this.rootPage = "WelcomePage";
       }
@@ -138,6 +143,16 @@ export class MyApp {
       this.forceLogout("Silahkan login");
     }
   }
+
+  checkLoginPushLogin() {
+    if (localStorage.getItem("isLoggedIn") != "1") {
+      this.helpers.toastPresent("Please Login.");
+      this.helpers.clearLoggedIn();
+      this.nav.push("LoginPage", {}, {
+        animate: true
+      });
+    }
+  }
   
   setLogin(params: any) {
     let result = params.user;
@@ -153,9 +168,7 @@ export class MyApp {
   forceLogout(message: string) {
     this.helpers.toastPresent(message);
     this.helpers.clearLoggedIn();
-    this.nav.setRoot("LoginPage", {}, {
-      animate: true
-    });
+    this.app.getRootNav().setRoot("MainTabsPage");
   }
   
   logout(token: any) {
@@ -178,10 +191,8 @@ export class MyApp {
         position: 'buttom',
         dismissOnPageChange: false,
       }).present();
-       
-      this.nav.setRoot("LoginPage", {}, {
-        animate: true
-      });
+      
+      this.app.getRootNav().setRoot("MainTabsPage");
     })
     .catch((error) => {
       
@@ -196,9 +207,7 @@ export class MyApp {
          dismissOnPageChange: false,
        }).present();
        
-       this.nav.setRoot("LoginPage", {}, {
-         animate: true
-       });
+       this.app.getRootNav().setRoot("MainTabsPage");
     });
   }
 }

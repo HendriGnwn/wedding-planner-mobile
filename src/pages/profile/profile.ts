@@ -50,6 +50,7 @@ export class ProfilePage {
   bannerHeight: any;
   isRequired: boolean = false;
   requiredLabel: any = '';
+  requiredPage: any = '';
 
   constructor(
     public navCtrl: NavController, 
@@ -79,6 +80,10 @@ export class ProfilePage {
     }
   }
 
+  onClickRequiredLabel() {
+    this.navCtrl.push(this.requiredPage);
+  }
+
   getUser() {
     this.apiProvider.get('user/show/' + localStorage.getItem('user_id'), {}, {'Content-Type': 'application/json', "Authorization": "Bearer " + localStorage.getItem('token')})
       .then((data) => {
@@ -88,9 +93,11 @@ export class ProfilePage {
         if (result.data.relation.venue == null) {
           this.isRequired = true;
           this.requiredLabel = 'Silahkan atur tanggal pernikahan dan tempat pernikahan Anda di menu Edit Profile';
+          this.requiredPage = "EditProfilePage";
         } else if (result.data.relation.partner.name == null) {
           this.isRequired = true;
           this.requiredLabel = 'Silahkan daftarkan pasangan Anda di menu Detail Pasangan Anda';
+          this.requiredPage = "RelationProfileDetailPage";
         } else {
           this.isRequired = false;
         }

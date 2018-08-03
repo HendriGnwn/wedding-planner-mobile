@@ -50,7 +50,7 @@ export class WelcomePage {
   }
   
   nextClick() {
-    this.navCtrl.push("LoginPage");
+    this.navCtrl.push("MainTabsPage");
   }
 
 }

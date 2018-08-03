@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController } from 'ionic-angular';
+import { IonicPage, NavController, Tabs } from 'ionic-angular';
 
 /**
  * Generated class for the TabsPage tabs.
@@ -15,7 +15,7 @@ import { IonicPage, NavController } from 'ionic-angular';
 })
 export class TabsPage {
   
-  @ViewChild('tabs') tabs;
+  @ViewChild('tabs') tabs: Tabs;
   
   firstLoaded: boolean = false;
   mySelectedIndex: any;

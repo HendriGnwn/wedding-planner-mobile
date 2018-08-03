@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {IonicPage, NavController, NavParams, Events} from 'ionic-angular';
+import {IonicPage, NavController, NavParams, Events, App} from 'ionic-angular';
 import {Device} from '@ionic-native/device';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import {ApiProvider} from '../../providers/api/api';
@@ -33,7 +33,8 @@ export class RegisterPage {
 		public api: ApiProvider,
 		public navParams: NavParams,
 		private device: Device,
-		private events: Events,
+    private events: Events,
+    public app: App,
     private formBuilder: FormBuilder,
     private helpers: HelpersProvider) {
     
@@ -80,7 +81,7 @@ export class RegisterPage {
           this.loading.dismiss();
           this.helpers.toastPresent(result.message);
           
-          this.navCtrl.setRoot("TabsPage");
+          this.app.getRootNav().setRoot("TabsPage");
         })
         .catch((error) => {
           this.loading.dismiss();
