@@ -140,7 +140,7 @@ export class MyApp {
    */
   checkLogin() {
     if (localStorage.getItem("isLoggedIn") != "1") {
-      this.forceLogout("Session expired, Please Login again.");
+      this.forceLogout("Silahkan login");
     }
   }
 
