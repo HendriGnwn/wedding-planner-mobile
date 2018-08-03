@@ -28,7 +28,7 @@ export class VendorPage {
     public apiProvider: ApiProvider,
     public helpersProvider: HelpersProvider) {
     
-    this.events.publish("auth:checkLogin");
+    //this.events.publish("auth:checkLogin");
     
     this.fileThumbUrl = this.helpersProvider.getBaseUrl() + 'files/vendors/thumbs/';
     this.exceptionFileThumbUrl = this.helpersProvider.getBaseUrl() + 'files/vendors/thumbs/default.png';
@@ -37,7 +37,7 @@ export class VendorPage {
   }
   
   getVendors() {
-    this.apiProvider.get('vendor', {}, {'Content-Type': 'application/json', "Authorization": "Bearer " + localStorage.getItem('token')})
+    this.apiProvider.get('vendor', {}, {'Content-Type': 'application/json'})
       .then((data) => {
         
         let result = JSON.parse(data.data);

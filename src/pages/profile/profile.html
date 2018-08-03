@@ -76,7 +76,7 @@
       </ion-col>
     </ion-row>
 
-    <ion-row class="alert-container" *ngIf="isRequired">
+    <ion-row class="alert-container" *ngIf="isRequired" (click)="onClickRequiredLabel()">
       <ion-col col-12 class="detail-subtitle" text-center>
         {{ requiredLabel }}
       </ion-col>

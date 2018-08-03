@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {IonicPage, NavController, NavParams, ViewController, Events} from 'ionic-angular';
+import {IonicPage, NavController, NavParams, ViewController, Events, App} from 'ionic-angular';
 import {Device} from '@ionic-native/device';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import {ApiProvider} from '../../providers/api/api';
@@ -34,7 +34,8 @@ export class LoginPage {
 		public navParams: NavParams,
 		private viewCtrl: ViewController,
     private helpersProvider: HelpersProvider,
-		private device: Device,
+    private device: Device,
+    public app: App,
 		private events: Events,
     private formBuilder: FormBuilder) {
     
@@ -75,7 +76,7 @@ export class LoginPage {
           this.loading.dismiss();
           this.helpersProvider.toastPresent(result.message);
           
-          this.navCtrl.setRoot("TabsPage");
+          this.app.getRootNav().setRoot("TabsPage");
         })
         .catch((error) => {
           this.loading.dismiss();

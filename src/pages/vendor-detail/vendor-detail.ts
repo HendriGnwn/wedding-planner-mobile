@@ -41,7 +41,7 @@ export class VendorDetailPage {
     public inAppBrowser: InAppBrowser
   ) {
   
-    this.events.publish("auth:checkLogin");
+    //this.events.publish("auth:checkLogin");
     
     this.vendor = this.navParams.get('vendor');
     console.log(this.vendor);

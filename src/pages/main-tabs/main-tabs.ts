@@ -10,24 +10,19 @@ import { IonicPage, NavController, Tabs } from 'ionic-angular';
 
 @IonicPage()
 @Component({
-  selector: 'page-tabs',
-  templateUrl: 'tabs.html'
+  selector: 'page-main-tabs',
+  templateUrl: 'main-tabs.html'
 })
-export class TabsPage {
+export class MainTabsPage {
   
-  @ViewChild('tabs') tabs: Tabs;
+  @ViewChild('maintab') maintab: Tabs;
   
-  firstLoaded: boolean = false;
-  mySelectedIndex: any;
-  
-  procedureRoot = "ProcedurePage";
-  costRoot = "CostPage";
-  conceptRoot = "ConceptPage";
-  vendorRoot = "VendorPage";
-  profileRoot = "ProfilePage";
+  tab1Root = "VendorPage";
+  tab2Root = "AccountPage";
+  selectedIndex: any = 1;
 
 
   constructor(public navCtrl: NavController) {
-    this.mySelectedIndex = 4;
+    this.selectedIndex = 1;
   }
 }

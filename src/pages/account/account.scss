@@ -1,0 +1,40 @@
+page-account {
+  .content-md {
+    .profile-banner {
+      margin-bottom: 7.5rem;
+    }
+  }
+  .card {
+    border-radius: 0;
+    margin: 0;
+    margin-bottom: 2rem;
+    width: 100vw;
+    box-shadow: none;
+    height: 25rem;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    .card-subtitle {
+      margin-top: 20rem;
+      .icon-upload {
+        font-size: 4rem;
+      }
+    }
+  }
+  .content {
+    padding: 1.3rem;
+    font-size: 1em;
+    color: color($colors, primary);
+    text-align: center;
+    .welcome-description {
+      margin-top:0.5rem;
+      font-size:2.6rem;
+      font-family: 'Alex Brush', cursive;
+    }
+    .list {
+      margin-top: 1.5rem;
+    }
+  }
+  
+  
+}

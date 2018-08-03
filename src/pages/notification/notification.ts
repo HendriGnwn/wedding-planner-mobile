@@ -35,7 +35,7 @@ export class NotificationPage {
     public helpersProvider: HelpersProvider
   ) {
     
-    this.events.publish("auth:checkLogin");
+    this.events.publish("auth:checkLoginPushLogin");
     this.loading = this.helpersProvider.loadingPresent("");
     
     this.fileThumbUrl = this.helpersProvider.getBaseUrl() + 'files/messages/thumbs/';
