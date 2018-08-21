@@ -49,6 +49,10 @@ export class CostPage {
       });
   }
 
+  goToCostDetail(item) {
+    this.navCtrl.push("CostDetailPage", {item: item});
+  }
+
   doRefresh(event) {
     this.getCost();
     setTimeout(() => {
