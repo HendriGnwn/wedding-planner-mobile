@@ -14,7 +14,7 @@
 
 <ion-content>
   <ion-card text-center *ngFor="let item of details;">
-    <div class="card-title">{{ item.content.concept.name }}</div>
+    <div class="card-title">{{ item.name }}</div>
     <div class="card-subtitle">IDR {{ item.value == null ? 0 : item.value | number : fractionSize }}</div>
   </ion-card>
 </ion-content>
